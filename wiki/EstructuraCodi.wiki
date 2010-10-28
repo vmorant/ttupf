@@ -5,3 +5,4 @@
 
 S'ha de decidir encara la estructura que tindrà el codi font. Alguns enllaços interessants poden ser:
   * http://blog.fedecarg.com/2008/08/11/scalable-and-flexible-directory-structure-for-web-applications/
+  * http://www.otton.org/2008/08/13/better-php-project-layouts/
