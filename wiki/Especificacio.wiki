@@ -1,0 +1,19 @@
+#summary Especificació de l'aplicació
+#labels Phase-Requirements
+= Especificació =
+
+ttupf té com a objectiu permetre crear horaris personalitzats a partir dels horaris de totes les carreres i cursos de l'ESuP. En aquests horaris personalitzats només es poblaran els períodes que interessi a l'usuari: les assignatures que estigui cursant. D'aquesta manera s'evita haver de consultar dues o més pàgines d'horaris.
+
+== Horaris ==
+Per a poder poblar horaris personalitzats s'ha d'analitzar tots els horaris existents a l'ESuP. L'anàlisi dels horaris consistirà en crear, per cada carrera i curs, una llista d'assignatures possibles i, per cada assignatura, els grups de seminari que existeixen. S'ha de trobar una manera de poder mantenir aquesta informació actualitzada.
+
+=== Casos de cel.les ===
+
+  * Es poden juntar dos grups de seminari a una mateixa aula. E.g. S111 + S112 54.023
+  * Pot haver-hi més d'una aula per una classe de teoria (segons l'Enric)
+  * Pot haver un període que estigui partit en seminari/teoria o seminari/pràctica, inclús solapant-se
+
+== Registre/configuració ==
+L'usuari ha de poder seleccionar les assignatures que cursa d'una certa carrera i curs i també especificar quin(s) grup(s) de seminari i pràctiques (el grup de seminari pot ser diferent del grup de pràctiques).
+
+Al formulari de configuració hi haurà camps per al grup de seminari i pràctiques. Omplint el grup de seminari es prepoblarà el camp de pràctiques segons el que s'hagi introduït al seminari, sempre deixant la possibilitat d'editar el camp del grup de pràctiques. També es permet un grup buit.
