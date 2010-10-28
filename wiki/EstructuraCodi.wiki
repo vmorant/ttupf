@@ -6,3 +6,17 @@
 S'ha de decidir encara la estructura que tindrà el codi font. Alguns enllaços interessants poden ser:
   * http://blog.fedecarg.com/2008/08/11/scalable-and-flexible-directory-structure-for-web-applications/
   * http://www.otton.org/2008/08/13/better-php-project-layouts/
+
+== Framework o custom ==
+
+Hi ha la opció d'utilitzar un framework per a la base de l'aplicació o bé fer-lo nosaltres sencer. Un framework és bàsicament un conjunt de llibreries que facilita el disseny i desenvolupament d'un projecte.
+
+Utilitzant un framework ens evitaríem haver de "tornar a inventar la roda" i també aprofitaríem els avantatges que ofereixen els frameworks en quant a la seguretat de l'aplicació (validació d'entrada de dades per part de l'usuari, XSS, CSRF, etc.).
+
+=== Candidats de framework ===
+
+==== Symfony ====
+Un framework per a PHP 5, sembla que té documentació molt bona i hi ha un llibre (publicat com a pàgina web també a http://www.symfony-project.org/jobeet/1_4/Doctrine/en/) d'introducció. Aquest llibre pot ser molt útil per guiar-nos durant el procés de disseny i implementació del projecte.
+
+==== CodeIgniter ====
+Un altre framework pen a PHP, s'ha d'investigar haviam què tal és.
