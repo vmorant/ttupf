@@ -39,6 +39,7 @@ L'usuari registrat i amb sessió iniciada podrà configurar el seu horari person
   # Escollir una carrera i curs
   # A partir de les assignatures disponibles per a aquell curs, escollir assignatures per a incloure a l'horari.
   # Opcionalment, configurar cada assignatura amb els seus grups de pràctica/seminari.
+  # Repetir passos 1-3 els cops necessaris.
 
 Omplint el grup de seminari es prepoblarà el camp de pràctiques segons el que s'hagi introduït al seminari, sempre deixant la possibilitat d'editar el camp del grup de pràctiques (pels casos en què el grup de seminaris no deriva del grup de pràctiques). També es permet un grup buit. E.g. si l'usuari introdueix 222 al camp de seminari per a una assignatura, el camp de pràctiques es prepoblarà amb 22.
   
