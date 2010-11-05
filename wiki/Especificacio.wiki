@@ -8,27 +8,25 @@ ttupf té com a objectiu permetre crear horaris personalitzats a partir dels hor
 Un primer esborrany de les tasques d'usuari són els següents.
 
 === Pàgina d'inici ===
-Quan arribi un usuari a ttupf veurà una de tres possibilitats. Depenent de si es tracta d'un visitant nou, un usuari registrat sense configurar horari, o un usuari registrat amb horari configurat, es mostrarà:
+Quan l'usuari arribi a ttupf, es trobarà amb una pàgina amb els següents elements:
 
-  * Pàgina amb descripció sobre l'aplicació i informació sobre com registrar-se i com configurar l'horari.
-  * Pàgina de configuració amb ajuda contextual per a crear l'horari personalitzat.
-  * L'horari personalitzat de la setmana actual.
+  * Informació sobre l'aplicació
+  * Informació sobre com registrar-se i configurar l'horari.
+  * Formulari d'inici de sessió
 
 === Registre d'usuari ===
 Un visitant es podrà registrar per poder crear l'horari personalitzat. La informació requerida serà:
 
+  * (?) Nom d'usuari (?)
   * Adreça de correu electrònic (potser limitar-ho a domini @`*`.upf.edu?)
   * Contrasenya
 
 === Inici de sessió ===
 Un usuari registrat podrà iniciar sessió omplint el formulari d'inici de sessió:
 
+  * (?) Nom d'usuari (?)
   * Adreça de correu
   * Contrasenya
-
-També podrà sol.licitar un restabliment de contrasenya proporcionant el correu electrònic.
-
-A la pàgina d'inici hi haurà un formulari d'inici de sessió també.
 
 === Restabliment contrasenya ===
 En sol.licitar el restabliment, si l'adreça és vàlida, l'aplicació hi enviarà un correu amb un enllaç. Aquest enllaç portarà a una pàgina de l'aplicació, on l'usuari podrà especificar una contrasenya nova.
@@ -49,6 +47,7 @@ La base de dades inicial consisteix en el següent model:
 === Usuari ===
 Aquesta taula s'haurà de tornar a dissenyar un cop s'hagi entés millor com funcionen els usuaris a Symfony.
   * id
+  * (?) nom_usuari (?)
   * correu
   * contrasenya
 
