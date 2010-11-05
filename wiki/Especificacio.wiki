@@ -10,16 +10,16 @@ Un primer esborrany de les tasques d'usuari són els següents.
 === Pàgina d'inici ===
 Quan l'usuari arribi a ttupf, es pot trobar amb tres casos diferents segons si és:
 
-  - Usuari amb sessió iniciada i horari configurat:
-    * Pàgina d'horari personalitzat
+  * Usuari amb sessió iniciada i horari configurat:
+    - Pàgina d'horari personalitzat
 
-  - Usuari amb sessió iniciada però l'horari sense configurar:
-    * Informació sobre com configurar l'horari.
+  * Usuari amb sessió iniciada però l'horari sense configurar:
+    - Informació sobre com configurar l'horari.
 
-  - Usuari sense sessió iniciada o sense registrar:
-    * Informació sobre l'aplicació
-    * Informació sobre com registrar-se i configurar l'horari.
-    * Formulari d'inici de sessió
+  * Usuari sense sessió iniciada o sense registrar:
+    - Informació sobre l'aplicació
+    - Informació sobre com registrar-se i configurar l'horari.
+    - Formulari d'inici de sessió
 
 === Registre d'usuari ===
 Un visitant es podrà registrar per poder crear l'horari personalitzat. La informació requerida serà:
