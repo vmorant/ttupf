@@ -11,7 +11,7 @@ Un primer esborrany de les tasques d'usuari són els següents.
 Quan l'usuari arribi a ttupf, es pot trobar amb tres casos diferents segons si és:
 
   * Usuari amb sessió iniciada i horari configurat:
-    - Pàgina d'horari personalitzat
+  - Pàgina d'horari personalitzat
 
   * Usuari amb sessió iniciada però l'horari sense configurar:
     - Informació sobre com configurar l'horari
