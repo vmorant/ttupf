@@ -14,11 +14,11 @@ Quan l'usuari arribi a ttupf, es pot trobar amb tres casos diferents segons si �
     - Pàgina d'horari personalitzat
 
   * Usuari amb sessió iniciada però l'horari sense configurar:
-    - Informació sobre com configurar l'horari.
+    - Informació sobre com configurar l'horari
 
   * Usuari sense sessió iniciada o sense registrar:
     - Informació sobre l'aplicació
-    - Informació sobre com registrar-se i configurar l'horari.
+    - Informació sobre com registrar-se i configurar l'horari
     - Formulari d'inici de sessió
 
 === Registre d'usuari ===
