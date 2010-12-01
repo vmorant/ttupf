@@ -1,0 +1,32 @@
+CarreraCurs:
+  actAs:              { Timestampable: ~ }
+  columns:
+    nom:              { type: string(255), notnull: true, unique: true }
+    url_horari:       { type: string(255), notnull: true, unique: true }
+
+Assignatura:
+  columns:
+    nom:              { type: string(255), notnull: true }
+    carrera_curs_id:  { type: integer, notnull: true }
+  relations:
+    CarreraCurs:      { onDelete: CASCADE, local: carrera_curs_id, foreign: id, foreignAlias: Assignatures }
+
+Sessio:
+  columns:
+    data_hora_inici:  { type: timestamp, notnull: true }
+    data_hora_fi:     { type: timestamp, notnull: true }
+    assignatura_id:   { type: integer, notnull: true }
+    aula:             { type: string(255), notnull: true }
+    tipus:            { type: string(255), notnull: true }
+    grup_seminari:    { type: string(255) }
+    grup_practiques:  { type: string(255) }
+  relations:
+    Assignatura:      { onDelete: CASCADE, local: assignatura_id, foreign: id, foreignAlias: Sessions }
+
+UsuariTeAssignatures:
+  columns:
+    usuari_id:        { type: integer, notnull: true }
+    assignatura_id:   { type: integer, notnull: true }
+  relations:
+    User:             { onDelete: CASCADE, local: usuari_id, foreign: id, foreignAlias: Assignatures }
+    Assignatura:      { onDelete: CASCADE, local: assignatura_id, foreign: id }
