@@ -1,0 +1,43 @@
+#summary Com instal.lar i configurar ttupf per a desenvolupament
+
+= Requisits =
+  * Apache
+  * MySQL
+  * PHP
+
+Per configurar l'Apache per tal de poder accedir a ttupf s'ha d'afegir el següent codi a l'arxiu httpd.conf:
+
+S'ha de reemplaçar `/ruta/working/copy` amb la ruta real.
+
+{{{
+# ttupf
+
+# Be sure to only have this line once in your configuration
+NameVirtualHost 127.0.0.1:80
+
+# This is the configuration for your project
+
+<VirtualHost 127.0.0.1:80>
+  ServerName ttupf.local
+    DocumentRoot "/ruta/working/copy/ttupf/src/web"
+  DirectoryIndex index.php
+  <Directory "/ruta/working/copy/ttupf/src/web">
+    AllowOverride All
+    Allow from All
+  </Directory>
+
+  Alias /sf /ruta/working/copy/lib/vendor/symfony/data/web/sf
+  <Directory /ruta/working/copy/ttupf/src/lib/vendor/symfony/data/web/sf">
+    AllowOverride All
+    Allow from All
+  </Directory>
+
+</VirtualHost>
+}}}
+
+També s'ha d'afegir una entrada al fitxer `hosts` (Windows: C:\Windows\System32\drivers\etc\hosts, Linux: /etc/hosts):
+127.0.0.1    ttupf.local
+
+Ara es pot anar a http://ttupf.local i veure l'aplicació.
+
+Més informació: http://www.symfony-project.org/getting-started/1_4/en/05-Web-Server-Configuration
