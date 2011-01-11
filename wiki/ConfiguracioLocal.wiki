@@ -41,3 +41,36 @@ També s'ha d'afegir una entrada al fitxer `hosts` (Windows: C:\Windows\System32
 Ara es pot anar a http://ttupf.local i veure l'aplicació.
 
 Més informació: http://www.symfony-project.org/getting-started/1_4/en/05-Web-Server-Configuration
+
+=Instalació des de zero en Windows=
+
+Si es parteix d'una instal·lació des de zero en Windows caldrà instal·lar Apache 2.2 i despres PHP 5.2.x. La versió de PHP haurà de ser la versió en zip VC6 Thread Safe.
+
+*Nota: Aqui ja podem fer la part de configuració per accedir a ttupf de l'apartat anterior.
+
+El següent pas és editar el arxiu httpd.conf en la carpeta conf de la instalació d'Apache.
+
+Primer haurem de treure el comentari (#) de la línia 
+
+{{{LoadModule rewrite_module modules/mod_rewrite.so}}}
+
+i tot seguit afegirem aquestes linies en el apartat on es carreguen els mòduls
+{{{
+#Carregar el modul de PHP5 
+LoadModule php5_module "C:/Program Files/PHP/php5apache2_2.dll"
+AddType application/x-httpd-php .php
+AddType application/x-httpd-php .php3
+AddType application/x-httpd-php .php4
+AddType application/x-httpd-php .php5
+PHPIniDir "C:/Program Files/PHP"
+}}}
+*Nota: La ultima línia caldrà canviar la ruta del directori per la que estigui instal·lat/extret el PHP 5 i on es pot localitzar el arxiu "php.ini-development".
+
+Finalment fem una copia del arxiu "php.ini-development" en la mateixa carpeta i el renombrarem per "php.ini".
+
+Reiniciem el servidor Apache i haurem acabat.
+
+Mes informació:
+http://www.jorgeoyhenard.com/instalacion-de-php-5-en-windows-7-con-apache/2275/
+
+http://www.jorgeoyhenard.com/instalar-apache-2-2-en-windows-7/2253/
