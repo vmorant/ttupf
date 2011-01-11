@@ -1,0 +1,14 @@
+#summary Article descrivint els plugins de Symfony que s'han fet servir.
+
+= Introducció =
+
+S'han fet servir diversos plugins de Symfony per accelerar el desenvolupament de ttupf. Seguidament es detalla la instal.lació i configuració dels plugins.
+
+= sfDoctrineGuardPlugin =
+
+Aquest plugin augmenta les capacitats de rols d'usuari del propi Symfony, i conjuntament amb sfForkedDoctrineApply (que proporciona registre d'usuaris nous).
+
+== Configuració ==
+Aquí es detallen els punts on la guia d'[http://www.symfony-project.org/plugins/sfDoctrineGuardPlugin instal.lació] és diferent de la realitat.
+
+  * Després d'instal.lar el plugin no cal editar `config/ProjectConfiguration.class.php` per activar-lo.
