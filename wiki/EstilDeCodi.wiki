@@ -2,20 +2,17 @@
 
 = Introducció =
 
-L'estil de codi que farem servir serà la pròpia de Symfony, disponible [http://trac.symfony-project.org/wiki/HowToContributeToSymfony#CodingStandards aquí].
-
+L'estil de codi que farem servir serà la pròpia de Symfony, disponible [http://trac.symfony-project.org/wiki/HowToContributeToSymfony#CodingStandards aquí], amb algunes modificacions, com per exemple la identació i les claus de obertura.
 
 == Resum ==
-  * La indentació es fa amb dos caràcters d'espai, mai amb el caràcter tabulador.
-  * Les claus tenen una línia dedicada, a la mateixa identació que la secció pertanyent.
+  * La indentació es fa amb un caràcter tabulador, de la mida de quatre espais, i mai utilitzant caràcters espai.
+  * La clau d'obertura la col·loquem al final de la mateixa línia on posem el títol de la funció, iteració, constructor, i en general qualsevol sentència que requereixi claus, tenint en compte que hi ha d'aver un espai entre el títol i la clau.
 {{{
 <?php
-class sfFoo
-{
-  public function bar()
-  {
-    sfCoffee::make();
-  }
+class sfFoo {
+    public function bar() {
+        sfCoffee::make();
+    }
 }
 }}}
 
@@ -24,9 +21,8 @@ class sfFoo
   * Sempre s'utilitzen claus a les declaracions de control (if/while/for).
 {{{
 ...
-if(condicio)
-{
-  codi;
+if(condicio) {
+    codi;
 }
 ...
 }}}
