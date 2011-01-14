@@ -30,3 +30,4 @@ UsuariTeAssignatures:
   relations:
     User:             { onDelete: CASCADE, local: usuari_id, foreign: id, foreignAlias: Assignatures }
     Assignatura:      { onDelete: CASCADE, local: assignatura_id, foreign: id }
+
