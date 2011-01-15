@@ -21,8 +21,6 @@ test:
     web_debug:              false
     no_script_name:         false
     etag:                   false
-    i18n:					true
-
 
 all:
   .settings:
@@ -43,3 +41,4 @@ all:
     secure_module:          sfGuardAuth
     secure_action:          secure
     
+    i18n:					true

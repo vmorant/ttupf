@@ -8,20 +8,20 @@ CarreraCurs:
     url_horari: http://www.upf.edu/esup/docencia/horaris/graus10_11/grau-eng_informatica/primer_trimestre/primer/primer_trimestre_g2.html
     
   GrauInf_1C_2T_1G:
-  	nom: Grau en Informàtica, Primer Curs, Segon Trimestre, Grup 1
-  	url_horari: http://www.upf.edu/esup/docencia/horaris/graus10_11/grau-eng_informatica/segon_trimestre/primer/segon_trimestre_g1.html
+    nom: Grau en Informàtica, Primer Curs, Segon Trimestre, Grup 1
+    url_horari: http://www.upf.edu/esup/docencia/horaris/graus10_11/grau-eng_informatica/segon_trimestre/primer/segon_trimestre_g1.html
   
   GrauInf_1C_2T_2G:
-  	nom: Grau en Informàtica, Primer Curs, Segon Trimestre, Grup 2
-  	url_horari: http://www.upf.edu/esup/docencia/horaris/graus10_11/grau-eng_informatica/segon_trimestre/primer/segon_trimestre_g2.html
+    nom: Grau en Informàtica, Primer Curs, Segon Trimestre, Grup 2
+    url_horari: http://www.upf.edu/esup/docencia/horaris/graus10_11/grau-eng_informatica/segon_trimestre/primer/segon_trimestre_g2.html
 
   GrauInf_1C_3T_1G:
-  	nom: Grau en Informàtica, Primer Curs, Tercer Trimestre, Grup 1
-  	url_horari: http://www.upf.edu/esup/docencia/horaris/graus10_11/grau-eng_informatica/tercer_trimestre/primer/tercer_trimestre_g1.html
+    nom: Grau en Informàtica, Primer Curs, Tercer Trimestre, Grup 1
+    url_horari: http://www.upf.edu/esup/docencia/horaris/graus10_11/grau-eng_informatica/tercer_trimestre/primer/tercer_trimestre_g1.html
 
   GrauInf_1C_3T_2G:
-  	nom: Grau en Informàtica, Primer Curs, Tercer Trimestre, Grup 2
-  	url_horari: http://www.upf.edu/esup/docencia/horaris/graus10_11/grau-eng_informatica/tercer_trimestre/primer/tercer_trimestre_g2.html
+    nom: Grau en Informàtica, Primer Curs, Tercer Trimestre, Grup 2
+    url_horari: http://www.upf.edu/esup/docencia/horaris/graus10_11/grau-eng_informatica/tercer_trimestre/primer/tercer_trimestre_g2.html
 
   GrauInf_2C_1T_1G:
     nom: Grau en Informàtica, Segon Curs, Primer Trimestre, Grup 1
@@ -32,17 +32,17 @@ CarreraCurs:
     url_horari: http://www.upf.edu/esup/docencia/horaris/graus10_11/grau-eng_informatica/primer_trimestre/segon/primer_trimestre_g2.html
     
   GrauInf_2C_2T_1G:
-  	nom: Grau en Informàtica, Segon Curs, Segon Trimestre, Grup 1
-  	url_horari: http://www.upf.edu/esup/docencia/horaris/graus10_11/grau-eng_informatica/segon_trimestre/segon/segon_trimestre_g1.html
+    nom: Grau en Informàtica, Segon Curs, Segon Trimestre, Grup 1
+    url_horari: http://www.upf.edu/esup/docencia/horaris/graus10_11/grau-eng_informatica/segon_trimestre/segon/segon_trimestre_g1.html
   
   GrauInf_2C_2T_2G:
-  	nom: Grau en Informàtica, Segon Curs, Segon Trimestre, Grup 2
-  	url_horari: http://www.upf.edu/esup/docencia/horaris/graus10_11/grau-eng_informatica/segon_trimestre/segon/segon_trimestre_g2.html
+    nom: Grau en Informàtica, Segon Curs, Segon Trimestre, Grup 2
+    url_horari: http://www.upf.edu/esup/docencia/horaris/graus10_11/grau-eng_informatica/segon_trimestre/segon/segon_trimestre_g2.html
 
   GrauInf_2C_3T_1G:
-  	nom: Grau en Informàtica, Segon Curs, Tercer Trimestre, Grup 1
-  	url_horari: http://www.upf.edu/esup/docencia/horaris/graus10_11/grau-eng_informatica/tercer_trimestre/segon/tercer_trimestre_g1.html
+    nom: Grau en Informàtica, Segon Curs, Tercer Trimestre, Grup 1
+    url_horari: http://www.upf.edu/esup/docencia/horaris/graus10_11/grau-eng_informatica/tercer_trimestre/segon/tercer_trimestre_g1.html
 
   GrauInf_2C_3T_2G:
-  	nom: Grau en Informàtica, Segon Curs, Tercer Trimestre, Grup 2
-  	url_horari: http://www.upf.edu/esup/docencia/horaris/graus10_11/grau-eng_informatica/tercer_trimestre/segon/tercer_trimestre_g2.html
+    nom: Grau en Informàtica, Segon Curs, Tercer Trimestre, Grup 2
+    url_horari: http://www.upf.edu/esup/docencia/horaris/graus10_11/grau-eng_informatica/tercer_trimestre/segon/tercer_trimestre_g2.html
