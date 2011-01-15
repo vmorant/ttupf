@@ -7,3 +7,15 @@
 all:
   sf_guard_plugin:
     routes_register: false
+   
+  sfApplyPlugin:
+    from:
+      email: "xxx@xxx.xxx"
+      fullname: "L'equip de TTUpf"
+
+  sfForkedApply:
+    confirmation:
+      reset: true
+      apply: true
+      email: true
+      reset_logged: true
