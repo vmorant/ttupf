@@ -21,6 +21,8 @@ test:
     web_debug:              false
     no_script_name:         false
     etag:                   false
+    i18n:					true
+
 
 all:
   .settings:
