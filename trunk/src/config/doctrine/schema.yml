@@ -28,6 +28,6 @@ UsuariTeAssignatures:
     usuari_id:        { type: integer, notnull: true }
     assignatura_id:   { type: integer, notnull: true }
   relations:
-    User:             { onDelete: CASCADE, local: usuari_id, foreign: id, foreignAlias: Assignatures }
+    sfGuardUser:      { onDelete: CASCADE, local: usuari_id, foreign: id, foreignAlias: Assignatures }
     Assignatura:      { onDelete: CASCADE, local: assignatura_id, foreign: id }
 
