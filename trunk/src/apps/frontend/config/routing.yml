@@ -16,7 +16,7 @@ default:
   url:   /:module/:action/*
 
 sf_guard_signin:
-  url:   /login
+  url:   /
   param: { module: sfGuardAuth, action: signin }
 
 sf_guard_signout:
