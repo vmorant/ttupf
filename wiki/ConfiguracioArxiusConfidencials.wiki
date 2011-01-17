@@ -1,6 +1,4 @@
-#summary One-sentence summary of this page.
-
-= Configuració d'arxius que contenen informació confidencial =
+#Configuració d'arxius que contenen informació confidencial
 
 Per tal de poder treballar amb el symfony correctament sense haver de penjar arxius que contenen contrasenyes de bases de dades o servidors de mail, hem de fer un petit ajust a la configuració.
 
