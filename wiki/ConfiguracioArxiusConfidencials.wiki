@@ -1,0 +1,8 @@
+#summary One-sentence summary of this page.
+
+= Configuració d'arxius que contenen informació confidencial =
+
+Per tal de poder treballar amb el symfony correctament sense haver de penjar arxius que contenen contrasenyes de bases de dades o servidors de mail, hem de fer un petit ajust a la configuració.
+
+*Arxiu "factories.yml"*
+  * S'ha renombrat l'arxiu "factories.yml" a "factories.ympl.tmpl" al repositori SVN amb la configuració per defecte (sense passwords personals), i per tal de que localment funcionin els mòduls que en depènen, cadascú ha de crear dins del directori "apps/frontend/config/" l'arxiu "factories.yml" amb la configuració personal, i ignorar-lo del repositori svn, per tal de tenir-lo unicament al servidor local.
