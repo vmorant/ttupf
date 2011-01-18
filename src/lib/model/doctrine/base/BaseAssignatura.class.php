@@ -9,18 +9,18 @@
  * @property integer $carrera_curs_id
  * @property CarreraCurs $CarreraCurs
  * @property Doctrine_Collection $Sessions
- * @property Doctrine_Collection $UsuariTeAssignatures
+ * @property Doctrine_Collection $Usuaris
  * 
- * @method string              getNom()                  Returns the current record's "nom" value
- * @method integer             getCarreraCursId()        Returns the current record's "carrera_curs_id" value
- * @method CarreraCurs         getCarreraCurs()          Returns the current record's "CarreraCurs" value
- * @method Doctrine_Collection getSessions()             Returns the current record's "Sessions" collection
- * @method Doctrine_Collection getUsuariTeAssignatures() Returns the current record's "UsuariTeAssignatures" collection
- * @method Assignatura         setNom()                  Sets the current record's "nom" value
- * @method Assignatura         setCarreraCursId()        Sets the current record's "carrera_curs_id" value
- * @method Assignatura         setCarreraCurs()          Sets the current record's "CarreraCurs" value
- * @method Assignatura         setSessions()             Sets the current record's "Sessions" collection
- * @method Assignatura         setUsuariTeAssignatures() Sets the current record's "UsuariTeAssignatures" collection
+ * @method string              getNom()             Returns the current record's "nom" value
+ * @method integer             getCarreraCursId()   Returns the current record's "carrera_curs_id" value
+ * @method CarreraCurs         getCarreraCurs()     Returns the current record's "CarreraCurs" value
+ * @method Doctrine_Collection getSessions()        Returns the current record's "Sessions" collection
+ * @method Doctrine_Collection getUsuaris()         Returns the current record's "Usuaris" collection
+ * @method Assignatura         setNom()             Sets the current record's "nom" value
+ * @method Assignatura         setCarreraCursId()   Sets the current record's "carrera_curs_id" value
+ * @method Assignatura         setCarreraCurs()     Sets the current record's "CarreraCurs" value
+ * @method Assignatura         setSessions()        Sets the current record's "Sessions" collection
+ * @method Assignatura         setUsuaris()         Sets the current record's "Usuaris" collection
  * 
  * @package    ttupf
  * @subpackage model
@@ -55,7 +55,7 @@ abstract class BaseAssignatura extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'assignatura_id'));
 
-        $this->hasMany('UsuariTeAssignatures', array(
+        $this->hasMany('UsuariTeAssignatures as Usuaris', array(
              'local' => 'id',
              'foreign' => 'assignatura_id'));
     }
