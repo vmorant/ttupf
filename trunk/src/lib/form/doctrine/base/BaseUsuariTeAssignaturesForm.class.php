@@ -15,15 +15,21 @@ abstract class BaseUsuariTeAssignaturesForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'id'             => new sfWidgetFormInputHidden(),
-      'usuari_id'      => new sfWidgetFormInputText(),
-      'assignatura_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Assignatura'), 'add_empty' => false)),
+      'id'              => new sfWidgetFormInputHidden(),
+      'usuari_id'       => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'), 'add_empty' => false)),
+      'assignatura_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Assignatura'), 'add_empty' => false)),
+      'grup_teoria'     => new sfWidgetFormInputText(),
+      'grup_practiques' => new sfWidgetFormInputText(),
+      'grup_seminari'   => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
-      'id'             => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'usuari_id'      => new sfValidatorInteger(),
-      'assignatura_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Assignatura'))),
+      'id'              => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
+      'usuari_id'       => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'))),
+      'assignatura_id'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Assignatura'))),
+      'grup_teoria'     => new sfValidatorInteger(),
+      'grup_practiques' => new sfValidatorInteger(array('required' => false)),
+      'grup_seminari'   => new sfValidatorInteger(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('usuari_te_assignatures[%s]');

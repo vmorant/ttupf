@@ -22,6 +22,7 @@
  * @property sfGuardRememberKey $RememberKeys
  * @property sfGuardForgotPassword $ForgotPassword
  * @property sfGuardUserProfile $Profile
+ * @property Doctrine_Collection $Assignatures
  * 
  * @method string                getFirstName()             Returns the current record's "first_name" value
  * @method string                getLastName()              Returns the current record's "last_name" value
@@ -40,6 +41,7 @@
  * @method sfGuardRememberKey    getRememberKeys()          Returns the current record's "RememberKeys" value
  * @method sfGuardForgotPassword getForgotPassword()        Returns the current record's "ForgotPassword" value
  * @method sfGuardUserProfile    getProfile()               Returns the current record's "Profile" value
+ * @method Doctrine_Collection   getAssignatures()          Returns the current record's "Assignatures" collection
  * @method sfGuardUser           setFirstName()             Sets the current record's "first_name" value
  * @method sfGuardUser           setLastName()              Sets the current record's "last_name" value
  * @method sfGuardUser           setEmailAddress()          Sets the current record's "email_address" value
@@ -57,6 +59,7 @@
  * @method sfGuardUser           setRememberKeys()          Sets the current record's "RememberKeys" value
  * @method sfGuardUser           setForgotPassword()        Sets the current record's "ForgotPassword" value
  * @method sfGuardUser           setProfile()               Sets the current record's "Profile" value
+ * @method sfGuardUser           setAssignatures()          Sets the current record's "Assignatures" collection
  * 
  * @package    ttupf
  * @subpackage model
@@ -155,6 +158,10 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
         $this->hasOne('sfGuardUserProfile as Profile', array(
              'local' => 'id',
              'foreign' => 'user_id'));
+
+        $this->hasMany('UsuariTeAssignatures as Assignatures', array(
+             'local' => 'id',
+             'foreign' => 'usuari_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable(array(
              ));
