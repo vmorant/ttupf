@@ -16,7 +16,7 @@ abstract class BaseSessioFormFilter extends BaseFormFilterDoctrine
       'data_hora_inici' => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'data_hora_fi'    => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'assignatura_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Assignatura'), 'add_empty' => true)),
-      'aula'            => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'aula'            => new sfWidgetFormFilterInput(),
       'tipus'           => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'grup_seminari'   => new sfWidgetFormFilterInput(),
       'grup_practiques' => new sfWidgetFormFilterInput(),

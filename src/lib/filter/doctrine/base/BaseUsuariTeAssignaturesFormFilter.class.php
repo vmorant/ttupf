@@ -15,7 +15,6 @@ abstract class BaseUsuariTeAssignaturesFormFilter extends BaseFormFilterDoctrine
     $this->setWidgets(array(
       'usuari_id'       => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'), 'add_empty' => true)),
       'assignatura_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Assignatura'), 'add_empty' => true)),
-      'grup_teoria'     => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'grup_practiques' => new sfWidgetFormFilterInput(),
       'grup_seminari'   => new sfWidgetFormFilterInput(),
     ));
@@ -23,7 +22,6 @@ abstract class BaseUsuariTeAssignaturesFormFilter extends BaseFormFilterDoctrine
     $this->setValidators(array(
       'usuari_id'       => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('sfGuardUser'), 'column' => 'id')),
       'assignatura_id'  => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Assignatura'), 'column' => 'id')),
-      'grup_teoria'     => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'grup_practiques' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'grup_seminari'   => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
     ));
@@ -48,7 +46,6 @@ abstract class BaseUsuariTeAssignaturesFormFilter extends BaseFormFilterDoctrine
       'id'              => 'Number',
       'usuari_id'       => 'ForeignKey',
       'assignatura_id'  => 'ForeignKey',
-      'grup_teoria'     => 'Number',
       'grup_practiques' => 'Number',
       'grup_seminari'   => 'Number',
     );

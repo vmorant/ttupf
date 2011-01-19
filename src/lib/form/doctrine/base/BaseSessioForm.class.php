@@ -30,7 +30,7 @@ abstract class BaseSessioForm extends BaseFormDoctrine
       'data_hora_inici' => new sfValidatorDateTime(),
       'data_hora_fi'    => new sfValidatorDateTime(),
       'assignatura_id'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Assignatura'))),
-      'aula'            => new sfValidatorString(array('max_length' => 255)),
+      'aula'            => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'tipus'           => new sfValidatorString(array('max_length' => 255)),
       'grup_seminari'   => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'grup_practiques' => new sfValidatorString(array('max_length' => 255, 'required' => false)),

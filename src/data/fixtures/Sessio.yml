@@ -1,0 +1,202 @@
+Sessio:
+  SIS_28_02_2011:
+    data_hora_inici:  '2011-02-28 14:30:00'
+    data_hora_fi:     '2011-02-28 16:30:00'
+    assignatura_id:   6
+    tipus:            NO HI HA CLASSE
+    
+  SO_28_02_2011:
+    data_hora_inici:  '2011-02-28 16:30:00'
+    data_hora_fi:     '2011-02-28 18:30:00'
+    assignatura_id:   7
+    tipus:            NO HI HA CLASSE
+    
+  EDS_28_02_2011:
+    data_hora_inici:  '2011-02-28 18:30:00'
+    data_hora_fi:     '2011-02-28 20:30:00'
+    assignatura_id:   3
+    aula:             52.119
+    tipus:            TEORIA
+    
+  ADC_01_03_2011_1:
+    data_hora_inici:  '2011-03-01 14:30:00'
+    data_hora_fi:     '2011-03-01 16:30:00'
+    assignatura_id:   4
+    aula:             52.427
+    tipus:            SEMINARIS
+    grup_seminari:    1
+    grup_practiques:  2
+
+  ADC_01_03_2011_2:
+    data_hora_inici:  '2011-03-01 14:30:00'
+    data_hora_fi:     '2011-03-01 16:30:00'
+    assignatura_id:   4
+    tipus:            PRÀCTIQUES
+    grup_practiques:  1
+    
+  PIPE_01_03_2011:
+    data_hora_inici:  '2011-03-01 16:30:00'
+    data_hora_fi:     '2011-03-01 18:30:00'
+    assignatura_id:   10
+    aula:             52.219
+    tipus:            TEORIA
+    
+  SIS_01_03_2011_1:
+    data_hora_inici:  '2011-03-01 18:30:00'
+    data_hora_fi:     '2011-03-01 20:30:00'
+    assignatura_id:   6
+    aula:             54.003
+    tipus:            PRÀCTIQUES
+    grup_practiques:  1
+ 
+  SIS_01_03_2011_2:
+    data_hora_inici:  '2011-03-01 18:30:00'
+    data_hora_fi:     '2011-03-01 20:30:00'
+    assignatura_id:   6
+    aula:             54.004
+    tipus:            PRÀCTIQUES
+    grup_practiques:  2
+    
+  SO_02_03_2011:
+    data_hora_inici:  '2011-03-02 14:30:00'
+    data_hora_fi:     '2011-03-02 16:30:00'
+    assignatura_id:   7
+    aula:             52.223
+    tipus:            TEORIA
+    
+  EDS_02_03_2011:
+    data_hora_inici:  '2011-03-02 16:30:00'
+    data_hora_fi:     '2011-03-02 18:30:00'
+    assignatura_id:   3
+    aula:             52.223
+    tipus:            TEORIA
+        
+  ADC_02_03_2011:
+    data_hora_inici:  '2011-03-02 16:30:00'
+    data_hora_fi:     '2011-03-02 18:30:00'
+    assignatura_id:   4
+    aula:             52.329
+    tipus:            SEMINARIS
+    grup_seminari:    2
+    grup_practiques:  2
+    
+  EDS_03_03_2011_1:
+    data_hora_inici:  '2011-03-03 14:30:00'
+    data_hora_fi:     '2011-03-03 16:30:00'
+    assignatura_id:   3
+    aula:             52.201
+    tipus:            SEMINARIS
+    grup_seminari:    1
+    grup_practiques:  1
+ 
+  EDS_03_03_2011_2:
+    data_hora_inici:  '2011-03-03 14:30:00'
+    data_hora_fi:     '2011-03-03 16:30:00'
+    assignatura_id:   3
+    aula:             52.213
+    tipus:            SEMINARIS
+    grup_seminari:    2
+    grup_practiques:  1
+    
+  ADC_03_03_2011:
+    data_hora_inici:  '2011-03-03 16:30:00'
+    data_hora_fi:     '2011-03-03 18:30:00'
+    assignatura_id:   4
+    tipus:            PRÀCTIQUES
+    grup_practiques:  2
+    
+  PIPE_03_03_2011_1:
+    data_hora_inici:  '2011-03-03 18:30:00'
+    data_hora_fi:     '2011-03-03 19:30:00'
+    assignatura_id:   10
+    aula:             52.109
+    tipus:            SEMINARIS
+    grup_seminari:    1
+    grup_practiques:  1
+
+  PIPE_03_03_2011_2:
+    data_hora_inici:  '2011-03-03 18:30:00'
+    data_hora_fi:     '2011-03-03 19:30:00'
+    assignatura_id:   10
+    aula:             52.425
+    tipus:            SEMINARIS
+    grup_seminari:    1
+    grup_practiques:  2
+
+  PIPE_03_03_2011_3:
+    data_hora_inici:  '2011-03-03 19:30:00'
+    data_hora_fi:     '2011-03-03 20:30:00'
+    assignatura_id:   10
+    aula:             52.105
+    tipus:            SEMINARIS
+    grup_seminari:    2
+    grup_practiques:  1
+ 
+  PIPE_03_03_2011_4:
+    data_hora_inici:  '2011-03-03 19:30:00'
+    data_hora_fi:     '2011-03-03 20:30:00'
+    assignatura_id:   10
+    aula:             52.429
+    tipus:            SEMINARIS
+    grup_seminari:    2
+    grup_practiques:  2
+    
+  PIPE_04_03_2011_1:
+    data_hora_inici:  '2011-03-04 14:30:00'
+    data_hora_fi:     '2011-03-04 16:30:00'
+    assignatura_id:   10
+    aula:             54.006
+    tipus:            PRÀCTIQUES
+    grup_practiques:  1
+
+  PIPE_04_03_2011_2:
+    data_hora_inici:  '2011-03-04 14:30:00'
+    data_hora_fi:     '2011-03-04 16:30:00'
+    assignatura_id:   10
+    aula:             54.008
+    tipus:            PRÀCTIQUES
+    grup_practiques:  2
+    
+  SIS_04_03_2011_1:
+    data_hora_inici:  '2011-03-04 16:30:00'
+    data_hora_fi:     '2011-03-04 17:30:00'
+    assignatura_id:   6
+    aula:             52.201
+    tipus:            SEMINARIS
+    grup_seminari:    1
+    grup_practiques:  1
+
+  SIS_04_03_2011_2:
+    data_hora_inici:  '2011-03-04 16:30:00'
+    data_hora_fi:     '2011-03-04 17:30:00'
+    assignatura_id:   6
+    aula:             52.209
+    tipus:            SEMINARIS
+    grup_seminari:    1
+    grup_practiques:  2
+    
+  SIS_04_03_2011_3:
+    data_hora_inici:  '2011-03-04 17:30:00'
+    data_hora_fi:     '2011-03-04 18:30:00'
+    assignatura_id:   6
+    aula:             52.201
+    tipus:            SEMINARIS
+    grup_seminari:    2
+    grup_practiques:  1
+    
+  SIS_04_03_2011_4:
+    data_hora_inici:  '2011-03-04 17:30:00'
+    data_hora_fi:     '2011-03-04 18:30:00'
+    assignatura_id:   6
+    aula:             52.209
+    tipus:            SEMINARIS
+    grup_seminari:    2
+    grup_practiques:  2
+    
+  SO_04_03_2011:
+    data_hora_inici:  '2011-03-04 18:30:00'
+    data_hora_fi:     '2011-03-04 20:30:00'
+    assignatura_id:   7
+    aula:             54.004
+    tipus:            PRÀCTIQUES
+    grup_practiques:  1
