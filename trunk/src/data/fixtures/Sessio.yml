@@ -72,8 +72,8 @@ Sessio:
     tipus:            TEORIA
         
   ADC_02_03_2011:
-    data_hora_inici:  '2011-03-02 16:30:00'
-    data_hora_fi:     '2011-03-02 18:30:00'
+    data_hora_inici:  '2011-03-02 18:30:00'
+    data_hora_fi:     '2011-03-02 20:30:00'
     assignatura_id:   4
     aula:             52.329
     tipus:            SEMINARIS
