@@ -1,0 +1,30 @@
+UsuariTeAssignatures:
+  SenyalsISistemes:
+    usuari_id:        1
+    assignatura_id:   6
+    grup_practiques:  1
+    grup_seminari:    2
+  
+  SistemesOperatius:
+    usuari_id:        1
+    assignatura_id:   7
+    grup_practiques:  2
+    grup_seminari:    1
+    
+  EnginyeriaDelSoftware:
+    usuari_id:        1
+    assignatura_id:   3
+    grup_practiques:  2
+    grup_seminari:    2
+    
+  ArquitecturaDeComputadors:
+    usuari_id:        1
+    assignatura_id:   4
+    grup_practiques:  2
+    grup_seminari:    2
+    
+  ProbabilitatIProcessosEstocastics:
+    usuari_id:        1
+    assignatura_id:   10
+    grup_practiques:  1
+    grup_seminari:    2

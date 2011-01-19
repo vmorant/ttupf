@@ -55,7 +55,6 @@ abstract class BaseSessio extends sfDoctrineRecord
              ));
         $this->hasColumn('aula', 'string', 255, array(
              'type' => 'string',
-             'notnull' => true,
              'length' => 255,
              ));
         $this->hasColumn('tipus', 'string', 255, array(

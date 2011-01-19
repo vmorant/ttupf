@@ -15,26 +15,27 @@ abstract class BaseCarreraCursForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'id'         => new sfWidgetFormInputHidden(),
-      'nom'        => new sfWidgetFormInputText(),
-      'url_horari' => new sfWidgetFormInputText(),
-      'created_at' => new sfWidgetFormDateTime(),
-      'updated_at' => new sfWidgetFormDateTime(),
+      'id'          => new sfWidgetFormInputHidden(),
+      'nom'         => new sfWidgetFormInputText(),
+      'curs'        => new sfWidgetFormInputText(),
+      'grup_teoria' => new sfWidgetFormInputText(),
+      'url_horari'  => new sfWidgetFormInputText(),
+      'created_at'  => new sfWidgetFormDateTime(),
+      'updated_at'  => new sfWidgetFormDateTime(),
     ));
 
     $this->setValidators(array(
-      'id'         => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'nom'        => new sfValidatorString(array('max_length' => 255)),
-      'url_horari' => new sfValidatorString(array('max_length' => 255)),
-      'created_at' => new sfValidatorDateTime(),
-      'updated_at' => new sfValidatorDateTime(),
+      'id'          => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
+      'nom'         => new sfValidatorString(array('max_length' => 255)),
+      'curs'        => new sfValidatorInteger(),
+      'grup_teoria' => new sfValidatorInteger(),
+      'url_horari'  => new sfValidatorString(array('max_length' => 255)),
+      'created_at'  => new sfValidatorDateTime(),
+      'updated_at'  => new sfValidatorDateTime(),
     ));
 
     $this->validatorSchema->setPostValidator(
-      new sfValidatorAnd(array(
-        new sfValidatorDoctrineUnique(array('model' => 'CarreraCurs', 'column' => array('nom'))),
-        new sfValidatorDoctrineUnique(array('model' => 'CarreraCurs', 'column' => array('url_horari'))),
-      ))
+      new sfValidatorDoctrineUnique(array('model' => 'CarreraCurs', 'column' => array('url_horari')))
     );
 
     $this->widgetSchema->setNameFormat('carrera_curs[%s]');
