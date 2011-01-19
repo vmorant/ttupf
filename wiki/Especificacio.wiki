@@ -51,17 +51,18 @@ Omplint el grup de seminari es prepoblarà el camp de pràctiques segons el que 
 == Model de dades ==
 La base de dades inicial consisteix en el següent model:
 
-=== Usuari ===
-Aquesta taula s'haurà de tornar a dissenyar un cop s'hagi entés millor com funcionen els usuaris a Symfony.
+=== sfGuardUser ===
+Aquesta taula prové del plugin sfDoctrineGuardPlugin. Les columnes següents són les més importants.
   * id
-  * (?) nom_usuari (?)
-  * correu
-  * contrasenya
+  * user_name
+  * email_address
 
 === CarreraCurs ===
 Taula amb una entrada per cada grup de teoria de cada curs de cada carrera.
   * id
   * nom
+  * curs
+  * grup_teoria
   * url_horari
 
 === Assignatura ===
@@ -70,23 +71,24 @@ Taula amb una entrada per cada assignatura.
   * nom
   * carrera_curs_id (clau forana a CarreraCurs.id)
 
-=== Classe ===
+=== Sessio ===
 Taula amb les dades per a cada classe de cada assignatura. A partir de la informació d'aquesta taula es poblarà l'horari personalitzat.
   * id
   * data_hora_inici
   * data_hora_fi
-  * carrera_curs_id (clau forana a CarreraCurs.id)
   * assignatura_id (clau forana a Assignatura.id)
   * aula
   * tipus
   * grup_practiques
   * grup_seminari
 
-=== Horari ===
+=== UsuariTeAssignatures ===
 Taula on es guardaran les classes que hagi escollit l'usuari per al seu horari.
   * id
   * usuari_id (clau forana a Usuari.id)
   * assignatura_id (clau forana a Assignatura.id)
+  * grup_practiques
+  * grup_seminari
 
 == Anàlisi dels horaris ==
 Per a poder poblar horaris personalitzats s'ha d'analitzar tots els horaris existents a l'ESuP. El primer pas per a cada carrera serà insertar a la base de dades les seves assignatures (a la taula Assignatura). Després, per a cada setmana, s'hauran d'insertar les classes amb la seva informació a la taula Classe.
@@ -109,3 +111,4 @@ S'han trobat les següents excepcions al cas base:
   * Es poden juntar dos grups de seminari a una mateixa aula. E.g. S111 + S112 54.023, o S111 i S112: 54.004.
   * Pot haver-hi més d'una aula per una classe de teoria, encara que normalment no hi hagi grup A i grup B de teoria (segons l'Enric).
   * Pot haver un període que estigui partit en seminari/teoria o seminari/pràctica, inclús solapant-se les franjes horàries.
+  * Pot no haver-hi cap tipus de classe definida. En aquest cas es dona per suposat que és teoria.
