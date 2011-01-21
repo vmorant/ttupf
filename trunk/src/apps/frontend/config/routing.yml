@@ -12,11 +12,19 @@ default_index:
   url:   /:module
   param: { action: index }
 
+index:
+  url:   /:module/:action/*
+  param: { module: index }
+  
+horari:
+  url:   /:module/:action/*
+  param: { module: horari }
+  
 default:
   url:   /:module/:action/*
 
 sf_guard_signin:
-  url:   /
+  url:   /horari
   param: { module: sfGuardAuth, action: signin }
 
 sf_guard_signout:

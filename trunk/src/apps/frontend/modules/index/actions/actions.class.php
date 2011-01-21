@@ -17,18 +17,17 @@ class indexActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    echo "Hey!";
-    echo $this->getUser();
-    if(($this->getUser()->isAuthenticated()) && (1)){
-    	echo "Loguejat i Configurat";
-    }
+    echo "Estat:<br>";
+    
     if($this->getUser()->isAuthenticated()){
-    	echo "Loguejat";
+    	echo "Acreditat<br>";
+    	if(1){
+    		echo "Configurat";
+    	}
     }
-    if(1){
-    	echo "Configurat";
+    else{
+    	echo "Sense credencials";
     }
-
   }
   
     public function executeAcercaDe(sfWebRequest $request)
