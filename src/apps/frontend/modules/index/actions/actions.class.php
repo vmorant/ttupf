@@ -18,12 +18,35 @@ class indexActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
     echo "Estat:<br>";
-    
+	
     if($this->getUser()->isAuthenticated()){
     	echo "Acreditat<br>";
-    	if(1){
-    		echo "Configurat";
-    	}
+    	
+    	$this->usuari_id = $this->getUser()->getGuardUser()->getId();
+   
+       	$this->utas = Doctrine_Core::getTable('UsuariTeAssignatures')
+       		->createQuery('a')
+      		->execute();
+      	
+		echo "Usuari id: ".$this->usuari_id."<br>";
+	
+		$this->configurat = false;
+	
+		foreach ($this->utas as $uta):
+    	
+	    	if($uta->getUsuariId() == $this->usuari_id){
+    			$this->configurat = true;
+    			echo $uta->getAssignaturaId()."<br>";
+    		}
+    	
+		endforeach;
+    			
+		if($this->configurat){
+   			echo "Configurat";
+		}
+		else
+			echo "No configurat";
+
     }
     else{
     	echo "Sense credencials";
