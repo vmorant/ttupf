@@ -2,11 +2,11 @@
 
 = Introducció =
 
-L'estil de codi que farem servir serà la pròpia de Symfony, disponible [http://trac.symfony-project.org/wiki/HowToContributeToSymfony#CodingStandards aquí], amb algunes modificacions, com per exemple la identació i les claus de obertura.
+L'estil de codi que farem servir serà una personalització de la pròpia de Symfony, disponible [http://trac.symfony-project.org/wiki/HowToContributeToSymfony#CodingStandards aquí]. Les modificacions que hi ha fan referència a la indentació i les claus d'obertura.
 
 == Resum ==
-  * La indentació es fa amb un caràcter tabulador, de la mida de quatre espais, i mai utilitzant caràcters espai.
-  * La clau d'obertura la col·loquem al final de la mateixa línia on posem el títol de la funció, iteració, constructor, i en general qualsevol sentència que requereixi claus, tenint en compte que hi ha d'aver un espai entre el títol i la clau.
+  * La indentació es fa amb un caràcter tabulador i mai utilitzant caràcters espai.
+  * La clau d'obertura la col·loquem al final de la mateixa línia on posem el títol de la funció, iteració, constructor, i en general qualsevol sentència que requereixi claus, tenint en compte que hi ha d'haver un espai entre el títol i la clau.
 {{{
 <?php
 class sfFoo {
@@ -27,7 +27,7 @@ if(condicio) {
 ...
 }}}
 
-  * Mai s'acaben els fitxers .php amb la etiqueta `?>`. Això és degut a què no és necessari, i la seva presència pot causar problemes (si per alguna raó s'introduiexen espais o línies en blanc després de la etiqueta `?>` es poden generar errors).
+  * Mai s'acaben els fitxers .php amb la etiqueta `?>`. No és necessari, i la seva presència pot causar problemes (si per alguna raó s'introduiexen espais o línies en blanc després de la etiqueta `?>` es poden generar errors).
   * Sempre s'especifica el tipus de cada argument a les signatures de funcions i mètodes.
   * Cada funció i mètode ha de tenir el seu bloc [http://www.phpdoc.org/about.php phpdoc]:
     * Les declaracions que comencen amb @ no tenen punt final.
