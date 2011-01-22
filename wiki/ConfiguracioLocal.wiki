@@ -18,7 +18,7 @@ NameVirtualHost 127.0.0.1:80
 # This is the configuration for your project
 
 <VirtualHost 127.0.0.1:80>
-  ServerName ttupf.local
+  ServerName ttupf.localhost
     DocumentRoot "/ruta/working/copy/ttupf/src/web"
   DirectoryIndex index.php
   <Directory "/ruta/working/copy/ttupf/src/web">
@@ -36,7 +36,7 @@ NameVirtualHost 127.0.0.1:80
 }}}
 
 També s'ha d'afegir una entrada al fitxer `hosts` (Windows: C:\Windows\System32\drivers\etc\hosts, Linux: /etc/hosts):
-127.0.0.1    ttupf.local
+127.0.0.1    ttupf.localhost
 
 Ara es pot anar a http://ttupf.local i veure l'aplicació.
 
