@@ -5,6 +5,7 @@
   * MySQL
   * PHP
 
+== Apache ==
 Per configurar l'Apache per tal de poder accedir a ttupf s'ha d'afegir el següent codi a l'arxiu httpd.conf:
 
 S'ha de reemplaçar `/ruta/working/copy` amb la ruta real.
@@ -41,6 +42,20 @@ També s'ha d'afegir una entrada al fitxer `hosts` (Windows: C:\Windows\System32
 Ara es pot anar a http://ttupf.local i veure l'aplicació.
 
 Més informació: http://www.symfony-project.org/getting-started/1_4/en/05-Web-Server-Configuration
+
+== MySQL ==
+S'ha de configurar la codificació de caràcters per defecte del servidor de MySQL. D'altra manera, en crear la base de dades amb el symfony, es guardaran les dades UTF-8 com si fossin Latin-1.
+
+S'ha d'editar el fitxer `my.ini` (sota Windows) o `my.cnf` (sota Linux). A l'apartat de `[mysqld]` s'ha d'afegir el següent:
+
+{{{
+[mysqld]
+...
+
+# ttupf
+default-character-set = utf8 
+collation-server = utf8_spanish_ci
+}}}
 
 =Instalació des de zero en Windows=
 
