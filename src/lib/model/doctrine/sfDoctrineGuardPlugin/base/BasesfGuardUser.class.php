@@ -22,7 +22,7 @@
  * @property sfGuardRememberKey $RememberKeys
  * @property sfGuardForgotPassword $ForgotPassword
  * @property sfGuardUserProfile $Profile
- * @property Doctrine_Collection $Assignatures
+ * @property Doctrine_Collection $UsuariTeAssignatures
  * 
  * @method string                getFirstName()             Returns the current record's "first_name" value
  * @method string                getLastName()              Returns the current record's "last_name" value
@@ -41,7 +41,7 @@
  * @method sfGuardRememberKey    getRememberKeys()          Returns the current record's "RememberKeys" value
  * @method sfGuardForgotPassword getForgotPassword()        Returns the current record's "ForgotPassword" value
  * @method sfGuardUserProfile    getProfile()               Returns the current record's "Profile" value
- * @method Doctrine_Collection   getAssignatures()          Returns the current record's "Assignatures" collection
+ * @method Doctrine_Collection   getUsuariTeAssignatures()  Returns the current record's "UsuariTeAssignatures" collection
  * @method sfGuardUser           setFirstName()             Sets the current record's "first_name" value
  * @method sfGuardUser           setLastName()              Sets the current record's "last_name" value
  * @method sfGuardUser           setEmailAddress()          Sets the current record's "email_address" value
@@ -59,7 +59,7 @@
  * @method sfGuardUser           setRememberKeys()          Sets the current record's "RememberKeys" value
  * @method sfGuardUser           setForgotPassword()        Sets the current record's "ForgotPassword" value
  * @method sfGuardUser           setProfile()               Sets the current record's "Profile" value
- * @method sfGuardUser           setAssignatures()          Sets the current record's "Assignatures" collection
+ * @method sfGuardUser           setUsuariTeAssignatures()  Sets the current record's "UsuariTeAssignatures" collection
  * 
  * @package    ttupf
  * @subpackage model
@@ -159,7 +159,7 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'user_id'));
 
-        $this->hasMany('UsuariTeAssignatures as Assignatures', array(
+        $this->hasMany('UsuariTeAssignatura as UsuariTeAssignatures', array(
              'local' => 'id',
              'foreign' => 'usuari_id'));
 
