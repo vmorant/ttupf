@@ -1,3 +1,5 @@
+detect_relations: true
+
 CarreraCurs:
   actAs:              { Timestampable: ~ }
   columns:
@@ -12,7 +14,7 @@ Assignatura:
     carrera_curs_id:  { type: integer, notnull: true }
   relations:
     CarreraCurs:      { onDelete: CASCADE, local: carrera_curs_id, foreign: id, foreignAlias: Assignatures }
-
+    
 Sessio:
   columns:
     data_hora_inici:  { type: timestamp, notnull: true }
@@ -25,13 +27,12 @@ Sessio:
   relations:
     Assignatura:      { onDelete: CASCADE, local: assignatura_id, foreign: id, foreignAlias: Sessions }
 
-UsuariTeAssignatures:
+UsuariTeAssignatura:
   columns:
-    usuari_id:        { type: integer, notnull: true }
-    assignatura_id:   { type: integer, notnull: true }
+    usuari_id:        { type: integer, notnull: true, primary: true }
+    assignatura_id:   { type: integer, notnull: true, primary: true }
     grup_practiques:  { type: integer }
     grup_seminari:    { type: integer }
   relations:
-    sfGuardUser:      { onDelete: CASCADE, local: usuari_id, foreign: id, foreignAlias: Assignatures }
-    Assignatura:      { onDelete: CASCADE, local: assignatura_id, foreign: id, foreignAlias: Usuaris }
-
+    sfGuardUser:      { onDelete: CASCADE, local: usuari_id, foreign: id, foreignAlias: UsuariTeAssignatures }
+    Assignatura:      { onDelete: CASCADE, local: assignatura_id, foreign: id, foreignAlias: UsuariTeAssignatures }

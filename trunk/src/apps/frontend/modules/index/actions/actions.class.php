@@ -17,36 +17,34 @@ class indexActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    echo "Estat:<br>";
+    echo "- Estat:<br>";
 	
     if($this->getUser()->isAuthenticated()){
-    	echo "Acreditat<br>";
+    	echo "-- Acreditat<br>";
     	
-    	$this->usuari_id = $this->getUser()->getGuardUser()->getId();
-   
-       	$this->utas = Doctrine_Core::getTable('UsuariTeAssignatures')
-       		->createQuery('a')
-      		->execute();
-      	
-		echo "Usuari id: ".$this->usuari_id."<br>";
+    	$this->usuari_id = $this->getUser()->getGuardUser()->getId();		      	
+		echo "--- Nom d'usuari: ".$this->getUser()->getGuardUser()->getUsername()."<br>";
 	
-		$this->configurat = false;
-	
-		foreach ($this->utas as $uta):
-    	
-	    	if($uta->getUsuariId() == $this->usuari_id){
-    			$this->configurat = true;
-    			echo $uta->getAssignaturaId()."<br>";
-    		}
-    	
-		endforeach;
-    			
-		if($this->configurat){
-   			echo "Configurat";
+		$this->utas = $this->getUser()->getGuardUser()->getUsuariTeAssignatures()->getData();
+		$this->utas_size = $this->getUser()->getGuardUser()->getUsuariTeAssignatures()->count();
+		
+		if($this->utas_size > 0){
+			echo "--- Horari configurat<br>";
+			echo "---- Assignatures:<br>";
+			
+			foreach($this->utas as $this->uta):
+				echo "----- ".$this->uta->getAssignatura()->getNom()."<br>";	
+				$this->sessions = $this->uta->getAssignatura()->getSessions()->getData();
+				foreach($this->sessions as $this->sessio):
+					$fecha = $this->sessio->getDataHoraInici();
+					echo $fecha." -> ";
+					echo "----- ".$this->sessio."<br>";
+				endforeach;
+			endforeach;	
 		}
-		else
-			echo "No configurat";
-
+		else{
+			echo "Horari sense configurar<br>";
+		}
     }
     else{
     	echo "Sense credencials";
