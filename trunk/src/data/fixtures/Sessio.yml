@@ -200,3 +200,11 @@ Sessio:
     aula:             54.004
     tipus:            PRÀCTIQUES
     grup_practiques:  1
+    
+  SS_01_03_2011:
+    data_hora_inici:  '2011-03-01 18:30:00'
+    data_hora_fi:     '2011-03-01 20:30:00'
+    assignatura_id:   1
+    aula:             54.002
+    tipus:            PRÀCTIQUES
+    grup_practiques:  1

@@ -72,7 +72,7 @@ class BasesfGuardAuthActions extends sfActions
   {
     $this->getUser()->signOut();
 
-    $signoutUrl = sfConfig::get('app_sf_guard_plugin_success_signout_url', $request->getReferer());
+    $signoutUrl = '@homepage';
 
     $this->redirect('' != $signoutUrl ? $signoutUrl : '@homepage');
   }
