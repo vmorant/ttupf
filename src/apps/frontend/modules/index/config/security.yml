@@ -7,3 +7,5 @@ acercaDe:
   is_secure: false
 index:
   is_secure: false
+login:
+  is_secure: true

@@ -15,13 +15,13 @@ class horariActions extends sfActions
   *
   * @param sfRequest $request A request object
   */
-  public function executeIndex(sfWebRequest $request)
-  {
-    $this->forward('default', 'module');
-  }
+  	public function executeIndex(sfWebRequest $request)
+  	{
+		$this->utas = $this->getUser()->getGuardUser()->getUsuariTeAssignatures()->getData();
+  	}
   
-  public function executeConfig(sfWebRequest $request)
-  {
-    $this->forward('default', 'module');
-  }
+  	public function executeConfig(sfWebRequest $request)
+  	{
+  		
+  	}
 }

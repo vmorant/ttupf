@@ -15,49 +15,34 @@ class indexActions extends sfActions
   *
   * @param sfRequest $request A request object
   */
-  public function executeIndex(sfWebRequest $request)
-  {
-    echo "- Estat:<br>";
-	
-    if($this->getUser()->isAuthenticated()){
-    	echo "-- Acreditat<br>";
+  	public function executeIndex(sfWebRequest $request) {	
+    	$this->usuariAcreditat = $this->getUser()->isAuthenticated();
     	
-    	$this->usuari_id = $this->getUser()->getGuardUser()->getId();		      	
-		echo "--- Nom d'usuari: ".$this->getUser()->getGuardUser()->getUsername()."<br>";
-	
-		$this->utas = $this->getUser()->getGuardUser()->getUsuariTeAssignatures()->getData();
-		$this->utas_size = $this->getUser()->getGuardUser()->getUsuariTeAssignatures()->count();
-		
-		if($this->utas_size > 0){
-			echo "--- Horari configurat<br>";
-			echo "---- Assignatures:<br>";
+    	if($this->usuariAcreditat) {
+	    	$this->utas = $this->getUser()->getGuardUser()->getUsuariTeAssignatures()->getData();
+			$this->utas_size = $this->getUser()->getGuardUser()->getUsuariTeAssignatures()->count();
 			
-			foreach($this->utas as $this->uta):
-				echo "----- ".$this->uta->getAssignatura()->getNom()."<br>";	
-				$this->sessions = $this->uta->getAssignatura()->getSessions()->getData();
-				foreach($this->sessions as $this->sessio):
-					$fecha = $this->sessio->getDataHoraInici();
-					echo $fecha." -> ";
-					echo "----- ".$this->sessio."<br>";
-				endforeach;
-			endforeach;	
-		}
-		else{
-			echo "Horari sense configurar<br>";
-		}
-    }
-    else{
-    	echo "Sense credencials";
-    }
-  }
+			if($this->utas_size > 0) {
+				$this->redirect($this->generateUrl('default', array('module' => 'horari', 'action' => 'index')));
+			}
+			else {
+				$this->redirect($this->generateUrl('default', array('module' => 'horari', 'action' => 'config')));
+			}
+    	}
+    	else {
+    		echo "L'usuari no està acreditat. S'hauria de mostrar l'índex amb totes les seves opcions.";
+    	}
+  	}
   
-    public function executeAcercaDe(sfWebRequest $request)
-  {
-    $this->forward('default', 'module');
-  }
+    public function executeAcercaDe(sfWebRequest $request) {
+    	echo "Acerca de";
+  	}
   
-    public function executeCond(sfWebRequest $request)
-  {
-    $this->forward('default', 'module');
-  }
+    public function executeCond(sfWebRequest $request) {
+    	echo "Condicions";
+  	}
+  
+	public function executeLogin(sfWebRequest $request) {
+		$this->forward('index', 'index');
+  	}
 }
