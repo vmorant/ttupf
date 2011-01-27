@@ -11,18 +11,18 @@ sfGuardUser:
   User_2:
     first_name:     Enric
     last_name:      Leon
-    email_address:  nothingbuttumbleweed@gmail.com
-    username:       klouds1292
-    password:       l1e2o9n2
+    email_address:  test2@ttupf.edu
+    username:       test1
+    password:       testing
     is_super_admin: true
     Groups:         [Group_admin]
     
   User_3:
-    first_name:     Guillem
-    last_name:      Parrado
-    email_address:  guillem404@hotmail.com
-    username:       wilfredo
-    password:       wilfredo
+    first_name:     Joan
+    last_name:      Jane
+    email_address:  test2@ttupf.edu
+    username:       test2
+    password:       testing
     is_super_admin: true
     Groups:         [Group_admin]
 
