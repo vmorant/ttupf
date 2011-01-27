@@ -99,4 +99,4 @@ La instal.lacio sota Ubuntu es detalla a continuacio:
 `sudo apt-get install mysql-server`
 
 == Instal.lar PHP5 ==
-`sudo apt-get install php5 php5-common libapache2-mod-php5 php5-gd php5-dev curl libcurl3 libcurl3-dev php5-curl`
+`sudo apt-get install php5 php5-common libapache2-mod-php5 php5-gd php5-dev curl libcurl3 libcurl3-dev php5-curl php5-mysql`
