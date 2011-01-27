@@ -17,4 +17,16 @@ default:
   javascripts:    []
 
   has_layout:     true
-  layout:         layout
+  layout:         indexLayout
+
+indexSuccess:
+  has_layout:     true
+  layout:         indexLayout
+
+contingutSuccess:
+  has_layout:     true
+  layout:         contingutLayout
+  
+loginSuccess:
+  has_layout:     true
+  layout:         loginLayout

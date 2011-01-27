@@ -36,3 +36,25 @@ UsuariTeAssignatura:
   relations:
     sfGuardUser:      { onDelete: CASCADE, local: usuari_id, foreign: id, foreignAlias: UsuariTeAssignatures }
     Assignatura:      { onDelete: CASCADE, local: assignatura_id, foreign: id, foreignAlias: UsuariTeAssignatures }
+    
+Contingut:
+  columns:
+    nom:              { type: string(255), notnull: true }
+    text:             { type: string(255), notnull: true }
+    
+Entrada:
+  columns:
+    contingut_id:     { type: integer, notnull: true }
+    nom:              { type: string(255), notnull: true }
+    longitud:         { type: integer }
+    amplada:          { type: integer }
+  relations:
+    Contingut:        { onDelete: CASCADE, local: contingut_id, foreign: id, foreignAlias: Entrades }
+
+Opcio:
+  columns:
+    contingut_id:     { type: integer, notnull: true }
+    nom:              { type: string(255), notnull: true }
+    url:              { type: string(255), notnull: true }
+  relations:
+    Contingut:        { onDelete: CASCADE, local: contingut_id, foreign: id, foreignAlias: Opcions }
