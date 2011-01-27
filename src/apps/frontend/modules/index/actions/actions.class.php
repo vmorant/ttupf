@@ -34,14 +34,10 @@ class indexActions extends sfActions
     	}
   	}
   
-    public function executeAcercaDe(sfWebRequest $request) {
-    	echo "Acerca de";
+    public function executeContingut(sfWebRequest $request) {
+    	echo "Contingut";
   	}
-  
-    public function executeCond(sfWebRequest $request) {
-    	echo "Condicions";
-  	}
-  
+    
 	public function executeLogin(sfWebRequest $request) {
 		$this->forward('index', 'index');
   	}
