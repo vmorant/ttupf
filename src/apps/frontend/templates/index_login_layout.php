@@ -10,6 +10,5 @@
   </head>
   <body>
     <?php echo $sf_content ?>
-    LOGIN
   </body>
 </html>

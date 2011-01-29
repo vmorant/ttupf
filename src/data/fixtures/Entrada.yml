@@ -1,0 +1,24 @@
+Entrada:
+  contacte_nom:
+    contingut_id:     1
+    nom:              Nom:
+    longitud:         40
+    amplada:          1
+    
+  contacte_cognom:
+    contingut_id:     1
+    nom:              Cognom:
+    longitud:         40
+    amplada:          1
+    
+  contacte_username:
+    contingut_id:     1
+    nom:              Nom d'usuari:
+    longitud:         40
+    amplada:          1
+    
+  contacte_text:
+    contingut_id:     1
+    nom:              Text:
+    longitud:         40
+    amplada:          10

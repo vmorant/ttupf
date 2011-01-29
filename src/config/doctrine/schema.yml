@@ -53,8 +53,14 @@ Entrada:
 
 Opcio:
   columns:
-    contingut_id:     { type: integer, notnull: true }
     nom:              { type: string(255), notnull: true }
-    url:              { type: string(255), notnull: true }
+    module:           { type: string(255), notnull: true }
+    action:           { type: string(255), notnull: true }
+    
+ContingutTeOpcio:
+  columns:
+    contingut_id:     { type: integer, notnull: true, primary: true }
+    opcio_id:         { type: integer, notnull: true, primary: true }
   relations:
-    Contingut:        { onDelete: CASCADE, local: contingut_id, foreign: id, foreignAlias: Opcions }
+    Contingut:        { onDelete: CASCADE, local: contingut_id, foreign: id, foreignAlias: ContingutTeOpcions }
+    Opcio:            { onDelete: CASCADE, local: opcio_id, foreign: id, foreignAlias: ContingutTeOpcions }
