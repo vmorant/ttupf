@@ -7,16 +7,13 @@
  * 
  * @property string $nom
  * @property string $text
- * @property Doctrine_Collection $Entrades
  * @property Doctrine_Collection $ContingutTeOpcions
  * 
  * @method string              getNom()                Returns the current record's "nom" value
  * @method string              getText()               Returns the current record's "text" value
- * @method Doctrine_Collection getEntrades()           Returns the current record's "Entrades" collection
  * @method Doctrine_Collection getContingutTeOpcions() Returns the current record's "ContingutTeOpcions" collection
  * @method Contingut           setNom()                Sets the current record's "nom" value
  * @method Contingut           setText()               Sets the current record's "text" value
- * @method Contingut           setEntrades()           Sets the current record's "Entrades" collection
  * @method Contingut           setContingutTeOpcions() Sets the current record's "ContingutTeOpcions" collection
  * 
  * @package    ttupf
@@ -44,10 +41,6 @@ abstract class BaseContingut extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('Entrada as Entrades', array(
-             'local' => 'id',
-             'foreign' => 'contingut_id'));
-
         $this->hasMany('ContingutTeOpcio as ContingutTeOpcions', array(
              'local' => 'id',
              'foreign' => 'contingut_id'));

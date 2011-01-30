@@ -30,14 +30,25 @@ class indexActions extends sfActions
 				$this->redirect($this->generateUrl('default', array('module' => 'horari', 'action' => 'config')));
 			}
     	}
-    	else {
-    		echo "L'usuari no està acreditat. S'hauria de mostrar l'índex amb totes les seves opcions.";
-    	}
   	}
   
     public function executeContingut(sfWebRequest $request) {
-    	$this->contingut = $this->getRoute()->getObject();
-    	echo $this->contingut->getNom();
+    	$this->contingut_actual = $this->getRoute()->getObject();
+	    $this->continguts = Doctrine::getTable('Contingut')
+			->createQuery('q')
+	    	->execute();
+		
+		if($this->contingut_actual->getId() == 1) {
+			$this->form = new sfForm();
+  			$this->form->setWidgets(array(
+    			'nom'    => new sfWidgetFormInputText(),
+    			'email'   => new sfWidgetFormInputText(array('default' => 'me@example.com')),
+    			'assumpte' => new sfWidgetFormChoice(array('choices' => array('Subject A', 'Subject B', 'Subject C'))),
+    			'missatge' => new sfWidgetFormTextarea(),
+  			));
+		}
+		
+		$this->opcions = $this->contingut_actual->getContingutTeOpcions();
   	}
     
 	public function executeLogin(sfWebRequest $request) {

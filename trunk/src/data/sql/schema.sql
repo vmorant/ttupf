@@ -2,7 +2,6 @@ CREATE TABLE assignatura (id BIGINT AUTO_INCREMENT, nom VARCHAR(255) NOT NULL, c
 CREATE TABLE carrera_curs (id BIGINT AUTO_INCREMENT, nom VARCHAR(255) NOT NULL, curs BIGINT NOT NULL, grup_teoria BIGINT NOT NULL, url_horari VARCHAR(255) NOT NULL UNIQUE, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE contingut (id BIGINT AUTO_INCREMENT, nom VARCHAR(255) NOT NULL, text VARCHAR(255) NOT NULL, PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE contingut_te_opcio (contingut_id BIGINT, opcio_id BIGINT, PRIMARY KEY(contingut_id, opcio_id)) ENGINE = INNODB;
-CREATE TABLE entrada (id BIGINT AUTO_INCREMENT, contingut_id BIGINT NOT NULL, nom VARCHAR(255) NOT NULL, longitud BIGINT, amplada BIGINT, INDEX contingut_id_idx (contingut_id), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE opcio (id BIGINT AUTO_INCREMENT, nom VARCHAR(255) NOT NULL, module VARCHAR(255) NOT NULL, action VARCHAR(255) NOT NULL, PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE sessio (id BIGINT AUTO_INCREMENT, data_hora_inici DATETIME NOT NULL, data_hora_fi DATETIME NOT NULL, assignatura_id BIGINT NOT NULL, aula VARCHAR(255), tipus VARCHAR(255) NOT NULL, grup_seminari VARCHAR(255), grup_practiques VARCHAR(255), INDEX assignatura_id_idx (assignatura_id), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE usuari_te_assignatura (usuari_id BIGINT, assignatura_id BIGINT, grup_practiques BIGINT, grup_seminari BIGINT, PRIMARY KEY(usuari_id, assignatura_id)) ENGINE = INNODB;
@@ -18,7 +17,6 @@ CREATE TABLE sf_guard_user_profile (id BIGINT AUTO_INCREMENT, user_id BIGINT NOT
 ALTER TABLE assignatura ADD CONSTRAINT assignatura_carrera_curs_id_carrera_curs_id FOREIGN KEY (carrera_curs_id) REFERENCES carrera_curs(id) ON DELETE CASCADE;
 ALTER TABLE contingut_te_opcio ADD CONSTRAINT contingut_te_opcio_opcio_id_opcio_id FOREIGN KEY (opcio_id) REFERENCES opcio(id) ON DELETE CASCADE;
 ALTER TABLE contingut_te_opcio ADD CONSTRAINT contingut_te_opcio_contingut_id_contingut_id FOREIGN KEY (contingut_id) REFERENCES contingut(id) ON DELETE CASCADE;
-ALTER TABLE entrada ADD CONSTRAINT entrada_contingut_id_contingut_id FOREIGN KEY (contingut_id) REFERENCES contingut(id) ON DELETE CASCADE;
 ALTER TABLE sessio ADD CONSTRAINT sessio_assignatura_id_assignatura_id FOREIGN KEY (assignatura_id) REFERENCES assignatura(id) ON DELETE CASCADE;
 ALTER TABLE usuari_te_assignatura ADD CONSTRAINT usuari_te_assignatura_usuari_id_sf_guard_user_id FOREIGN KEY (usuari_id) REFERENCES sf_guard_user(id) ON DELETE CASCADE;
 ALTER TABLE usuari_te_assignatura ADD CONSTRAINT usuari_te_assignatura_assignatura_id_assignatura_id FOREIGN KEY (assignatura_id) REFERENCES assignatura(id) ON DELETE CASCADE;

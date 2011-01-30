@@ -1,3 +1,4 @@
 <?php
-	
-	echo link_to("Acreditar-me", 'sf_guard_signin');
+
+	echo "<h1>Index</h1>";
+	echo "<p>L'usuari no està acreditat. S'hauria de mostrar l'índex amb totes les seves opcions</p>";
