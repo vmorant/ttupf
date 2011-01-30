@@ -1,5 +1,6 @@
 <?php
 
+	echo "Footer: ";
 	foreach($continguts as $contingut):
-		echo link_to($contingut->getNom(), url_for('index_contingut', $contingut))."<br>";
+		echo link_to($contingut->getNom(), 'index_contingut', $contingut)." ";
 	endforeach;

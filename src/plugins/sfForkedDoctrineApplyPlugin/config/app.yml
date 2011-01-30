@@ -15,7 +15,7 @@ all:
       email: true
       reset_logged: false
     routes:
-      apply: /user/new
+      apply: /user/new/
       reset: /user/password-reset
       resetRequest: /user/reset-request
       resetCancel: /user/reset-cancel
