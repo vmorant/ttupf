@@ -23,6 +23,10 @@ ContingutTeOpcio:
     contingut_id: 3
     opcio_id:    2
 
+  index_login:
+    contingut_id: 4
+    opcio_id:    2
+  
   contacte_registrar:
     contingut_id: 1
     opcio_id:    3
@@ -35,4 +39,7 @@ ContingutTeOpcio:
     contingut_id: 3
     opcio_id:    3
 
+  ajuda_registrar:
+    contingut_id: 4
+    opcio_id:    3
   

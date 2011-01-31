@@ -19,21 +19,6 @@
 		endforeach;
 	end_slot();
 	
-	slot('contacte');
-		echo "<table>"
-				.$form.
-		    	"<tr>
-		    		<td colspan='2'>
-		    			<input type='submit' />
-		    		</td>
-		    	</tr>
-			</table>
-		</form>";
-	end_slot();
-	
 	echo "<h1>".$contingut_actual->getNom()."</h1><br>";
-	echo "<p>".$contingut_actual->getText()."</p>";
+	echo $sf_data->getRaw('view_part');
 	
-	if($contingut_actual->getId() == 1) {
-		include_slot('contacte');
-	}

@@ -18,6 +18,7 @@ class indexComponents extends sfComponents
   	public function executeFooter(sfWebRequest $request) {
 	    $this->continguts = Doctrine::getTable('Contingut')
 			->createQuery('q')
+			->where('q.es_contingut = true')
 	    	->execute();
   	}
 }
