@@ -15,15 +15,19 @@ abstract class BaseContingutForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'id'   => new sfWidgetFormInputHidden(),
-      'nom'  => new sfWidgetFormInputText(),
-      'text' => new sfWidgetFormInputText(),
+      'id'           => new sfWidgetFormInputHidden(),
+      'nom'          => new sfWidgetFormInputText(),
+      'action_part'  => new sfWidgetFormTextarea(),
+      'view_part'    => new sfWidgetFormTextarea(),
+      'es_contingut' => new sfWidgetFormInputCheckbox(),
     ));
 
     $this->setValidators(array(
-      'id'   => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'nom'  => new sfValidatorString(array('max_length' => 255)),
-      'text' => new sfValidatorString(array('max_length' => 255)),
+      'id'           => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
+      'nom'          => new sfValidatorString(array('max_length' => 255)),
+      'action_part'  => new sfValidatorString(array('max_length' => 700)),
+      'view_part'    => new sfValidatorString(array('max_length' => 700)),
+      'es_contingut' => new sfValidatorBoolean(),
     ));
 
     $this->widgetSchema->setNameFormat('contingut[%s]');

@@ -30,25 +30,34 @@ class indexActions extends sfActions
 				$this->redirect($this->generateUrl('default', array('module' => 'horari', 'action' => 'config')));
 			}
     	}
+    	else{
+    		$this->contingut_actual = Doctrine::getTable('Contingut')->find(array(4));
+
+			if($this->contingut_actual->getActionPart() != NULL) {
+				eval($this->contingut_actual->getActionPart());
+			}
+			
+			$this->opcions = $this->contingut_actual->getContingutTeOpcions();
+			$this->view_part = $this->contingut_actual->getViewPart();
+    	}
   	}
   
     public function executeContingut(sfWebRequest $request) {
     	$this->contingut_actual = $this->getRoute()->getObject();
+    	$this->forward404Unless($this->contingut_actual->getEsContingut());
+    	
 	    $this->continguts = Doctrine::getTable('Contingut')
 			->createQuery('q')
+			->where('q.es_contingut = true')
 	    	->execute();
 		
-		if($this->contingut_actual->getId() == 1) {
-			$this->form = new sfForm();
-  			$this->form->setWidgets(array(
-    			'nom'    => new sfWidgetFormInputText(),
-    			'email'   => new sfWidgetFormInputText(array('default' => 'me@example.com')),
-    			'assumpte' => new sfWidgetFormChoice(array('choices' => array('Subject A', 'Subject B', 'Subject C'))),
-    			'missatge' => new sfWidgetFormTextarea(),
-  			));
+		if($this->contingut_actual->getActionPart() != NULL) {
+			eval($this->contingut_actual->getActionPart());
 		}
-		
+	
 		$this->opcions = $this->contingut_actual->getContingutTeOpcions();
+		
+		$this->view_part = $this->contingut_actual->getViewPart();
   	}
     
 	public function executeLogin(sfWebRequest $request) {

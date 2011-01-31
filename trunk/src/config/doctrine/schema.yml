@@ -40,7 +40,9 @@ UsuariTeAssignatura:
 Contingut:
   columns:
     nom:              { type: string(255), notnull: true }
-    text:             { type: string(255), notnull: true }
+    action_part:      { type: string(700), notnull: true }
+    view_part:        { type: string(700), notnull: true }
+    es_contingut:     { type: boolean, notnull: true }
 
 Opcio:
   columns:

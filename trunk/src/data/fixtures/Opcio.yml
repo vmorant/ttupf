@@ -5,7 +5,7 @@ Opcio:
     action: index
   
   login:
-    nom: Inicia Sessió
+    nom: Inicia Sessi√≥
     module: index
     action: login
       

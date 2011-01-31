@@ -15,7 +15,7 @@
 				<h1>
 				</h1>
 				<div id="opcions">
-					<?php include_partial('opcions_inicials') ?>
+					<?php include_slot('opcions') ?>
 				</div>
 			</div>
 		</div>
