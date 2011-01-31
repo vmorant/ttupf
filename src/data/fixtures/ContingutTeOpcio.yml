@@ -39,7 +39,7 @@ ContingutTeOpcio:
     contingut_id: 3
     opcio_id:    3
 
-  ajuda_registrar:
+  index_registrar:
     contingut_id: 4
     opcio_id:    3
   
