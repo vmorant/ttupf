@@ -27,8 +27,8 @@ NameVirtualHost 127.0.0.1:80
     Allow from All
   </Directory>
 
-  Alias /sf /ruta/working/copy/lib/vendor/symfony/data/web/sf
-  <Directory /ruta/working/copy/ttupf/src/lib/vendor/symfony/data/web/sf">
+  Alias /sf /ruta/working/copy/ttupf/src/lib/vendor/symfony/data/web/sf
+  <Directory "/ruta/working/copy/ttupf/src/lib/vendor/symfony/data/web/sf">
     AllowOverride All
     Allow from All
   </Directory>
