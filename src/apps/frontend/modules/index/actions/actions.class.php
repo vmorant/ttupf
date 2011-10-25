@@ -42,7 +42,7 @@ class indexActions extends sfActions
     	}
   	}
   
-    public function executeContingut(sfWebRequest $request) {
+	public function executeContingut(sfWebRequest $request) {
     	$this->contingut_actual = $this->getRoute()->getObject();
     	$this->forward404Unless($this->contingut_actual->getEsContingut());
     	
