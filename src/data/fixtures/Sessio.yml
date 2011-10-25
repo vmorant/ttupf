@@ -31,6 +31,7 @@ Sessio:
     data_hora_inici:  '2011-03-01 14:30:00'
     data_hora_fi:     '2011-03-01 16:30:00'
     assignatura_id:   4
+    aula:             54.005
     tipus:            PRÀCTIQUES
     grup_practiques:  1
     
