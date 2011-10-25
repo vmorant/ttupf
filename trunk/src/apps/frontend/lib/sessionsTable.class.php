@@ -11,31 +11,44 @@ class sessionsTable
 	 * Conté el codi HTML de la taula
 	 */
 	private $table;
+	private $day_class;
 
 	public function sessionsTable($sessions){
 		$this->sessionsArray = $sessions;
-		$date = explode(" ", $this->sessionsArray[0]->getDataHoraInici());
-		$date = $date[0];
+		$this->haveClassesToday = false;
+
+		//Agafem com a date el dia actual
+		$date = date('d/m/Y', mktime(0, 0, 0, date('m')  , date('d'), date('Y')));
+	
+		//Agafem un dia determinat pel qual sabem que hi han sessions si no estem en l'entorn de debug:
+		if(sfConfig::get('sf_environment') == "dev") {
+			$date = date('d/m/Y', mktime(0, 0, 0, date(3)  , date(1), date(2011)));
+		}
+
 		//TODO s'hauria de mostrar la data de les sessions de la taula; de moment mostra la data de la primera sessio del vector.
 		$this->table = "<table id='sessions'><thead><tr><th>".$date."</th></tr></thead>";
 		
 		foreach($this->sessionsArray as $session):
 			$dataHoraInici = $session->getDataHoraInici();
-			$dia = date('d', strtotime($dataHoraInici));
-			$mes = date('m', strtotime($dataHoraInici));
-			$any = date('Y', strtotime($dataHoraInici));
+			
+			$session_date = date('d/m/Y', strtotime($dataHoraInici));
 			
 			//TODO seleccionar sessions del dia actual per defecte, permetre escollir altres dies.
-			if(($dia == 1) && ($mes = 3) && ($any == 2011)) {
+			if($session_date == $date) {
+				$this->haveClassesToday = true;
 				$hora = explode(" ", $dataHoraInici);
 				$this->table .= "<tr><td>".$hora[1]."</td><td>".$session->getAssignatura()->getNom()."<br />".$session->getTipus()."<br />".$session->getAula()."</td></tr>";
-			}
+			}			
 		endforeach;
 		
 		$this->table .= "</table>";
 	}
 
 	public function toString(){
-		return $this->table;
+		if($this->haveClassesToday) {
+			return $this->table;
+		} else {
+			return "Fantàstic! Tens el dia lliure.<br />";
+		}
 	}
 }
