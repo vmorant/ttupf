@@ -38,3 +38,12 @@ Assignatura:
   ProbabilitatIProcessosEstocastics_G2:
     nom: Probabilitat i Processos Estocàstics
     carrera_curs_id: 10
+
+
+  ArqXarxes:
+    nom: Arquitectura de Xarxes
+    carrera_curs_id: 1
+  DAD:
+    nom: Desenvolupament d'Aplicacions Distribuïdes
+    carrera_curs_id: 1
+
