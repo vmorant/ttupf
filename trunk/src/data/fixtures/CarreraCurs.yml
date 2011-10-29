@@ -1,9 +1,9 @@
 CarreraCurs:
   GEI_1C_1T_1G:
     nom: Grau en Enginyeria Informàtica
-    url_horari: http://www.upf.edu/esup/docencia/horaris/graus10_11/grau-eng_informatica/primer_trimestre/primer/primer_trimestre_g1.html
+    url_horari: http://www.upf.edu/esup/docencia/horaris/graus11_12/grau-eng_informatica/primer_trimestre/tercer/1r_trimestre_g1.html
     grup_teoria: 1
-    curs: 1
+    curs: 3
   
   GEI_1C_1T_2G:
     nom: Grau en Enginyeria Informàtica

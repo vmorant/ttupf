@@ -34,3 +34,15 @@ UsuariTeAssignatura:
     assignatura_id:   1
     grup_practiques:  1
     grup_seminari:    2
+  
+  ArqXarxes:
+    usuari_id:        1
+    assignatura_id:   11
+    grup_practiques:  P101
+    grup_seminari:    S101
+
+  DAD:
+    usuari_id:        1
+    assignatura_id:   12
+    grup_practiques:  P101
+    grup_seminari:    S101
