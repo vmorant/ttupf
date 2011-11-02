@@ -46,3 +46,9 @@ UsuariTeAssignatura:
     assignatura_id:   12
     grup_practiques:  P101
     grup_seminari:    S101
+
+  Ang:
+    usuari_id:        1
+    assignatura_id:   13
+    grup_practiques:  P101
+    grup_seminari:    S101

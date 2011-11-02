@@ -46,4 +46,6 @@ Assignatura:
   DAD:
     nom: Desenvolupament d'Aplicacions Distribuïdes
     carrera_curs_id: 1
-
+  Ang:
+    nom: Comunicació en Anglès Tècnic
+    carrera_curs_id: 1
