@@ -38,7 +38,7 @@ class timetableParser
 					if($cell == 0){
 						// Parse the start/end times for this row's period.
 						$period = new Period($cells[$cell]->plaintext);
-						$this->logger->info("Start time is " . $period->getStart() . ". End time is " . $period->getEnd());
+						$this->logger->info("Start time is " . $period->getStart()->format("H:i:s") . ". End time is " . $period->getEnd()->format("H:i:s"));
 					}
 					else{
 						if(trim($cells[$cell]->plaintext) === '') {
@@ -49,11 +49,11 @@ class timetableParser
 						$session = new Sessio();
 						$sessionStartDateTime = new DateTime($currWeekStartDate->format('d.m.Y'));
 						$sessionStartDateTime->add(new DateInterval('P'.strval($cell-1).'D'));
-						$sessionStartDateTime->setTime($period->start->format('H'), $period->start->format('i'));
+						$sessionStartDateTime->setTime($period->getStart()->format('H'), $period->getStart()->format('i'));
 						$session->setDataHoraInici($sessionStartDateTime->format('Y-m-d H:i:s'));
 						$this->logger->debug('SessionStartDateTime is: ' . $sessionStartDateTime->format('d.m.Y H:i:s'));
 
-						$sessionEndDateTime = $sessionStartDateTime->setTime($period->end->format('H'), $period->end->format('i'));
+						$sessionEndDateTime = $sessionStartDateTime->setTime($period->getEnd()->format('H'), $period->getEnd()->format('i'));
 						$session->setDataHoraFi($sessionEndDateTime->format('Y-m-d H:i:s'));
 						$this->logger->debug('SessionEndDateTime is: ' . $sessionEndDateTime->format('d.m.Y H:i:s'));
 
@@ -190,8 +190,8 @@ class timetableParser
 class Period
 {
 	private $logger;
-	public $start;
-	public $end;
+	private $start;
+	private $end;
 
 	public function Period($timeString)
 	{
@@ -226,7 +226,7 @@ class Period
 
 	public function getStart()
 	{
-		return $this->start->format("H:i:s");
+		return $this->start;
 	}
 
 	public function setEnd($hours, $mins)
@@ -236,6 +236,6 @@ class Period
 
 	public function getEnd()
 	{
-		return $this->end->format("H:i:s");
+		return $this->end;
 	}
 }
