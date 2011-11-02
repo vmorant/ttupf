@@ -115,44 +115,48 @@ class timetableParser
 				$course->setCarreraCurs($this->courseYear);
 			}
 		}
-
-		switch(sizeof($sessionPlainTextArray)) {
-			// Empty period, probably a slot for elective courses.
-			case 0:
-				return -1;
-			// Probably a bank holiday. All we have is probably "FESTIU" or similar.
-			case 1:
-				$sessionObject->setTipus($sessionPlainTextArray[0]);
-				break;
-			// Probably a cancelled class. We have course name and session type "NO HI HA CLASSE".
-			case 2:
-				/*$courseId = Doctrine_Query::create()
-					->select('a.id')
-					->from('Assignatura a')
-					->where('a.nom = ?', $sessionPlainTextArray[0])
-					->execute();*/
-				$sessionObject->setAssignatura($course);
-				$sessionObject->setTipus($sessionPlainTextArray[1]);
-				break;
-			// Basic session, we have course name, session type and [practical|seminar] classroom 
-			case 3:
-				$sessionObject->setAssignatura($course);
-				$sessionObject->setTipus($sessionPlainTextArray[1]);
-				$this->parseGroupClass($sessionPlainTextArray, $sessionObject);
-				break;
-			// Either practical or seminar class with two groups in two classrooms simultaneously.
-				// TODO it only saves info for one of the groups, need to create a separate session
-				// for the second group.
-			case 4:
-				$sessionObject->setAssignatura($course);
-				$sessionObject->setTipus($sessionPlainTextArray[1]);
-				if(sizeof($sessionPlainTextArray[3] < 10)) {
-					$this->parseGroupClass($sessionPlainTextArray, $sessionObject);
+		// Parse period cell by looking for lines that have '[Aula|Pnnn|Xnnn]: nn.nnn'. The bit before
+		// the colon tells us whether it's theory (Aula), practical (Pnnn) or seminar (Snnn). The bit
+		// after the colon always tells us the classroom.
+		foreach($sessionPlainTextArray as $line):
+			$matches = array();
+			$this->logger->debug("Line is: " . $line);
+			// The tilde (~) is the separator for the regular expression. 
+			// $regex matches strings of the type "Aula: 52.119".
+			$regex = "/(.+)[:|-] ([0-9]{2}.[0-9]{3})/";
+			// Aula (or [P|S]XXX) will be in $matches[1], classroom will be in $matches[2].
+			$preg_match = preg_match($regex, $line, $matches);
+			$this->logger->debug("Preg match result is: " . intval($preg_match)); 
+			if($preg_match){
+				switch($matches[1][0]){
+				case 'A':
+					$sessionObject->setTipus('TEORIA');
+					$this->logger->debug("Setting type to theory.");
+					break;
+				case 'P':
+					$sessionObject->setTipus('PRÀCTIQUES');
+					$sessionObject->setGrupPractiques($matches[1]);
+					$this->logger->debug("Setting type to practical.");
+					break;
+				case 'S':
+					$sessionObject->setTipus('SEMINARIS');
+					$sessionObject->setGrupSeminari($matches[1]);
+					$this->logger->debug("Setting type to seminar.");
+					break;
+				default:
+					$this->logger->error("No s'ha pogut parsejar el tipus de sessió.");
+					return -1;
 				}
-				break;
-			default:
-				return -1;
-		}
+				
+				$sessionObject->setAssignatura($course);
+				$sessionObject->setAula($matches[2]);
+			}
+			else{
+				if(sizeof($sessionPlainTextArray) <= 2){
+					return -1;
+				}
+			}
+		endforeach;
 		return 0;
 	}
 
