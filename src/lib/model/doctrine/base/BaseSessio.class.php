@@ -12,6 +12,7 @@
  * @property string $tipus
  * @property string $grup_seminari
  * @property string $grup_practiques
+ * @property string $grup_teoria
  * @property Assignatura $Assignatura
  * 
  * @method timestamp   getDataHoraInici()   Returns the current record's "data_hora_inici" value
@@ -21,6 +22,7 @@
  * @method string      getTipus()           Returns the current record's "tipus" value
  * @method string      getGrupSeminari()    Returns the current record's "grup_seminari" value
  * @method string      getGrupPractiques()  Returns the current record's "grup_practiques" value
+ * @method string      getGrupTeoria()      Returns the current record's "grup_teoria" value
  * @method Assignatura getAssignatura()     Returns the current record's "Assignatura" value
  * @method Sessio      setDataHoraInici()   Sets the current record's "data_hora_inici" value
  * @method Sessio      setDataHoraFi()      Sets the current record's "data_hora_fi" value
@@ -29,6 +31,7 @@
  * @method Sessio      setTipus()           Sets the current record's "tipus" value
  * @method Sessio      setGrupSeminari()    Sets the current record's "grup_seminari" value
  * @method Sessio      setGrupPractiques()  Sets the current record's "grup_practiques" value
+ * @method Sessio      setGrupTeoria()      Sets the current record's "grup_teoria" value
  * @method Sessio      setAssignatura()     Sets the current record's "Assignatura" value
  * 
  * @package    ttupf
@@ -67,6 +70,10 @@ abstract class BaseSessio extends sfDoctrineRecord
              'length' => 255,
              ));
         $this->hasColumn('grup_practiques', 'string', 255, array(
+             'type' => 'string',
+             'length' => 255,
+             ));
+        $this->hasColumn('grup_teoria', 'string', 255, array(
              'type' => 'string',
              'length' => 255,
              ));

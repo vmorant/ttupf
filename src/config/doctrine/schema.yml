@@ -24,6 +24,7 @@ Sessio:
     tipus:            { type: string(255), notnull: true }
     grup_seminari:    { type: string(255) }
     grup_practiques:  { type: string(255) }
+    grup_teoria:	  { type: string(255) }
   relations:
     Assignatura:      { onDelete: CASCADE, local: assignatura_id, foreign: id, foreignAlias: Sessions }
 
@@ -33,6 +34,7 @@ UsuariTeAssignatura:
     assignatura_id:   { type: integer, notnull: true, primary: true }
     grup_practiques:  { type: string(255) }
     grup_seminari:    { type: string(255) }
+    grup_teoria:	  { type: string(255) }
   relations:
     sfGuardUser:      { onDelete: CASCADE, local: usuari_id, foreign: id, foreignAlias: UsuariTeAssignatures }
     Assignatura:      { onDelete: CASCADE, local: assignatura_id, foreign: id, foreignAlias: UsuariTeAssignatures }

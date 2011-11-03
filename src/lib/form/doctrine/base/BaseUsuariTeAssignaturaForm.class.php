@@ -19,6 +19,7 @@ abstract class BaseUsuariTeAssignaturaForm extends BaseFormDoctrine
       'assignatura_id'  => new sfWidgetFormInputHidden(),
       'grup_practiques' => new sfWidgetFormInputText(),
       'grup_seminari'   => new sfWidgetFormInputText(),
+      'grup_teoria'     => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
@@ -26,6 +27,7 @@ abstract class BaseUsuariTeAssignaturaForm extends BaseFormDoctrine
       'assignatura_id'  => new sfValidatorChoice(array('choices' => array($this->getObject()->get('assignatura_id')), 'empty_value' => $this->getObject()->get('assignatura_id'), 'required' => false)),
       'grup_practiques' => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'grup_seminari'   => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'grup_teoria'     => new sfValidatorString(array('max_length' => 255, 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('usuari_te_assignatura[%s]');

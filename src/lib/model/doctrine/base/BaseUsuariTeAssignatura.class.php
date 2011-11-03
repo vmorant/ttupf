@@ -9,6 +9,7 @@
  * @property integer $assignatura_id
  * @property string $grup_practiques
  * @property string $grup_seminari
+ * @property string $grup_teoria
  * @property sfGuardUser $sfGuardUser
  * @property Assignatura $Assignatura
  * 
@@ -16,12 +17,14 @@
  * @method integer             getAssignaturaId()   Returns the current record's "assignatura_id" value
  * @method string              getGrupPractiques()  Returns the current record's "grup_practiques" value
  * @method string              getGrupSeminari()    Returns the current record's "grup_seminari" value
+ * @method string              getGrupTeoria()      Returns the current record's "grup_teoria" value
  * @method sfGuardUser         getSfGuardUser()     Returns the current record's "sfGuardUser" value
  * @method Assignatura         getAssignatura()     Returns the current record's "Assignatura" value
  * @method UsuariTeAssignatura setUsuariId()        Sets the current record's "usuari_id" value
  * @method UsuariTeAssignatura setAssignaturaId()   Sets the current record's "assignatura_id" value
  * @method UsuariTeAssignatura setGrupPractiques()  Sets the current record's "grup_practiques" value
  * @method UsuariTeAssignatura setGrupSeminari()    Sets the current record's "grup_seminari" value
+ * @method UsuariTeAssignatura setGrupTeoria()      Sets the current record's "grup_teoria" value
  * @method UsuariTeAssignatura setSfGuardUser()     Sets the current record's "sfGuardUser" value
  * @method UsuariTeAssignatura setAssignatura()     Sets the current record's "Assignatura" value
  * 
@@ -48,6 +51,10 @@ abstract class BaseUsuariTeAssignatura extends sfDoctrineRecord
              'length' => 255,
              ));
         $this->hasColumn('grup_seminari', 'string', 255, array(
+             'type' => 'string',
+             'length' => 255,
+             ));
+        $this->hasColumn('grup_teoria', 'string', 255, array(
              'type' => 'string',
              'length' => 255,
              ));

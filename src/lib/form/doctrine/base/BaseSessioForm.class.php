@@ -23,6 +23,7 @@ abstract class BaseSessioForm extends BaseFormDoctrine
       'tipus'           => new sfWidgetFormInputText(),
       'grup_seminari'   => new sfWidgetFormInputText(),
       'grup_practiques' => new sfWidgetFormInputText(),
+      'grup_teoria'     => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
@@ -34,6 +35,7 @@ abstract class BaseSessioForm extends BaseFormDoctrine
       'tipus'           => new sfValidatorString(array('max_length' => 255)),
       'grup_seminari'   => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'grup_practiques' => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'grup_teoria'     => new sfValidatorString(array('max_length' => 255, 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('sessio[%s]');
