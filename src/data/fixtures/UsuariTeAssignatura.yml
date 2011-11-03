@@ -1,5 +1,5 @@
 UsuariTeAssignatura:
-  AX1:
+  ADX1:
     usuari_id:        1
     assignatura_id:   1
     grup_practiques:  P102
@@ -23,7 +23,7 @@ UsuariTeAssignatura:
     grup_practiques:  P101
     grup_seminari:    S102
 
-  AX2:
+  ADX2:
     usuari_id:        2
     assignatura_id:   1
     grup_practiques:  P102
@@ -47,7 +47,7 @@ UsuariTeAssignatura:
     grup_practiques:  P101
     grup_seminari:    S102
 
-  AX3:
+  ADX3:
     usuari_id:        3
     assignatura_id:   1
     grup_practiques:  P102
