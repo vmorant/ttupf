@@ -7,7 +7,26 @@ Horari Index<br />
 	foreach($utas as $uta):
 		$sessions = $uta->getAssignatura()->getSessions()->getData();
 		foreach($sessions as $session):
-			$sessionsArray[] = $session;
+			$tipus = $session->getTipus();
+			switch($tipus[0]) {
+				case 'P':
+					if($session->getGrupPractiques() == $uta->getGrupPractiques()) {
+						$sessionsArray[] = $session;
+					}
+					break;
+				case 'T':
+					if($session->getGrupTeoria() == $uta->getGrupTeoria()) {
+						$sessionsArray[] = $session;
+					}
+					break;
+				case 'S':
+					if($session->getGrupSeminari() == $uta->getGrupSeminari()) {
+						$sessionsArray[] = $session;
+					}
+					break;
+				default:
+					break;
+			}
 		endforeach;
 	endforeach;
  
