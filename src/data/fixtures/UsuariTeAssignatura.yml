@@ -2,83 +2,76 @@ UsuariTeAssignatura:
   ADX1:
     usuari_id:        1
     assignatura_id:   1
-    grup_teoria:      T1
+    grup_teoria:      1
     grup_practiques:  P102
     grup_seminari:    S103
 
   DAD1:
     usuari_id:        1
     assignatura_id:   2
-    grup_teoria:      T1
+    grup_teoria:      1
     grup_practiques:  P101
     grup_seminari:    S101
 
   CAT1:
     usuari_id:        1
     assignatura_id:   3
-    grup_teoria:      T1
+    grup_teoria:      2
     grup_practiques:  P201
     grup_seminari:    S202
-
-  SF1:
-    usuari_id:        1
-    assignatura_id:   4
-    grup_teoria:      T1
-    grup_practiques:  P101
-    grup_seminari:    S102
 
   ADX2:
     usuari_id:        2
     assignatura_id:   1
-    grup_teoria:      T1
+    grup_teoria:      1
     grup_practiques:  P102
     grup_seminari:    S103
 
   DAD2:
     usuari_id:        2
     assignatura_id:   2
-    grup_teoria:      T1
+    grup_teoria:      1
     grup_practiques:  P101
     grup_seminari:    S101
 
   CAT2:
     usuari_id:        2
     assignatura_id:   3
-    grup_teoria:      T1
+    grup_teoria:      2
     grup_practiques:  P201
     grup_seminari:    S202
 
   SF2:
     usuari_id:        2
     assignatura_id:   4
-    grup_teoria:      T1
+    grup_teoria:      1
     grup_practiques:  P101
     grup_seminari:    S102
 
   ADX3:
     usuari_id:        3
     assignatura_id:   1
-    grup_teoria:      T1
+    grup_teoria:      1
     grup_practiques:  P102
     grup_seminari:    S103
 
   DAD3:
     usuari_id:        3
     assignatura_id:   2
-    grup_teoria:      T1
+    grup_teoria:      1
     grup_practiques:  P101
     grup_seminari:    S101
 
   CAT3:
     usuari_id:        3
     assignatura_id:   3
-    grup_teoria:      T1
+    grup_teoria:      2
     grup_practiques:  P201
     grup_seminari:    S202
 
   SF3:
     usuari_id:        3
     assignatura_id:   4
-    grup_teoria:      T1
+    grup_teoria:      1
     grup_practiques:  P101
     grup_seminari:    S102

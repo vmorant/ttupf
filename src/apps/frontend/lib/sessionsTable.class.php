@@ -23,7 +23,7 @@ class sessionsTable
 	
 		//Agafem un dia determinat pel qual sabem que hi han sessions si no estem en l'entorn de debug:
 		if(sfConfig::get('sf_environment') == "dev") {
-			$this->date = date('d/m/Y', mktime(0, 0, 0, date(10)  , date(24), date(2011)));
+//			$this->date = date('d/m/Y', mktime(0, 0, 0, date(10)  , date(24), date(2011)));
 		}
 
 		//TODO s'hauria de mostrar la data de les sessions de la taula; de moment mostra la data de la primera sessio del vector.
