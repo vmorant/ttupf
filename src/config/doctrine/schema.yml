@@ -31,8 +31,8 @@ UsuariTeAssignatura:
   columns:
     usuari_id:        { type: integer, notnull: true, primary: true }
     assignatura_id:   { type: integer, notnull: true, primary: true }
-    grup_practiques:  { type: integer }
-    grup_seminari:    { type: integer }
+    grup_practiques:  { type: string(255) }
+    grup_seminari:    { type: string(255) }
   relations:
     sfGuardUser:      { onDelete: CASCADE, local: usuari_id, foreign: id, foreignAlias: UsuariTeAssignatures }
     Assignatura:      { onDelete: CASCADE, local: assignatura_id, foreign: id, foreignAlias: UsuariTeAssignatures }
