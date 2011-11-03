@@ -18,8 +18,8 @@ abstract class BaseUsuariTeAssignaturaFormFilter extends BaseFormFilterDoctrine
     ));
 
     $this->setValidators(array(
-      'grup_practiques' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'grup_seminari'   => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'grup_practiques' => new sfValidatorPass(array('required' => false)),
+      'grup_seminari'   => new sfValidatorPass(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('usuari_te_assignatura_filters[%s]');
@@ -41,8 +41,8 @@ abstract class BaseUsuariTeAssignaturaFormFilter extends BaseFormFilterDoctrine
     return array(
       'usuari_id'       => 'Number',
       'assignatura_id'  => 'Number',
-      'grup_practiques' => 'Number',
-      'grup_seminari'   => 'Number',
+      'grup_practiques' => 'Text',
+      'grup_seminari'   => 'Text',
     );
   }
 }

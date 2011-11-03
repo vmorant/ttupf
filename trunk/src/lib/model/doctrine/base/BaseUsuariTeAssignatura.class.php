@@ -7,15 +7,15 @@
  * 
  * @property integer $usuari_id
  * @property integer $assignatura_id
- * @property integer $grup_practiques
- * @property integer $grup_seminari
+ * @property string $grup_practiques
+ * @property string $grup_seminari
  * @property sfGuardUser $sfGuardUser
  * @property Assignatura $Assignatura
  * 
  * @method integer             getUsuariId()        Returns the current record's "usuari_id" value
  * @method integer             getAssignaturaId()   Returns the current record's "assignatura_id" value
- * @method integer             getGrupPractiques()  Returns the current record's "grup_practiques" value
- * @method integer             getGrupSeminari()    Returns the current record's "grup_seminari" value
+ * @method string              getGrupPractiques()  Returns the current record's "grup_practiques" value
+ * @method string              getGrupSeminari()    Returns the current record's "grup_seminari" value
  * @method sfGuardUser         getSfGuardUser()     Returns the current record's "sfGuardUser" value
  * @method Assignatura         getAssignatura()     Returns the current record's "Assignatura" value
  * @method UsuariTeAssignatura setUsuariId()        Sets the current record's "usuari_id" value
@@ -43,11 +43,13 @@ abstract class BaseUsuariTeAssignatura extends sfDoctrineRecord
              'type' => 'integer',
              'primary' => true,
              ));
-        $this->hasColumn('grup_practiques', 'integer', null, array(
-             'type' => 'integer',
+        $this->hasColumn('grup_practiques', 'string', 255, array(
+             'type' => 'string',
+             'length' => 255,
              ));
-        $this->hasColumn('grup_seminari', 'integer', null, array(
-             'type' => 'integer',
+        $this->hasColumn('grup_seminari', 'string', 255, array(
+             'type' => 'string',
+             'length' => 255,
              ));
     }
 

@@ -4,7 +4,7 @@ CREATE TABLE contingut (id BIGINT AUTO_INCREMENT, nom VARCHAR(255) NOT NULL, act
 CREATE TABLE contingut_te_opcio (contingut_id BIGINT, opcio_id BIGINT, PRIMARY KEY(contingut_id, opcio_id)) ENGINE = INNODB;
 CREATE TABLE opcio (id BIGINT AUTO_INCREMENT, nom VARCHAR(255) NOT NULL, module VARCHAR(255) NOT NULL, action VARCHAR(255) NOT NULL, PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE sessio (id BIGINT AUTO_INCREMENT, data_hora_inici DATETIME NOT NULL, data_hora_fi DATETIME NOT NULL, assignatura_id BIGINT NOT NULL, aula VARCHAR(255), tipus VARCHAR(255) NOT NULL, grup_seminari VARCHAR(255), grup_practiques VARCHAR(255), INDEX assignatura_id_idx (assignatura_id), PRIMARY KEY(id)) ENGINE = INNODB;
-CREATE TABLE usuari_te_assignatura (usuari_id BIGINT, assignatura_id BIGINT, grup_practiques BIGINT, grup_seminari BIGINT, PRIMARY KEY(usuari_id, assignatura_id)) ENGINE = INNODB;
+CREATE TABLE usuari_te_assignatura (usuari_id BIGINT, assignatura_id BIGINT, grup_practiques VARCHAR(255), grup_seminari VARCHAR(255), PRIMARY KEY(usuari_id, assignatura_id)) ENGINE = INNODB;
 CREATE TABLE sf_guard_forgot_password (id BIGINT AUTO_INCREMENT, user_id BIGINT NOT NULL, unique_key VARCHAR(255), expires_at DATETIME NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, INDEX user_id_idx (user_id), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE sf_guard_group (id BIGINT AUTO_INCREMENT, name VARCHAR(255) UNIQUE, description TEXT, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE sf_guard_group_permission (group_id BIGINT, permission_id BIGINT, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(group_id, permission_id)) ENGINE = INNODB;

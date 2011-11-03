@@ -24,8 +24,8 @@ abstract class BaseUsuariTeAssignaturaForm extends BaseFormDoctrine
     $this->setValidators(array(
       'usuari_id'       => new sfValidatorChoice(array('choices' => array($this->getObject()->get('usuari_id')), 'empty_value' => $this->getObject()->get('usuari_id'), 'required' => false)),
       'assignatura_id'  => new sfValidatorChoice(array('choices' => array($this->getObject()->get('assignatura_id')), 'empty_value' => $this->getObject()->get('assignatura_id'), 'required' => false)),
-      'grup_practiques' => new sfValidatorInteger(array('required' => false)),
-      'grup_seminari'   => new sfValidatorInteger(array('required' => false)),
+      'grup_practiques' => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'grup_seminari'   => new sfValidatorString(array('max_length' => 255, 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('usuari_te_assignatura[%s]');
