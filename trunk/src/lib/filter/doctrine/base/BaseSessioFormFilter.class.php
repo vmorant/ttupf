@@ -20,6 +20,7 @@ abstract class BaseSessioFormFilter extends BaseFormFilterDoctrine
       'tipus'           => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'grup_seminari'   => new sfWidgetFormFilterInput(),
       'grup_practiques' => new sfWidgetFormFilterInput(),
+      'grup_teoria'     => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
@@ -30,6 +31,7 @@ abstract class BaseSessioFormFilter extends BaseFormFilterDoctrine
       'tipus'           => new sfValidatorPass(array('required' => false)),
       'grup_seminari'   => new sfValidatorPass(array('required' => false)),
       'grup_practiques' => new sfValidatorPass(array('required' => false)),
+      'grup_teoria'     => new sfValidatorPass(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('sessio_filters[%s]');
@@ -57,6 +59,7 @@ abstract class BaseSessioFormFilter extends BaseFormFilterDoctrine
       'tipus'           => 'Text',
       'grup_seminari'   => 'Text',
       'grup_practiques' => 'Text',
+      'grup_teoria'     => 'Text',
     );
   }
 }
