@@ -55,8 +55,9 @@ class timetableParser
 						$this->logger->debug('SessionStartDateTime is: ' . $sessionStartDateTime->format('d.m.Y H:i:s'));
 
 						// Agafem el timestamp de l'hora que acaba la classe i la guardem a la variable period
-						
-						$sessionEndDateTime = $sessionStartDateTime->setTime($period->getEnd()->format('H'), $period->getEnd()->format('i'));
+						$sessionEndDateTime = new DateTime($currWeekStartDate->format('d.m.Y'));						
+						$sessionEndDateTime->add(new DateInterval('P'.strval($cell-1).'D'));
+						$sessionEndDateTime = $sessionEndDateTime->setTime($period->getEnd()->format('H'), $period->getEnd()->format('i'));
 						
 						$period->setEnd($sessionEndDateTime);
 						$this->logger->debug('SessionEndDateTime is: ' . $sessionEndDateTime->format('d.m.Y H:i:s'));
@@ -142,7 +143,7 @@ class timetableParser
 				case 'A':
 					// Mirem si la linea on hi ha la informació amb l'aula de la teoria és la primera o la 
 					// última. Si és la primera és el primer grup de teoría. Si no és el segon.
-					if($key == 0) {
+					if($key == 2) {
 						$sessionObject->setGrupTeoria('1');
 					} else if($key == sizeof($sessionPlainTextArray) - 1) {
 						$sessionObject->setGrupTeoria('2');
