@@ -108,11 +108,14 @@ class timetableParser
 		if(sizeof($sessionPlainTextArray) > 1){
 			$course = Doctrine_Core::getTable('Assignatura')
 				->findOneByNom($sessionPlainTextArray[0]);
+			$this->logger->debug("Found course " . $sessionPlainTextArray[0] . " in database, id is " . $course->getId());
 			// Course doesn't exist, so create it and set its attributes.
 			if(!$course) {
+				$this->logger->debug("Course " . $sessionPlainTextArray[0] . " doesn't exist, creating.");
 				$course = new Assignatura();
 				$course->setNom($sessionPlainTextArray[0]);
 				$course->setCarreraCurs($this->courseYear);
+				$course->save();
 			}
 		}
 		// Parse period cell by looking for lines that have '[Aula|Pnnn|Xnnn]: nn.nnn'. The bit before
@@ -123,7 +126,7 @@ class timetableParser
 			$this->logger->debug("Line is: " . $line);
 			// The tilde (~) is the separator for the regular expression. 
 			// $regex matches strings of the type "Aula: 52.119".
-			$regex = "/(.+)[:|-] ([0-9]{2}.[0-9]{3})/";
+			$regex = "/(.+)[:|-] ([0-9]{2}.[[:alnum:]]{3})/";
 			// Aula (or [P|S]XXX) will be in $matches[1], classroom will be in $matches[2].
 			$preg_match = preg_match($regex, $line, $matches);
 			$this->logger->debug("Preg match result is: " . intval($preg_match)); 
@@ -144,7 +147,7 @@ class timetableParser
 					$this->logger->debug("Setting type to seminar.");
 					break;
 				default:
-					$this->logger->error("No s'ha pogut parsejar el tipus de sessió.");
+					$this->logger->debug("No s'ha pogut parsejar el tipus de sessió.");
 					return -1;
 				}
 				
