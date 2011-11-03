@@ -25,11 +25,16 @@ class horariActions extends sfActions
 		$query = new Doctrine_Query();
 		$query->from('CarreraCurs');
 		$carreresCursos = $query->execute();
+		
+		$query = new Doctrine_Query();
+		$query->from('Sessio');
+		$sessions = $query->execute();
+		
 		$i = 0;
 		foreach($carreresCursos as $carreraCurs):
 			// Provem nomes amb primer carreracurs ja que els altres retornen 404
 			if($i==0){
-				$timetableParser = new timetableParser($carreraCurs);
+				$timetableParser = new timetableParser($carreraCurs, $sessions);
 				$i++;
 			}
 			else{

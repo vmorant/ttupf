@@ -9,13 +9,16 @@ class timetableParser
 
 	private $logger;
 	private $courseYear;
+	private $sessions;
 
-	public function timetableParser($courseYear)
+	public function timetableParser($courseYear, $sessions)
 	{
 		$this->logger = sfContext::getInstance()->getLogger();
 		$this->courseYear = $courseYear;
 		$timetableDOM = new simple_html_dom();
 		$timetableDOM->load_file($courseYear->getUrlHorari());
+		
+		$this->sessions = $sessions;
 
 		// Date of first week is in the second table, second row, second cell.
 		$firstWeek = $timetableDOM->find('table', 1)->find('tr', 1)->find('td', 1)->plaintext;
@@ -171,8 +174,11 @@ class timetableParser
 				$sessionObject->setAula($matches[2]);
 				$sessionObject->setDataHoraInici($period->getStart()->format('Y-m-d H:i:s'));
 				$sessionObject->setDataHoraFi($period->getEnd()->format('Y-m-d H:i:s'));
-				$this->logger->debug("session object still exists, saving.");
-				$sessionObject->save();
+				
+				if(!$this->sessioExists($sessionObject)) {
+					$this->logger->debug("session object still exists, saving.");
+					$sessionObject->save();
+				}
 			}
 			else{
 				if(sizeof($sessionPlainTextArray) <= 2){
@@ -204,6 +210,16 @@ class timetableParser
 		}
 		// Set the classroom for all cases.
 		$sessionObject->setAula($groupClass[1]);
+	}
+	
+	private function sessioExists($sessionObject) {
+		$bdSessions = $this->sessions;
+		foreach($bdSessions as $bdSessio) {
+			if($sessionObject->getDataHoraInici() == $bdSessio->getDataHoraInici()) {
+				return -1;
+			}
+		}
+		return 0;
 	}
 }
 
