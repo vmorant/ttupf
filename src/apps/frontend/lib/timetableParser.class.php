@@ -57,16 +57,17 @@ class timetableParser
 						$session->setDataHoraFi($sessionEndDateTime->format('Y-m-d H:i:s'));
 						$this->logger->debug('SessionEndDateTime is: ' . $sessionEndDateTime->format('d.m.Y H:i:s'));
 
-						// Actually parse each cell's content. Need to extract Course name, period type (Theory/Practical/Seminar), seminar/practical group and class.
-						$sessionInfo = html_entity_decode($cells[$cell]->plaintext, ENT_QUOTES, 'UTF-8');
-						$sessionInfoArray = explode("\n", $sessionInfo);
-						foreach($sessionInfoArray as $i => $value):
-							unset($sessionInfoArray[$i]);
-							$sessionInfoArray[] = trim($value);
+						// Get the plaintext for the period and insert each line into an array.
+						$periodInfo = html_entity_decode($cells[$cell]->plaintext, ENT_QUOTES, 'UTF-8');
+						$periodInfoArray = explode("\n", $periodInfo);
+						foreach($periodInfoArray as $i => $value):
+							unset($periodInfoArray[$i]);
+							$periodInfoArray[] = trim($value);
 						endforeach;
-						$sessionInfoArray = array_values($sessionInfoArray);
-						$this->logger->debug("Trimmed sessioninfoarray is: " . var_export($sessionInfoArray, true));
-						$parseErrorCode = $this->parseSession($session, $sessionInfoArray);
+						// Re-index the array starting from zero.
+						$period->setDetails(array_values($periodInfoArray));
+						$this->logger->debug("Trimmed periodinfoarray is: " . var_export($period->getDetails(), true));
+						$parseErrorCode = $this->parseSession($session, $period->getDetails());
 						if(!$parseErrorCode){
 							$this->logger->debug("session object still exists, saving.");
 							$session->save();
@@ -108,7 +109,9 @@ class timetableParser
 		if(sizeof($sessionPlainTextArray) > 1){
 			$course = Doctrine_Core::getTable('Assignatura')
 				->findOneByNom($sessionPlainTextArray[0]);
-			$this->logger->debug("Found course " . $sessionPlainTextArray[0] . " in database, id is " . $course->getId());
+			if($course){
+				$this->logger->debug("Found course " . $sessionPlainTextArray[0] . " in database, id is " . $course->getId());
+			}
 			// Course doesn't exist, so create it and set its attributes.
 			if(!$course) {
 				$this->logger->debug("Course " . $sessionPlainTextArray[0] . " doesn't exist, creating.");
@@ -125,8 +128,9 @@ class timetableParser
 			$matches = array();
 			$this->logger->debug("Line is: " . $line);
 			// The tilde (~) is the separator for the regular expression. 
-			// $regex matches strings of the type "Aula: 52.119".
-			$regex = "/(.+)[:|-] ([0-9]{2}.[[:alnum:]]{3})/";
+			// $regex matches strings of the type "Aula: 52.119". The .+? after the colon is because
+			// sometimes its a space and sometimes a &nbsp;.
+			$regex = "/(.+)[:|-].+?([0-9]{2}.[[:alnum:]]{3})/";	
 			// Aula (or [P|S]XXX) will be in $matches[1], classroom will be in $matches[2].
 			$preg_match = preg_match($regex, $line, $matches);
 			$this->logger->debug("Preg match result is: " . intval($preg_match)); 
@@ -222,7 +226,7 @@ class Period
 		$this->end->setTime(intval($end[0]), intval($end[1]));
 	}
 
-	public function setStart($hours, $mins)
+	public function setStartTime($hours, $mins)
 	{
 		$this->start->setTime($hours, $mins);
 	}
@@ -232,7 +236,12 @@ class Period
 		return $this->start;
 	}
 
-	public function setEnd($hours, $mins)
+	public function setStart($start)
+	{
+		$this->start = $start;
+	}
+
+	public function setEndTime($hours, $mins)
 	{
 		$this->end->setTime($hours, $mins);
 	}
@@ -240,5 +249,26 @@ class Period
 	public function getEnd()
 	{
 		return $this->end;
+	}
+
+	public function setEnd($end)
+	{
+		$this->end = $end;
+	}
+
+	public function setDate($year, $month, $day)
+	{
+		$this->start->setDate($year, $month, $day);
+		$this->end->setDate($year, $month, $day);
+	}
+
+	public function setDetails($details)
+	{
+		$this->details = $details;
+	}
+
+	public function getDetails()
+	{
+		return $this->details;
 	}
 }
