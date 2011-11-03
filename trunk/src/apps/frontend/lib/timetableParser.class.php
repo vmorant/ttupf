@@ -46,15 +46,19 @@ class timetableParser
 							continue;
 						}
 						// Session start date is the week's start date + current day of week. Time is provided in the first cell of each row
-						$session = new Sessio();
+						
 						$sessionStartDateTime = new DateTime($currWeekStartDate->format('d.m.Y'));
 						$sessionStartDateTime->add(new DateInterval('P'.strval($cell-1).'D'));
 						$sessionStartDateTime->setTime($period->getStart()->format('H'), $period->getStart()->format('i'));
-						$session->setDataHoraInici($sessionStartDateTime->format('Y-m-d H:i:s'));
+						
+						$period->setStart($sessionStartDateTime);
 						$this->logger->debug('SessionStartDateTime is: ' . $sessionStartDateTime->format('d.m.Y H:i:s'));
 
+						// Agafem el timestamp de l'hora que acaba la classe i la guardem a la variable period
+						
 						$sessionEndDateTime = $sessionStartDateTime->setTime($period->getEnd()->format('H'), $period->getEnd()->format('i'));
-						$session->setDataHoraFi($sessionEndDateTime->format('Y-m-d H:i:s'));
+						
+						$period->setEnd($sessionEndDateTime);
 						$this->logger->debug('SessionEndDateTime is: ' . $sessionEndDateTime->format('d.m.Y H:i:s'));
 
 						// Get the plaintext for the period and insert each line into an array.
@@ -67,11 +71,8 @@ class timetableParser
 						// Re-index the array starting from zero.
 						$period->setDetails(array_values($periodInfoArray));
 						$this->logger->debug("Trimmed periodinfoarray is: " . var_export($period->getDetails(), true));
-						$parseErrorCode = $this->parseSession($session, $period->getDetails());
-						if(!$parseErrorCode){
-							$this->logger->debug("session object still exists, saving.");
-							$session->save();
-						}
+						
+						$this->parseSession($period);
 					}
 				}
 			}
@@ -102,8 +103,9 @@ class timetableParser
 	/**
 	 * Attempts to parse a session's content to extract the course id, session type, practical/seminar group and classroom. Takes a session object and an array that contains the lines that make up the session info.
 	 */
-	private function parseSession($sessionObject, $sessionPlainTextArray)
+	private function parseSession($period)
 	{
+		$sessionPlainTextArray = $period->getDetails();
 		// When there is only one element in the array it's probably a bank holiday and not the 
 		// coursename.
 		if(sizeof($sessionPlainTextArray) > 1){
@@ -124,7 +126,7 @@ class timetableParser
 		// Parse period cell by looking for lines that have '[Aula|Pnnn|Xnnn]: nn.nnn'. The bit before
 		// the colon tells us whether it's theory (Aula), practical (Pnnn) or seminar (Snnn). The bit
 		// after the colon always tells us the classroom.
-		foreach($sessionPlainTextArray as $line):
+		foreach($sessionPlainTextArray as $key => $line):
 			$matches = array();
 			$this->logger->debug("Line is: " . $line);
 			// The tilde (~) is the separator for the regular expression. 
@@ -135,8 +137,16 @@ class timetableParser
 			$preg_match = preg_match($regex, $line, $matches);
 			$this->logger->debug("Preg match result is: " . intval($preg_match)); 
 			if($preg_match){
+				$sessionObject = new Sessio();
 				switch($matches[1][0]){
 				case 'A':
+					// Mirem si la linea on hi ha la informació amb l'aula de la teoria és la primera o la 
+					// última. Si és la primera és el primer grup de teoría. Si no és el segon.
+					if($key == 0) {
+						$sessionObject->setGrupTeoria('1');
+					} else if($key == sizeof($sessionPlainTextArray) - 1) {
+						$sessionObject->setGrupTeoria('2');
+					}
 					$sessionObject->setTipus('TEORIA');
 					$this->logger->debug("Setting type to theory.");
 					break;
@@ -151,12 +161,17 @@ class timetableParser
 					$this->logger->debug("Setting type to seminar.");
 					break;
 				default:
+					unset($sessionObject);
 					$this->logger->debug("No s'ha pogut parsejar el tipus de sessió.");
 					return -1;
 				}
 				
 				$sessionObject->setAssignatura($course);
 				$sessionObject->setAula($matches[2]);
+				$sessionObject->setDataHoraInici($period->getStart()->format('Y-m-d H:i:s'));
+				$sessionObject->setDataHoraFi($period->getEnd()->format('Y-m-d H:i:s'));
+				$this->logger->debug("session object still exists, saving.");
+				$sessionObject->save();
 			}
 			else{
 				if(sizeof($sessionPlainTextArray) <= 2){
