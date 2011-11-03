@@ -12,10 +12,11 @@ class sessionsTable
 	 */
 	private $table;
 	private $date;
+	private $hasClassesToday;
 
 	public function sessionsTable($sessions){
 		$this->sessionsArray = $sessions;
-		$haveClassesToday = false;
+		$this->haveClassesToday = false;
 
 		//Agafem com a date el dia actual
 		$this->date = date('d/m/Y', mktime(0, 0, 0, date('m')  , date('d'), date('Y')));
@@ -35,7 +36,7 @@ class sessionsTable
 			
 			//TODO seleccionar sessions del dia actual per defecte, permetre escollir altres dies.
 			if($session_date == $this->date) {
-				$haveClassesToday = true;
+				$this->haveClassesToday = true;
 				$hora = explode(" ", $dataHoraInici);
 				$this->table .= "<tr><td>".$hora[1]."</td><td>".$session->getAssignatura()->getNom()."<br />".$session->getTipus()."<br />".$session->getAula()."</td></tr>";
 			}			
