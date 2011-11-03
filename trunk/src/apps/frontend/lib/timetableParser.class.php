@@ -211,11 +211,14 @@ class timetableParser
 		// Set the classroom for all cases.
 		$sessionObject->setAula($groupClass[1]);
 	}
-	
+
+	/**
+	 * Comprova si existeix una sessio a la base de dades com la que li passa per referència.
+	 */
 	private function sessioExists($sessionObject) {
 		$bdSessions = $this->sessions;
 		foreach($bdSessions as $bdSessio) {
-			if($sessionObject->getDataHoraInici() == $bdSessio->getDataHoraInici()) {
+			if(($sessionObject->getDataHoraInici() == $bdSessio->getDataHoraInici()) || ($sessionObject->getAula() == $bdSessio->getAula())) {
 				return -1;
 			}
 		}
