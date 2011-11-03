@@ -1,51 +1,12 @@
-Assignatura:
-  SenyalsISistemes_G1:
-    nom: Senyals i Sistemes
-    carrera_curs_id: 9
-    
-  SistemesOperatius_G1:
-    nom: Sistemes Operatius
-    carrera_curs_id: 9
-    
-  EnginyeriaDelSoftware_G1:
-    nom: Enginyeria del Software
-    carrera_curs_id: 9
-    
-  ArquitecturaDeComputadors_G1:
-    nom: Arquitectura de Computadors
-    carrera_curs_id: 9
-    
-  ProbabilitatIProcessosEstocastics_G1:
-    nom: Probabilitat i Processos Estocàstics
-    carrera_curs_id: 9
-  
-  SenyalsISistemes_G2:
-    nom: Senyals i Sistemes
-    carrera_curs_id: 10
-    
-  SistemesOperatius_G2:
-    nom: Sistemes Operatius
-    carrera_curs_id: 10
-    
-  EnginyeriaDelSoftware_G2:
-    nom: Enginyeria del Software
-    carrera_curs_id: 10
-    
-  ArquitecturaDeComputadors_G2:
-    nom: Arquitectura de Computadors
-    carrera_curs_id: 10
-    
-  ProbabilitatIProcessosEstocastics_G2:
-    nom: Probabilitat i Processos Estocàstics
-    carrera_curs_id: 10
-
-
-  ArqXarxes:
+  ADX:
     nom: Arquitectura de Xarxes
     carrera_curs_id: 1
   DAD:
     nom: Desenvolupament d'Aplicacions Distribuïdes
     carrera_curs_id: 1
-  Ang:
+  CAT:
     nom: Comunicació en Anglès Tècnic
+    carrera_curs_id: 1
+  SF:
+    nom: Sistemes Formals
     carrera_curs_id: 1
