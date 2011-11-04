@@ -1,5 +1,6 @@
-Horari Configuració
+Horari Configuració<br />
 
 <?php 
-
-	echo "<br><br>--- Horari sense configurar";
+	foreach($carreresCursos as $carreraCurs):
+		echo $carreraCurs->getNom()."<br />";
+	endforeach;

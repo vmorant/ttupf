@@ -25,6 +25,15 @@ sfGuardUser:
     password:       testing
     is_super_admin: true
     Groups:         [Group_admin]
+    
+  User_4:
+    first_name:     Noconfig
+    last_name:      Noconfig
+    email_address:  noconfig@ttupf.edu
+    username:       noconfig
+    password:       testing
+    is_super_admin: true
+    Groups:         [Group_admin]
 
 sfGuardGroup:
   Group_admin:

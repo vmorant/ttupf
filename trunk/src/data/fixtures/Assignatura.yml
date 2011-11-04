@@ -11,3 +11,9 @@ Assignatura:
   SF:
     nom: Sistemes Formals
     carrera_curs_id: 1
+  SS:
+    nom: Senyals i Sistemes
+    carrera_curs_id: 2
+  PIPE:
+    nom: Probabilitat i Processos Estocàstics
+    carrera_curs_id: 2
