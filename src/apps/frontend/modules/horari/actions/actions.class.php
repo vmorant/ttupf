@@ -22,6 +22,7 @@ class horariActions extends sfActions
 
 	public function executeActualitza(sfWebRequest $request)
 	{
+		Doctrine_Manager::connection()->setAttribute(Doctrine_Core::ATTR_AUTO_FREE_QUERY_OBJECTS, true );
 		$query = new Doctrine_Query();
 		$query->from('CarreraCurs');
 		$carreresCursos = $query->execute();

@@ -12,12 +12,16 @@ class timetableParser
 	private $sessions;
 
 	public function timetableParser($courseYear, $sessions)
-	{
+	{	
 		$this->logger = sfContext::getInstance()->getLogger();
+	
 		$this->courseYear = $courseYear;
+
 		$timetableDOM = new simple_html_dom();
-		$timetableDOM->load_file($courseYear->getUrlHorari());
 		
+		
+		$timetableDOM->load_file($courseYear->getUrlHorari());
+				
 		$this->sessions = $sessions;
 
 		// Date of first week is in the second table, second row, second cell.
@@ -35,16 +39,16 @@ class timetableParser
 
 		// Create sessions for each period in the timetable and save them to the database.
 		$rows = $currWeekDOM->find('tr');
+		
+		
 		for($row = 0; $row < sizeof($rows); $row++){
 			if($row > 1){
 				$cells = $rows[$row]->find('td');
-				for($cell = 0; $cell < sizeof($cells); $cell++){
-					if($cell == 0){
+				$period = new Period($cells[0]->plaintext);
+				$this->logger->info("Start time is " . $period->getStart()->format("H:i:s") . ". End time is " . $period->getEnd()->format("H:i:s"));
+				for($cell = 0; $cell < sizeof($cells); $cell++){				
+					if($cell > 0){
 						// Parse the start/end times for this row's period.
-						$period = new Period($cells[$cell]->plaintext);
-						$this->logger->info("Start time is " . $period->getStart()->format("H:i:s") . ". End time is " . $period->getEnd()->format("H:i:s"));
-					}
-					else{
 						if(trim($cells[$cell]->plaintext) === '') {
 							$this->logger->debug("Skipping cell [".$row."][".$cell."], it's empty.");
 							continue;
@@ -80,6 +84,7 @@ class timetableParser
 						$this->parseSession($period);
 					}
 				}
+				unset($period);
 			}
 		}
 	}
@@ -110,6 +115,7 @@ class timetableParser
 	 */
 	private function parseSession($period)
 	{
+		$memoria_usada_1 = round(memory_get_usage(1) / 1024,1);
 		$sessionPlainTextArray = $period->getDetails();
 		// When there is only one element in the array it's probably a bank holiday and not the 
 		// coursename.
@@ -178,6 +184,9 @@ class timetableParser
 
 				$this->logger->debug("session object still exists, saving.");
 				$sessionObject->save();
+				
+				$sessionObject->free();
+				unset($sessionObject);
 			}
 			else{
 				if(sizeof($sessionPlainTextArray) <= 2){
@@ -185,6 +194,12 @@ class timetableParser
 				}
 			}
 		endforeach;
+		$course->free();
+		unset($course);
+		
+		$memoria_usada_2 = round(memory_get_usage(1) / 1024,1);
+		$this->logger->debug("Memory used in parser: ".($memoria_usada_2 - $memoria_usada_1));
+		
 		return 0;
 	}
 
