@@ -20,6 +20,20 @@ UsuariTeAssignatura:
     grup_practiques:  P201
     grup_seminari:    S202
 
+  SS1:
+    usuari_id:        1
+    assignatura_id:   5
+    grup_teoria:      1
+    grup_practiques:  P102
+    grup_seminari:    S102
+    
+  PIPE1:
+    usuari_id:        1
+    assignatura_id:   6
+    grup_teoria:      1
+    grup_practiques:  P101
+    grup_seminari:    S102
+
   ADX2:
     usuari_id:        2
     assignatura_id:   1
@@ -44,6 +58,13 @@ UsuariTeAssignatura:
   SF2:
     usuari_id:        2
     assignatura_id:   4
+    grup_teoria:      1
+    grup_practiques:  P101
+    grup_seminari:    S102
+    
+  PIPE2:
+    usuari_id:        2
+    assignatura_id:   6
     grup_teoria:      1
     grup_practiques:  P101
     grup_seminari:    S102
@@ -72,6 +93,13 @@ UsuariTeAssignatura:
   SF3:
     usuari_id:        3
     assignatura_id:   4
+    grup_teoria:      1
+    grup_practiques:  P101
+    grup_seminari:    S102
+
+  PIPE3:
+    usuari_id:        3
+    assignatura_id:   6
     grup_teoria:      1
     grup_practiques:  P101
     grup_seminari:    S102

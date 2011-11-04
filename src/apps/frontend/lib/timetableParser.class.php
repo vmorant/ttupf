@@ -11,18 +11,22 @@ class timetableParser
 	private $courseYear;
 	private $sessions;
 
-	public function timetableParser($courseYear, $sessions)
+	public function timetableParser($courseYear)
 	{	
 		$this->logger = sfContext::getInstance()->getLogger();
 	
 		$this->courseYear = $courseYear;
+		$this->sessions = array();
 
-		$timetableDOM = new simple_html_dom();
-		
-		
+		$timetableDOM = new simple_html_dom();		
 		$timetableDOM->load_file($courseYear->getUrlHorari());
 				
-		$this->sessions = $sessions;
+
+		foreach($courseYear->getAssignatures() as $assignatura):
+			foreach($assignatura->getSessions() as $sessio):
+				$this->sessions[] = $sessio;
+			endforeach;
+		endforeach;
 
 		// Date of first week is in the second table, second row, second cell.
 		$firstWeek = $timetableDOM->find('table', 1)->find('tr', 1)->find('td', 1)->plaintext;
@@ -115,7 +119,6 @@ class timetableParser
 	 */
 	private function parseSession($period)
 	{
-		$memoria_usada_1 = round(memory_get_usage(1) / 1024,1);
 		$sessionPlainTextArray = $period->getDetails();
 		// When there is only one element in the array it's probably a bank holiday and not the 
 		// coursename.
@@ -126,7 +129,7 @@ class timetableParser
 				$this->logger->debug("Found course " . $sessionPlainTextArray[0] . " in database, id is " . $course->getId());
 			}
 			// Course doesn't exist, so create it and set its attributes.
-			if(!$course) {
+			else {
 				$this->logger->debug("Course " . $sessionPlainTextArray[0] . " doesn't exist, creating.");
 				$course = new Assignatura();
 				$course->setNom($sessionPlainTextArray[0]);
@@ -184,9 +187,6 @@ class timetableParser
 
 				$this->logger->debug("session object still exists, saving.");
 				$sessionObject->save();
-				
-				$sessionObject->free();
-				unset($sessionObject);
 			}
 			else{
 				if(sizeof($sessionPlainTextArray) <= 2){
@@ -194,12 +194,6 @@ class timetableParser
 				}
 			}
 		endforeach;
-		$course->free();
-		unset($course);
-		
-		$memoria_usada_2 = round(memory_get_usage(1) / 1024,1);
-		$this->logger->debug("Memory used in parser: ".($memoria_usada_2 - $memoria_usada_1));
-		
 		return 0;
 	}
 
@@ -234,13 +228,13 @@ class timetableParser
 		
 		$firstDayWeek = new DateTime($firstDayWeek);
 		
-		foreach($bdSessions as $bdSessio) {
+		foreach($bdSessions as $bdSessio):
 			$iterDay = new DateTime($bdSessio->getDataHoraInici());
 			
 			if($iterDay->format('%a') - 7 < $firstDayWeek->format('%a')) {
 				$bdSessio->delete();
 			}
-		}
+		endforeach;
 		return 0;
 	}
 }

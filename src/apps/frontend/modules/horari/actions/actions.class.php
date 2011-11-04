@@ -27,19 +27,11 @@ class horariActions extends sfActions
 		$query->from('CarreraCurs');
 		$carreresCursos = $query->execute();
 		
-		$query = new Doctrine_Query();
-		$query->from('Sessio');
-		$sessions = $query->execute();
+		$this->logMessage('CarreresCursos és: '.$carreresCursos, 'Debug');
 		
-		$i = 0;
 		foreach($carreresCursos as $carreraCurs):
 			// Provem nomes amb primer carreracurs ja que els altres retornen 404
-			if($i==0){
-				$timetableParser = new timetableParser($carreraCurs, $sessions);
-				$i++;
-			}
-			else{
-			}
+			$timetableParser = new timetableParser($carreraCurs);
 		endforeach;
 		
 		//$this->assignatures = new timetableParser();
@@ -47,6 +39,9 @@ class horariActions extends sfActions
 	
 	public function executeConfig(sfWebRequest $request)
 	{
-		
+		Doctrine_Manager::connection()->setAttribute(Doctrine_Core::ATTR_AUTO_FREE_QUERY_OBJECTS, true );
+		$query = new Doctrine_Query();
+		$query->from('CarreraCurs');
+		$this->carreresCursos = $query->execute();
 	}
 }
