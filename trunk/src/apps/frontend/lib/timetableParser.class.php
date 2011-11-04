@@ -29,6 +29,7 @@ class timetableParser
 		$currWeekDOM = $timetableDOM->find('table', $currWeekNum);
 
 		$currWeekStartDate = $this->weekStartDate(new DateTime());
+		$this->deleteWeekSessions($currWeekStartDate->format('d.m.Y H:i:s'));
 
 		$this->logger->info("Current week start date is ". $currWeekStartDate->format('d.m.Y H:i:s'));
 
@@ -174,11 +175,9 @@ class timetableParser
 				$sessionObject->setAula($matches[2]);
 				$sessionObject->setDataHoraInici($period->getStart()->format('Y-m-d H:i:s'));
 				$sessionObject->setDataHoraFi($period->getEnd()->format('Y-m-d H:i:s'));
-				
-				if(!$this->sessioExists($sessionObject)) {
-					$this->logger->debug("session object still exists, saving.");
-					$sessionObject->save();
-				}
+
+				$this->logger->debug("session object still exists, saving.");
+				$sessionObject->save();
 			}
 			else{
 				if(sizeof($sessionPlainTextArray) <= 2){
@@ -213,13 +212,18 @@ class timetableParser
 	}
 
 	/**
-	 * Comprova si existeix una sessio a la base de dades com la que li passa per referència.
+	 * Esborra les sessions d'aquella setmana, i se li passa per entrada el primer dia de la setmana
 	 */
-	private function sessioExists($sessionObject) {
+	private function deleteWeekSessions($firstDayWeek) {
 		$bdSessions = $this->sessions;
+		
+		$firstDayWeek = new DateTime($firstDayWeek);
+		
 		foreach($bdSessions as $bdSessio) {
-			if(($sessionObject->getDataHoraInici() == $bdSessio->getDataHoraInici()) || ($sessionObject->getAula() == $bdSessio->getAula())) {
-				return -1;
+			$iterDay = new DateTime($bdSessio->getDataHoraInici());
+			
+			if($iterDay->format('%a') - 7 < $firstDayWeek->format('%a')) {
+				$bdSessio->delete();
 			}
 		}
 		return 0;
