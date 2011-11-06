@@ -21,7 +21,7 @@ class SessioTable extends Doctrine_Table
 	private $courseYear;
 	private $sessions;
 
-	public function actualitza($courseYear)
+	public function actualitza($courseYear, $date = NULL)
 	{	
 		$this->logger = sfContext::getInstance()->getLogger();
 	
@@ -41,12 +41,17 @@ class SessioTable extends Doctrine_Table
 		// Date of first week is in the second table, second row, second cell.
 		$firstWeek = $timetableDOM->find('table', 1)->find('tr', 1)->find('td', 1)->plaintext;
 
-		$currWeekNum = $this->calculateCurrentWeek($firstWeek);
+		$currWeekNum = $this->calculateCurrentWeek($firstWeek, $date);
 		$this->logger->info('Current week number is ' . $currWeekNum);
 
 		$currWeekDOM = $timetableDOM->find('table', $currWeekNum);
 
-		$currWeekStartDate = $this->weekStartDate(new DateTime());
+		if($date){
+			$currWeekStartDate = $this->weekStartDate(new DateTime($date));
+		}
+		else{
+			$currWeekStartDate = $this->weekStartDate(new DateTime());
+		}
 		$this->deleteWeekSessions($currWeekStartDate->format('d.m.Y H:i:s'));
 
 		$this->logger->info("Current week start date is ". $currWeekStartDate->format('d.m.Y H:i:s'));
@@ -106,10 +111,16 @@ class SessioTable extends Doctrine_Table
 	/**
 	 * Given a starting date, calculate the number of weeks that have passed since then.
 	 */
-	private function calculateCurrentWeek($dateFirstWeek)
+	private function calculateCurrentWeek($dateFirstWeek, $date = NULL)
 	{
 		$dateFirstWeek = new DateTime($dateFirstWeek);
-		$today = new DateTime();
+		// Si s'ha especificat una data retornem el número de setmana d'aquella data.
+		if($date){
+			$today = new DateTime($date);
+		}
+		else{
+			$today = new DateTime();
+		}
 		$interval = $today->diff($dateFirstWeek);
 		// Add one because week number starts at 1 not zero
 		$currWeek = floor($interval->format('%a') / 7) + 1;
