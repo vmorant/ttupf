@@ -30,11 +30,9 @@ class horariActions extends sfActions
 		$this->logMessage('CarreresCursos és: '.$carreresCursos, 'Debug');
 		
 		foreach($carreresCursos as $carreraCurs):
-			// Provem nomes amb primer carreracurs ja que els altres retornen 404
-			$timetableParser = new timetableParser($carreraCurs);
+			$taulaSessions = Doctrine::getTable('Sessio');
+			$taulaSessions->actualitza($carreraCurs);
 		endforeach;
-		
-		//$this->assignatures = new timetableParser();
 	}
 	
 	public function executeConfig(sfWebRequest $request)
