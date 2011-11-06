@@ -17,6 +17,10 @@ horari:
   url:   /:module/:action/
   param: { module: horari }
 
+horari_actualitza:
+  url:   /:module/:action/*
+  param: { module: horari }
+
 sf_guard_signin:
   url:   /index/login/*
   param: { module: sfGuardAuth, action: signin }
