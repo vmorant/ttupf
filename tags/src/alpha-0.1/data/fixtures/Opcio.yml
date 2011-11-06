@@ -1,0 +1,15 @@
+Opcio:
+  tornar:
+    nom: Tornar
+    module: index
+    action: index
+  
+  login:
+    nom: Inicia Sessió
+    module: index
+    action: login
+      
+  registrar:
+    nom: Registre-se
+    module: user
+    action: new

@@ -1,0 +1,11 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/08-Security
+
+cond:
+  is_secure: false
+acercaDe:
+  is_secure: false
+index:
+  is_secure: false
+login:
+  is_secure: true

@@ -1,0 +1,19 @@
+Assignatura:
+  ADX:
+    nom: Arquitectura de Xarxes
+    carrera_curs_id: 1
+  DAD:
+    nom: Desenvolupament d'Aplicacions Distribuïdes
+    carrera_curs_id: 1
+  CAT:
+    nom: Comunicació en Anglès Tècnic
+    carrera_curs_id: 1
+  SF:
+    nom: Sistemes Formals
+    carrera_curs_id: 1
+  SS:
+    nom: Senyals i Sistemes
+    carrera_curs_id: 2
+  PIPE:
+    nom: Probabilitat i Processos Estocàstics
+    carrera_curs_id: 2

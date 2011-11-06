@@ -1,0 +1,42 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/10-Routing
+
+index_contingut:
+  url:     /:module/:nom_slug/:id/
+  class:   sfDoctrineRoute
+  options: { model: Contingut, type: object }
+  param:   { module: index, action: contingut }
+  requirements:
+    sf_method: [get]
+
+index:
+  url:   /:module/:action/
+  param: { module: index }
+  
+horari:
+  url:   /:module/:action/
+  param: { module: horari }
+
+sf_guard_signin:
+  url:   /index/login/*
+  param: { module: sfGuardAuth, action: signin }
+
+sf_guard_signout:
+  url:   /sfGuardAuth/signout
+  param: { module: sfGuardAuth, action: signout }
+
+sf_guard_password:
+  url:   /request_password
+  param: { module: sfGuardAuth, action: password }
+
+# default rules
+homepage:
+  url:   /
+  param: { module: index, action: index }
+
+default_index:
+  url:   /:module
+  param: { action: index }
+  
+default:
+  url:   /:module/:action/*
