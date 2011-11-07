@@ -11,20 +11,33 @@
 class horariActions extends sfActions
 {
  /**
-  * Executes index action
+	* Executes index action.
+	*
+	* Es pot especificar la data a mostrar a la URL: 
+	* /horari/index/X/Y/Z
+	*  - X és el dia
+	*  - Y és el mes
+	*  - Z és l'any amb quatre xifres
   *
   * @param sfRequest $request A request object
   */
 	public function executeIndex(sfWebRequest $request)
 	{
+		// S'ha demanat data específica
+		if($request->getParameter('any')){
+			// S'ha de normalitzar el dia i mes per a tenir dos dígits,
+			// DateTime->format() ho fa.
+			$this->data = new DateTime($request->getParameter('any') . "/" . $request->getParameter('mes') . "/" . $request->getParameter('dia'));
+			$this->data = $this->data->format('d/m/Y');
+		}
 		$this->utas = $this->getUser()->getGuardUser()->getUsuariTeAssignatures()->getData();
 	}
 
 	/**
 	 * Actualitza les sessions d'una setmana. Es pot especificar la data a la URL
-	 * /horari/actualitza/dia/X/mes/Y/any/Z on X és el dia, Y el mes i Z l'any amb
-	 * quatre xifres. Si no s'especifica data s'actualitza les sessions de la setmana
-	 * actual.
+	 * /horari/actualitza/X/Y/Z on X és el dia, Y el mes i Z l'any amb
+	 * quatre xifres. Si no s'especifica data s'actualitza les sessions de la
+	 * setmana actual.
 	 *
 	 * @param sfRequest $request A request object
 	 */
