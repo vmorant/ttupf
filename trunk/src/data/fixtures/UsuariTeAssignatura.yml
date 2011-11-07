@@ -69,6 +69,13 @@ UsuariTeAssignatura:
     grup_practiques:  P101
     grup_seminari:    S102
 
+  AIW2:
+    usuari_id:        2
+    assignatura_id:   7
+    grup_teoria:      1
+    grup_practiques:  P102
+    grup_seminari:    S102
+
   ADX3:
     usuari_id:        3
     assignatura_id:   1
@@ -103,3 +110,10 @@ UsuariTeAssignatura:
     grup_teoria:      1
     grup_practiques:  P101
     grup_seminari:    S102
+    
+  AIW3:
+    usuari_id:        3
+    assignatura_id:   7
+    grup_teoria:      1
+    grup_practiques:  P101
+    grup_seminari:    S101

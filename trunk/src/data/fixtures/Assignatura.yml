@@ -17,3 +17,6 @@ Assignatura:
   PIPE:
     nom: Probabilitat i Processos Estocàstics
     carrera_curs_id: 2
+  AIW:
+    nom: Aplicacions Intel·ligents per a la web
+    carrera_curs_id: 3
