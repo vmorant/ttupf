@@ -30,7 +30,42 @@ class horariActions extends sfActions
 			$this->data = new DateTime($request->getParameter('any') . "/" . $request->getParameter('mes') . "/" . $request->getParameter('dia'));
 			$this->data = $this->data->format('d/m/Y');
 		}
-		$this->utas = $this->getUser()->getGuardUser()->getUsuariTeAssignatures()->getData();
+		$utas = $this->getUser()->getGuardUser()->getUsuariTeAssignatures()->getData();
+		
+		// Creem vector de sessions a partir de la qual es generara una taula d'horari.
+		$this->sessionsArray = array();
+		foreach($utas as $uta):
+			$sessions = $uta->getAssignatura()->getSessions()->getData();
+			foreach($sessions as $session):
+				$tipus = $session->getTipus();
+				switch($tipus[0]) {
+					case 'P':
+						if($session->getGrupPractiques() == $uta->getGrupPractiques()) {
+							$this->sessionsArray[] = $session;
+						}
+						break;
+					case 'T':
+						if($session->getGrupTeoria() == $uta->getGrupTeoria()) {
+							$this->sessionsArray[] = $session;
+						}
+						break;
+					case 'S':
+						if($session->getGrupSeminari() == $uta->getGrupSeminari()) {
+							$this->sessionsArray[] = $session;
+						}
+						break;
+					default:
+						break;
+				}
+			endforeach;
+		endforeach;
+		
+		//Un cop obtingudes les sessions per aquel día, s'ordenen en nuncio de l'hora.
+		foreach ($this->sessionsArray as $key => $sessio) {
+		    $dates[$key]  = $sessio->getDataHoraInici(); 
+		}
+
+		array_multisort($dates, SORT_ASC, $this->sessionsArray);
 	}
 
 	/**
