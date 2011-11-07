@@ -11,7 +11,7 @@ UsuariTeAssignatura:
     assignatura_id:   2
     grup_teoria:      1
     grup_practiques:  P101
-    grup_seminari:    S101
+    grup_seminari:    S104
 
   CAT1:
     usuari_id:        1
@@ -24,7 +24,7 @@ UsuariTeAssignatura:
     usuari_id:        1
     assignatura_id:   5
     grup_teoria:      1
-    grup_practiques:  P102
+    grup_practiques:  P101
     grup_seminari:    S102
     
   PIPE1:
