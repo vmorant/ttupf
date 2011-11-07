@@ -46,7 +46,7 @@ Horari Index<br />
 	// S'ha de fer un createFromFormat perquè algú va decidir fer que $data
 	// fos d/m/Y en lloc de Y/m/d, i aquest primer format confon al constructor
 	// normal.
-	$diaAnterior = DateTime::createFromFormat('d/m/Y', $data);
+	$diaAnterior = DateTime::createFromFormat('d/m/Y', $sessionsTable->getDate());
 	$diaAnterior->sub(new DateInterval('P1D'));
 	log_message("Dia anterior: " . $diaAnterior->format('d/m/Y'), 'Debug');
 	$parametres_anterior = 'dia=' . $diaAnterior->format('d') . '&mes=' . $diaAnterior->format('m') . '&any=' . $diaAnterior->format('Y');
