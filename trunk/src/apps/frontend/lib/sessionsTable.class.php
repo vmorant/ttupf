@@ -23,7 +23,6 @@ class sessionsTable
 		//Agafem com a date el dia actual
 		$this->date = date('d/m/Y', mktime(0, 0, 0, date('m')  , date('d'), date('Y')));
 		}
-}
 
 	/**
 	 * Genera el codi HTML de la taula d'horari
