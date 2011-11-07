@@ -66,4 +66,8 @@ class sessionsTable
 	public function setDate($date){
 		$this->date = $date;
 	}
+
+	public function getDate(){
+		return $this->date;
+	}
 }
