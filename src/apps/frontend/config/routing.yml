@@ -17,8 +17,8 @@ horari:
   url:   /:module/:action/
   param: { module: horari }
 
-horari_actualitza:
-  url:   /:module/:action/*
+horari_data:
+  url:   /:module/:action/:dia/:mes/:any
   param: { module: horari }
 
 sf_guard_signin:
