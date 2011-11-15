@@ -3,6 +3,8 @@
 <head>
     <?php include_http_metas() ?>
     <?php include_metas() ?>
+		<meta name="HandheldFriendly" content="true" />
+		<meta name="viewport" content="width=device-width, height=device-height" />
     <?php include_title() ?>
     <link rel="shortcut icon" href="/favicon.ico" />
     <?php include_stylesheets() ?>
@@ -33,7 +35,7 @@
 					<span class="symfony">
 						powered by 
 						<a href="http://www.symfony-project.org/">
-							<img src="/images/symfony.png" alt="symfony framework" />
+							<img src="images/symfony.png" alt="symfony framework" />
 						</a>
 					</span>
 				</div>
