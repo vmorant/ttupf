@@ -12,4 +12,51 @@
  */
 class Sessio extends BaseSessio
 {
+	public function isGroupSet() {
+		if($this->getGrupPractiques() ||
+			$this->getGrupTeoria() ||
+			$this->getGrupSeminari()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	} 
+	
+	public function isAulaSet() {
+		if($this->getAula()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public function isTypeSet() {
+		if($this->getTipus()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public function isAssignaturaSet() {
+		if($this->getAssignatura()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public function isDateTimeSet() {
+		if($this->getDataHoraInici() ||
+			$this->getDataHoraFi())  {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }

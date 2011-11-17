@@ -134,13 +134,40 @@ class SessioTable extends Doctrine_Table
 	{
 		return $date->sub(new DateInterval('P'.strval(intval($date->format('N'))-1).'D'));
 	}
+	
+
 
 	/**
 	 * Attempts to parse a session's content to extract the course id, session type, practical/seminar group and classroom. Takes a session object and an array that contains the lines that make up the session info.
 	 */
 	private function parseSession($period)
 	{
-		$sessionPlainTextArray = $period->getDetails();
+		/* Here is where the state machine goes*/
+		$current_state = 0;
+		
+		$periodPlainTextArray = $period->getDetails();
+		
+		foreach ($periodPlainTextArray as $key => $row) {
+		    $keys[$key]  = $key; 
+		}
+
+		array_multisort($keys, SORT_DESC, $periodPlainTextArray);
+		
+		foreach($periodPlainTextArray as $key => $row):
+//			echo utf8_decode($row)."<br />";
+			//$block->lineType($row);
+//			$block->isThereAGroup($row);
+			if($current_state != -1) {
+				//echo utf8_decode($row)."<br />";	
+				$current_state = $period->stateMachine($current_state, utf8_decode($row));
+			} else {
+				echo "Something gets wrong.<br />";
+			}
+		endforeach;
+		
+		echo "/**********************<br />";
+	
+/*		$sessionPlainTextArray = $period->getDetails();
 		// When there is only one element in the array it's probably a bank holiday and not the 
 		// coursename.
 		if(sizeof($sessionPlainTextArray) > 1){
@@ -214,7 +241,7 @@ class SessioTable extends Doctrine_Table
 					return -1;
 				}
 			}
-		endforeach;
+		endforeach;*/
 		return 0;
 	}
 
@@ -266,12 +293,18 @@ class SessioTable extends Doctrine_Table
 class Period
 {
 	private $logger;
+
 	private $start;
 	private $end;
+	private $details;
+	private $blockArray;
 
 	public function Period($timeString)
 	{
+		$this->blockArray = array();
+	
 		$this->logger = sfContext::getInstance()->getLogger();
+
 		$this->start = new DateTime();
 		$this->end = new DateTime();
 
@@ -293,6 +326,180 @@ class Period
 		$this->logger->debug('end array is: ' .var_export($end, true));
 		$this->start->setTime(intval($start[0]), intval($start[1]));
 		$this->end->setTime(intval($end[0]), intval($end[1]));
+	}
+	
+	public function stateMachine($current_state, $line, $next = -1) {
+		switch($current_state) {
+			case 0:
+				// Accions a fer;
+				echo "// Estat A<br />";
+				echo $line."<br />";
+
+				$this->blockArray[] = new Block();
+				$hasThings = $this->blockArray[sizeof($this->blockArray) - 1]->lineType($line);
+				
+				// Seguent estat
+				if($next == -1) {
+					if($hasThings[1] && $this->blockArray[sizeof($this->blockArray) - 1]->isThereAGroup($line) && $hasThings[0]) {
+						echo "__Aula i Grup --> B, Tipus --> D<br />";
+						return $this->stateMachine(1, $line, 3);
+					}
+					else if($hasThings[1] && $this->blockArray[sizeof($this->blockArray) - 1]->isThereAGroup($line)) {
+						echo "__Aula i Grup --> B<br />";
+						return 1;
+					}
+										else if($hasThings[1]) {
+					echo "__Aula --> B<br />";
+						return 1;
+					}
+					else if($hasThings[0]) {
+						echo "__Tipus --> D<br />";
+						return 3;
+					}
+					else if(!$line || ((preg_match("/^[\s]{1,}/", $line) || preg_match("/^[-]{3,}/", $line)))) {
+						echo "__Linea Buida<br />";
+						return 0;
+					}
+					else {
+						echo "Something went wrong in state A<br />";
+					}
+				}
+				else {
+					return $next;
+				}				
+				break;
+			case 1:
+				// Accions a fer;
+				echo "// Estat B<br />";
+				echo $line."<br />";
+				$hasThings = $this->blockArray[sizeof($this->blockArray) - 1]->lineType($line);
+				
+				// Seguent estat
+				if($next == -1) {
+					if($hasThings[1] && $this->blockArray[sizeof($this->blockArray) - 1]->isThereAGroup($line)) {
+						echo "__Aula i Grup --> B<br />";
+						return 1;
+					}
+					else if($hasThings[1]) {
+						echo "__Aula --> B<br />";
+						return 1;
+					}
+					else if($hasThings[3]) {
+						echo "__Hora --> C<br />";
+						return 2;
+					}
+					else if ($this->blockArray[sizeof($this->blockArray) - 1]->isThereAGroup($line) && $hasThings[0]) {
+						echo "__Tipus i Grup --> D<br />";
+						return 3;
+					}
+					else if($hasThings[0]) {
+						echo "__Tipus --> D<br />";
+						return 3;
+					}
+					else {
+						echo "Something went wrong in state B<br />";
+					}
+				}
+				else {
+					return $next;
+				}
+				break;
+			case 2:
+				// Accions a fer;
+				echo "// Estat C<br />";
+				echo $line."<br />";
+				$hasThings = $this->blockArray[sizeof($this->blockArray) - 1]->lineType($line);
+				
+				// Seguent estat
+				if($next == -1) {
+					if($hasThings[1] && $this->blockArray[sizeof($this->blockArray) - 1]->isThereAGroup($line)) {
+						echo "__Aula i Grup --> B<br />";
+						return 1;
+					}
+					else if($hasThings[0]) {
+						echo "__Tipus --> D<br />";
+						return 3;
+					}
+					else {
+						echo "Something went wrong in state C<br />";
+					}
+				}
+				else {
+					return $next;
+				}
+				break;
+			case 3:
+				// Accions a fer;
+				echo "// Estat D<br />";
+				echo $line."<br />";
+				$hasThings = $this->blockArray[sizeof($this->blockArray) - 1]->lineType($line);
+				
+				foreach($hasThings as $thing):
+					if($thing)
+						echo "1|";
+					else
+						echo "0|";
+				endforeach;
+				echo "<br />";
+				
+				// Seguent estat
+				if($next == -1) {
+					if($hasThings[2]) {
+						echo "__Assignatura --> E<br />";
+						return 5;
+					}
+					else if($hasThings[1] && $this->blockArray[sizeof($this->blockArray) - 1]->isThereAGroup($line) && $hasThings[0]) {
+						echo "__Aula i Grup --> B, Tipus --> D<br />";
+						return $this->stateMachine(1, $line, 3);
+					}
+					else if ($this->blockArray[sizeof($this->blockArray) - 1]->isThereAGroup($line) && $hasThings[0]) {
+						echo "__Tipus i Grup --> D<br />";
+						return 3;
+					}
+					else if($hasThings[1] && $this->blockArray[sizeof($this->blockArray) - 1]->isThereAGroup($line)) {
+						echo "__Aula i Grup --> B<br />";
+						return 1;
+					}
+					else if($hasThings[3]) {
+						echo "__Hora --> C<br />";
+						return 2;
+					}
+					else if($hasThings[1]) {
+						echo "__Aula --> B<br />";
+						return 1;
+					}
+					else {
+						echo "Something went wrong in state D<br />";
+					}
+				}
+				else {
+					return $next;
+				}
+				break;
+			case 4:
+				// Accions a fer;
+				echo "// Estat F<br />";
+				echo $line."<br />";
+				
+				// Seguent estat
+				if($next == -1) {
+					return 5;
+				}
+				else {
+					return $next;
+				}
+				break;
+			case 5:
+				// Accions a fer;
+				echo "// Estat E, Bloc acabat<br />";
+				echo $line."<br />";
+				if(preg_match("/^[\s]{1,}/", $line) || preg_match("/^[-]{3,}/", $line)) {
+					return 0;
+				}
+				break;
+			default:
+				break;
+		}
 	}
 
 	public function setStartTime($hours, $mins)
@@ -339,6 +546,186 @@ class Period
 	public function getDetails()
 	{
 		return $this->details;
+	}
+}
+
+class Block
+{
+	private $type;
+	private $sessions;
+	private $checked;
+	
+	public function Block() {
+		$this->sessions = array();
+		$this->checked = array();
+	}
+	
+	public function newSession() {
+		$this->sessions[] = new Sessio();
+		$this->checked = false; 
+	}
+	
+	public function getActualSession() {
+		if(!$this->isEmpty($this->sessions)) {
+			return $this->sessions[sizeof($this->sessions) - 1];
+		}
+		else {
+			return -1;
+		}
+	}
+	
+	public function setSessionAula($aula) {
+		$this->getActualSession()->setAula($aula);
+	}
+
+	public function setSessionStart($start) {
+		$this->getActualSession()->setDataHoraInici($start);
+	}
+	
+	public function setSessionEnd($end) {
+		$this->getActualSession()->setDataHoraFi($end);
+	}
+
+	public function setSessionType($type) {
+		$this->getActualSession()->setTipus($type);
+	}
+	
+	// Set the group like P101 or S101 or A or B or C or 1 or 2.
+	//TODO handle cases when the grip is inherit
+	public function setSessionGroup($group) {
+		if(sizeof($group) == 1) {
+			$this->getActualSession()->setGrupTeoria($group);
+		}
+		else {
+			if(!is_numeric($group[0])) {
+				switch(strtolower($group[0])) {
+					case 'p':
+						$this->getActualSession()->setGrupPractiques($group);
+						break;
+					case 's':
+						$this->getActualSession()->setGrupSeminaris($group);
+						break;
+					case 't':
+						$this->getActualSession()->setGrupTeoria($group);
+						break;
+					default:
+						break;
+				}
+			}
+			else {
+				$this->getActualSession()->setGrupTeoria($group);
+			}
+		}
+	}
+	
+	public function setAssignatura($assignatura) {
+		$this->getActualSession()->setAssignatura($assignatura);
+	}
+	
+	public function isEmpty($array) {
+		if(sizeof($array)) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+	
+	public function isChecked() {
+		if(!isEmpty($this->checked)) {
+			return $this->checked[sizeof($this->checked) - 1];
+		}
+	}
+	
+	public function checkSession() {
+		$this->checked[sizeof($this->checked) - 1] = true;
+	}
+	
+	// Looks for a group, and makes use of the $linetype to search that will be like {0 => Aulagrup, 1 => Tipus}
+	public function isThereAGroup($group_string) {
+		$groups = Array();
+		$groups_iter = Array();
+
+		// Look for a SXXX or PXXX as many as exists in the aulagrup line
+		$group_sp_pattern_aulagrup = "/([SsPp]+[0-9]{3}+)/";
+		// Look for the <<<<theory>>>> group in the type line or aulagrup line. Doesn't work with lowercase group identifier
+		$group_t_pattern_type_or_aulagrup = "/[pP]*[-|\s]*(?<![A-Za-z0-9])([A-Z0-9])[-|\s|:][\s]*/";
+
+		$hasThings = Array();
+		$hasThings = $this->lineType($group_string);
+		
+		if($hasThings[0] || $hasThings[1]) {
+			//echo utf8_decode($group_string)."<br />";
+			if(preg_match_all($group_sp_pattern_aulagrup, $group_string, $groups_iter)) {
+				//echo "Match!:<br />";
+				foreach($groups_iter[1] as $row):
+					 //echo "--> ".$row."<br />";
+					 $groups[] = $row;
+				endforeach;
+			}
+			else
+			{
+				//echo "No match found<br />";
+			}
+			//echo utf8_decode($group_string)."<br />";
+			if(preg_match_all($group_t_pattern_type_or_aulagrup, $group_string, $groups_iter)) {
+				//echo "Match!:<br />";
+				foreach($groups_iter[1] as $row):
+					 //echo "--> ".$row."<br />";
+					 $groups[] = $row;
+				endforeach;
+			}
+			else
+			{
+				//echo "No match found<br />";
+			}
+		}
+		//foreach($groups as $row):
+		//	echo "____".$row."<br />";
+		//endforeach;
+		return $groups;
+	}
+	
+	public function lineType($line) {
+		$line = utf8_encode($line);
+		$types = Array();
+		$aulas = Array();
+		$assignaturas = Array();
+		$hours = Array();
+		
+		$hasThings = Array();
+		$hasThings[] = false;
+		$hasThings[] = false;
+		$hasThings[] = false;
+		$hasThings[] = false;
+
+		// If line has at least 1 uppercase word is type => 0
+		$has_type = "/[ÀÁÈÉÍÏÒÓÚÜÑA-Z]{3,}/";
+		// If line is like PXXX: XX.XXX or SXXX: XX.XXX or SXXX - XX.XXX is aulagrup => 1
+		$has_aula = "/[0-9]{2}.[A-Za-z0-9]{3}/";
+		// This regex is a miracle understandable. Sorry xD NO FUNCIONA DEL TOT, de moment detecta l'assignatura bé però
+		// només pot contenir una paraula en majuscula i al final. aula => 2
+		$has_assignatura = "/^((?:(?:[ÀÁÇÈÉÍÏÒÓÚÜÑA-Z]?[àáçèéíïòóúüña-z\'\·[:space:]]+)+)+[ÀÁÈÉÍÏÒÓÚÜÑA-Z]*)$/";
+		// If line matches at least one hour XX:XX hora =>3
+		$has_hour = "/(?<![0-9])([0-2]?[0-9]\s?[:|.]\s?[0-5][0-9])(?![0-9])/";
+		
+		if(preg_match_all($has_type, $line, $types)) {
+			//echo "__TYPE<br />";
+			$hasThings[0] = true;
+		}
+		if(preg_match_all($has_aula, $line, $aulas)) {
+			//echo "__AULA<br />";
+			$hasThings[1] = true;
+		}
+		if(preg_match_all($has_assignatura, $line, $assignaturas)) {
+			//echo "__ASSIGNATURA<br />";
+			$hasThings[2] = true;
+		}
+		if(preg_match_all($has_hour, $line, $hours)) {
+			//echo "__HORA<br />";
+			$hasThings[3] = true;
+		}
+		return $hasThings;
 	}
 }
 

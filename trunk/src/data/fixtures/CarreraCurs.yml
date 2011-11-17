@@ -16,3 +16,22 @@ CarreraCurs:
     url_horari: http://www.upf.edu/esup/docencia/horaris/graus11_12/grau-eng_informatica/primer_trimestre/tercer/optatives.html
     grup_teoria: 1
     curs: 3
+    
+  GEI_1C_1T_1G:
+    nom: Grau en Enginyeria Informàtica 1C 1T 1G
+    url_horari: http://www.upf.edu/esup/docencia/horaris/graus11_12/grau-eng_informatica/primer_trimestre/primer/primer_trimestre_g1.html
+    grup_teoria: 1
+    curs: 1
+
+  EI_4C_1T_1G:
+    nom: Enginyeria Informàtica 4C 1T 1G
+    url_horari: http://www.upf.edu/esup/docencia/horaris/Plans_Antics_11_12/ei/primer_trimestre/quart_curs.html
+    grup_teoria: 1
+    curs: 4
+
+  EI_4C_2T_OPT:
+    nom: Grau en Enginyeria Telemàtica 3C 1T 1T
+    url_horari: http://www.upf.edu/esup/docencia/horaris/graus11_12/grau-eng_telematica/primer_trimestre/tercer/primer_trimestre_g1.html
+    grup_teoria: 1
+    curs: 3
+  
