@@ -172,6 +172,12 @@ class SessioTable extends Doctrine_Table
 			}
 		endforeach;
 		
+		$period->setDefaultHours();
+		
+		foreach($period->getBlockArray() as $block):
+			$block->saveSessions();	
+		endforeach;
+		
 		//echo "/**********************<br />";
 	
 /*		$sessionPlainTextArray = $period->getDetails();
@@ -336,6 +342,20 @@ class Period
 		$this->end->setTime(intval($end[0]), intval($end[1]));
 	}
 	
+	public function setDefaultHours() {
+		$start = $this->getStart()->format('Y-m-d H:i:s');
+		$end = $this->getEnd()->format('Y-m-d H:i:s');
+
+		foreach($this->blockArray as $block):
+			foreach($block->getSessions() as $session):
+				$session->setDataHoraInici($start);
+				echo $session->getDataHoraInici()."<br />";
+				$session->setDataHoraFi($end);
+				echo $session->getDataHoraFi()."<br />";
+			endforeach;
+		endforeach;
+	}
+	
 	public function stateMachine($current_state, $line) {
 		//$line = iconv("ISO-8859-1//TRANSLIT", "UTF-8", $line);
 		switch($current_state) {
@@ -434,7 +454,13 @@ class Period
 				break;
 			case 3:
 				//echo "// Estat D<br />";
-				//echo $line."<br />";
+				echo "-----------------_->".$line."<-------<br />";
+				
+				if($line == NULL) {
+					$this->unsetCurrentBlock();
+					return -1;
+				}
+				
 				$hasThings = $this->getCurrentBlock()->lineType($line);
 				
 				// Seguent estat
@@ -536,7 +562,7 @@ class Period
 	}
 	
 	public function doStateC($line) {
-		$this->getCurrentBlock()->setHours($line);
+		$this->getCurrentBlock()->setHours($line, $this);
 	}
 	
 	public function doStateD($line) {
@@ -564,12 +590,15 @@ class Period
 		}
 		
 		$this->getCurrentBlock()->setAssignatura($course);
-		$this->getCurrentBlock()->saveSessions();		
 		return;
 	}
 	
 	public function doStateF($line) {
 		return;
+	}
+
+	public function getBlockArray() {
+		return $this->blockArray;
 	}
 
 	public function setCourseYear($courseYear)
@@ -626,11 +655,14 @@ class Period
 	public function getCurrentBlock() {
 		return $this->blockArray[sizeof($this->blockArray) - 1];
 	}
+	
+	public function unsetCurrentBlock() {
+		$this->getCurrentBlock()->deleteSessions();
+	}
 }
 
 class Block
 {
-	private $type;
 	private $sessions;
 	
 	public function Block() {
@@ -639,6 +671,10 @@ class Block
 	
 	public function newSession() {
 		$this->sessions[] = new Sessio();
+	}
+	
+	public function deleteSessions() {
+		$this->sessions = array();
 	}
 	
 	public function getActualSession() {
@@ -748,7 +784,7 @@ class Block
 		// If line has at least 1 uppercase word is type => 0
 		$has_type = "/[ÀÁÈÉÍÏÒÓÚÜÑA-Z]{3,}/";
 		// If line is like PXXX: XX.XXX or SXXX: XX.XXX or SXXX - XX.XXX is aulagrup => 1
-		$has_aula = "/[0-9]{2}.[A-Za-z0-9]{3}/";
+		$has_aula = "/[0-9]{2}.[A-Za-z0-9][0-9]{2}/";
 		// This regex is a miracle understandable. Sorry xD NO FUNCIONA DEL TOT, de moment detecta l'assignatura bé però
 		// només pot contenir una paraula en majuscula i al final. aula => 2
 		$has_assignatura = "/^((?:(?:[ÀÁÇÈÉÍÏÒÓÚÜÑA-Z]?[àáçèéíïòóúüña-z\'\·[:space:]]+)+)+[ÀÁÈÉÍÏÒÓÚÜÑA-Z]*)$/";
@@ -779,20 +815,24 @@ class Block
 		$ct_aulas = Array();
 		
 		// If line is like PXXX: XX.XXX or SXXX: XX.XXX or SXXX - XX.XXX is aulagrup => 1
-		$has_aula = "/[0-9]{2}.[A-Za-z0-9]{3}/";
+		$has_aula = "/[0-9]{2}.[A-Za-z0-9][0-9]{2}/";
 		
 		if(preg_match_all($has_aula, $line, $aulas)) {
-			foreach($aulas as $aula):
-				foreach($aula as $s):
-					$ct_aulas[] = $s;
-				endforeach;	
-				$ct_aulas = ' ';
+			foreach($aulas[0] as $key => $aula):
+				echo $aula."<br />";
+				if($key == 0) {
+					$ct_aulas = $aula;
+				}
+				else {
+					$ct_aulas = $ct_aulas." ".$aula;
+				}
 			endforeach;
+			echo "IMPORTANT --> ".$ct_aulas."<br />";
 			$this->setSessionAula($ct_aulas);
 		}
 	}
 	
-	public function setHours($line) {
+	public function setHours($line, $period) {
 		$hours = Array();
 		
 		$has_hour = "/(?<![0-9])([0-2]?[0-9]\s?[:|.]\s?[0-5][0-9])(?![0-9])/";
@@ -801,15 +841,21 @@ class Block
 			if(sizeof($hours) > 1) {
 				foreach($this->getSessions() as $session):
 					if(!$session->isDateTimeSet()) {
-						$session->setDataHoraInici($hours[0][0]);
-						$session->setDataHoraFi($hours[0][1]);
+						echo $hours[0][0]."<br />";
+						echo $hours[0][1]."<br />";
+//						$session->setDataHoraInici($hours[0][0]);
+//						$session->setDataHoraFi($hours[0][1]);
+						$session->setDataHoraInici($period->getStart()->format('Y-m-d H:i:s'));
+						$session->setDataHoraFi($period->getEnd()->format('Y-m-d H:i:s'));
 					}
 				endforeach;
 			}
 			else {
 				foreach($this->getSessions() as $session):
 					if(!$session->isDateTimeSet()) {
-						$session->setDataHoraFi($hours[0][0]);
+						echo $hours[0][0]."<br />";
+//						$session->setDataHoraFi($hours[0][0]);
+						$session->setDataHoraFi($period->getEnd()->format('Y-m-d H:i:s'));
 					}
 				endforeach;
 			}
