@@ -40,7 +40,7 @@ class Sessio extends BaseSessio
 			return false;
 		}
 	}
-		
+
 	public function isDateTimeSet() {
 		if($this->getDataHoraInici() ||
 			$this->getDataHoraFi())  {
