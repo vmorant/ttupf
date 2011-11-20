@@ -103,7 +103,7 @@ class SessioTable extends Doctrine_Table
 						$period->setDetails(array_values($periodInfoArray));
 						$this->logger->debug("Trimmed periodinfoarray is: " . var_export($period->getDetails(), true));
 						
-						echo "parsejant<br />";
+						//echo "parsejant<br />";
 						$this->parseSession($period);
 					}
 				}
@@ -170,11 +170,6 @@ class SessioTable extends Doctrine_Table
 				////echo "Something gets wrong.<br />";
 			}
 		endforeach;
-		
-		if(sizeof($period->getCurrentBlock()) != 0) {
-			echo "HA ACABAT BE<br />";
-			
-		}
 		
 		////echo "/**********************<br />";
 	
@@ -342,72 +337,72 @@ class Period
 	
 	public function stateMachine($current_state, $line) {
 		//$line = iconv("ISO-8859-1//TRANSLIT", "UTF-8", $line);
-		echo "^".utf8_decode($line)."$<br />";
+		//echo "^".utf8_decode($line)."$<br />";
 		switch($current_state) {
 			case 0:
-				echo "// Estat A<br />";
+				//echo "// Estat A<br />";
 				////echo $line."<br />";
 
 				$hasThings = $this->lineType($line);
 				
 				// Seguent estat
 				if($hasThings[1] && ($this->isThereAGroup($line)) && $hasThings[0]) {
-					echo "__Aula i Grup --> B, Tipus --> D<br />";
+					//echo "__Aula i Grup --> B, Tipus --> D<br />";
 					$this->doStateA();
 					$this->doStateB($line);
 					$this->doStateD($line);
 					return 3;
 				}
 				else if($hasThings[1] && $this->isThereAGroup($line)) {
-					echo "__Aula i Grup --> B<br />";
+					//echo "__Aula i Grup --> B<br />";
 					$this->doStateA();
 					$this->doStateB($line);
 					return 1;
 				}
 				else if($hasThings[1]) {
-					echo "__Aula --> B<br />";
+					//echo "__Aula --> B<br />";
 					$this->doStateA();
 					$this->doStateB($line);
 					return 1;
 				}
 				else if($hasThings[0]) {
-					echo "__Tipus --> D<br />";
+					//echo "__Tipus --> D<br />";
 					$this->doStateA();
 					$this->doStateD($line);
 					return 3;
 				}
 				else if(!$line || ((preg_match("/^[\s]{1,}/", $line) || preg_match("/^[-]{3,}/", $line)))) {
-					echo "__Linea Buida<br />";
+					//echo "__Linea Buida<br />";
 					return 0;
 				}
 				else {
-					echo "__Linea Invalida<br />";
+					//echo "__Linea Invalida<br />";
 					return 0;
 				}
 				break;
 			case 1:
-				echo "// Estat B<br />";
-				echo $line."<br />";
+				//echo "// Estat B<br />";
+				//echo $line."<br />";
 				$hasThings = $this->lineType($line);
 
 				// Seguent estat
 				if($hasThings[1] && $this->isThereAGroup($line)) {
-					echo "__Aula i Grup --> B<br />";
+					//echo "__Aula i Grup --> B<br />";
 					$this->doStateB($line);
 					return 1;
 				}
 				else if($hasThings[1]) {
-					echo "__Aula --> B<br />";
+					//echo "__Aula --> B<br />";
 					$this->doStateB($line);
 					return 1;
 				}
 				else if($hasThings[3]) {
-					echo "__Hora --> C<br />";
+					//echo "__Hora --> C<br />";
 					$this->doStateC($line);
 					return 2;
 				}
 				else if (($groups = $this->isThereAGroup($line)) && $hasThings[0]) {
-					echo "__Tipus i Grup --> D<br />";
+					//echo "__Tipus i Grup --> D<br />";
 					foreach($groups as $group):
 						$this->getCurrentBlock()->setSessionGroup($group);	
 					endforeach;
@@ -415,7 +410,7 @@ class Period
 					return 3;
 				}
 				else if($hasThings[0]) {
-					echo "__Tipus --> D<br />";
+					//echo "__Tipus --> D<br />";
 					$this->doStateD($line);
 					return 3;
 				}
@@ -425,31 +420,32 @@ class Period
 				break;
 			case 2:
 				//TODO: Maybe can be created some way from c to e
-				echo "// Estat C<br />";
+				//echo "// Estat C<br />";
 				////echo $line."<br />";
 				$hasThings = $this->lineType($line);
 				
 				// Seguent estat
 				if($hasThings[1] && $this->isThereAGroup($line)) {
-					echo "__Aula i Grup --> B<br />";
+					//echo "__Aula i Grup --> B<br />";
 					$this->doStateB($line);
 					return 1;
 				}
 				else if($hasThings[0]) {
-					echo "__Tipus --> D<br />";
+					//echo "__Tipus --> D<br />";
 					$this->doStateD($line);
 					return 3;
 				}
 				else {
-					echo "Something went wrong in state C<br />";
+					echo "Line:\"".utf8_decode($line)."\"<br />";
+					echo "State C: Something is wrong in this line.<br />";
 				}
 				break;
 			case 3:
-				echo "// Estat D<br />";
+				//echo "// Estat D<br />";
 				//echo "-----------------_->".$line."<-------<br />";
 				
 				if($line == NULL) {
-					echo "HEYYYYY";
+					//echo "HEYYYYY";
 					$this->unsetCurrentBlock();
 					return -1;
 				}
@@ -458,45 +454,45 @@ class Period
 				
 				// Seguent estat
 				if($hasThings[2]) {
-					echo "__Assignatura --> E<br />";
+					//echo "__Assignatura --> E<br />";
 					$this->doStateE($line);					
 					return 5;
 				}
 				else if($hasThings[1] && $this->isThereAGroup($line) && $hasThings[0]) {
-					echo "__Aula i Grup --> B, Tipus --> D<br />";
+					//echo "__Aula i Grup --> B, Tipus --> D<br />";
 					$this->doStateB($line);
 					$this->doStateD($line);
 					return 3;
 				}
 				else if($hasThings[1] && $this->isThereAGroup($line)) {
-					echo "__Aula i Grup --> B<br />";
+					//echo "__Aula i Grup --> B<br />";
 					$this->doStateB($line);
 					return 1;
 				}
 				else if($hasThings[3]) {
-					echo "__Hora --> C<br />";
+					//echo "__Hora --> C<br />";
 					$this->doStateC($line);
 					return 2;
 				}
 				else if($hasThings[1]) {
-					echo "__Aula --> B<br />";
+					//echo "__Aula --> B<br />";
 					$this->doStateB($line);
 					return 1;
 				}
 				else {
-					echo "Dia Festiu o l'assignatura no te nom<br />";
+					//echo "Dia Festiu o l'assignatura no te nom<br />";
 				}
 				break;
 			case 4:
-				echo "// Estat F<br />";
-				echo $line."<br />";
+				//echo "// Estat F<br />";
+				//echo $line."<br />";
 				
 				// Seguent estat
 				$this->doStateF($line);
 				return 5;
 				break;
 			case 5:
-				echo "// Estat E, Bloc acabat<br />";
+				//echo "// Estat E, Bloc acabat<br />";
 				//echo $line."<br />";				
 				if(preg_match("/^[\s]{1,}/", $line) || preg_match("/^[-]{3,}/", $line)) {
 					return 0;
@@ -509,7 +505,7 @@ class Period
 	
 	public function doStateA() {
 		$this->blockArray[] = new Block();
-		echo "Creant NOU Bloc<br />";
+		//echo "Creant NOU Bloc<br />";
 	}
 	
 	public function doStateB($line) {
@@ -519,7 +515,7 @@ class Period
 		
 		if($groups = $this->isThereAGroup($line)) {
 			foreach($groups as $group):
-				echo "G->".$group."<br />";
+				//echo "G->".$group."<br />";
 				switch(strtolower($group[0]))  {
 					case 's':
 						$isSeminar = true;
@@ -551,6 +547,7 @@ class Period
 	}
 	
 	public function doStateC($line) {
+		echo "Hora: ".$line."<br />";
 		$this->getCurrentBlock()->setHours($line, $this);
 	}
 	
@@ -886,9 +883,9 @@ class Block
 	
 	public function saveSessions() {
 		foreach($this->getSessions() as $session):
-			echo "<br />ES GUARDA LA SESSIO<br /><br />";
-			echo $session->getDataHoraInici()." - ";
-			echo $session->getDataHoraFi()."<br />";
+			//echo "<br />ES GUARDA LA SESSIO<br /><br />";
+			//echo $session->getDataHoraInici()." - ";
+			//echo $session->getDataHoraFi()."<br />";
 			$session->save();
 		endforeach;
 	}
