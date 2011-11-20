@@ -35,6 +35,15 @@ sfGuardUser:
     is_super_admin: true
     Groups:         [Group_admin]
 
+  User_5:
+    first_name:     Eli
+    last_name:      Anglada
+    email_address:  test4@ttupf.edu
+    username:       eli
+    password:       testing
+    is_super_admin: true
+    Groups:         [Group_admin]
+
 sfGuardGroup:
   Group_admin:
     name:           admin

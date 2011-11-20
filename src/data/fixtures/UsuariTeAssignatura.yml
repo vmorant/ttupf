@@ -117,3 +117,31 @@ UsuariTeAssignatura:
     grup_teoria:      1
     grup_practiques:  P102
     grup_seminari:    S102
+
+  CAT4:
+    usuari_id:        5
+    assignatura_id:   8
+    grup_teoria:      2
+    grup_practiques:  P201
+    grup_seminari:    S201
+    
+  PTM4:
+    usuari_id:        5
+    assignatura_id:   9
+    grup_teoria:      1
+    grup_practiques:  P101
+    grup_seminari:    S101
+  
+  SXS4:
+    usuari_id:        5
+    assignatura_id:   10
+    grup_teoria:      1
+    grup_practiques:  P101
+    grup_seminari:    S101
+  
+  RC4:
+    usuari_id:        5
+    assignatura_id:   11
+    grup_teoria:      1
+    grup_practiques:  P101
+    grup_seminari:    S101

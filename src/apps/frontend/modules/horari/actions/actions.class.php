@@ -32,6 +32,7 @@ class horariActions extends sfActions
 		}
 		$utas = $this->getUser()->getGuardUser()->getUsuariTeAssignatures()->getData();
 		
+		//TODO maybe some grup_practiques or grip-seminari has many groups. We have to support thet
 		// Creem vector de sessions a partir de la qual es generara una taula d'horari.
 		$this->sessionsArray = array();
 		foreach($utas as $uta):
