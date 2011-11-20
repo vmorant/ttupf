@@ -37,25 +37,20 @@ class horariActions extends sfActions
 		foreach($utas as $uta):
 			$sessions = $uta->getAssignatura()->getSessions()->getData();
 			foreach($sessions as $session):
-				$tipus = $session->getTipus();
-				switch($tipus[0]) {
-					case 'P':
-						if($session->getGrupPractiques() == $uta->getGrupPractiques()) {
+				if($session->getGrupSeminari()) {
+					if($session->getGrupSeminari() == $uta->getGrupSeminari()) {
+						$this->sessionsArray[] = $session;
+					}
+				}
+				else if($session->getGrupPractiques()) {
+					if($session->getGrupPractiques() == $uta->getGrupPractiques()) {
 							$this->sessionsArray[] = $session;
-						}
-						break;
-					case 'T':
-						if($session->getGrupTeoria() == $uta->getGrupTeoria()) {
-							$this->sessionsArray[] = $session;
-						}
-						break;
-					case 'S':
-						if($session->getGrupSeminari() == $uta->getGrupSeminari()) {
-							$this->sessionsArray[] = $session;
-						}
-						break;
-					default:
-						break;
+					}
+				}
+				else if($session->getGrupTeoria()) {
+					if($session->getGrupTeoria() == $uta->getGrupTeoria()) {
+						$this->sessionsArray[] = $session;
+					}
 				}
 			endforeach;
 		endforeach;
