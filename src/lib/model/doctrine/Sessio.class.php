@@ -14,7 +14,6 @@ class Sessio extends BaseSessio
 {
 	public function isGroupSet() {
 		if($this->getGrupPractiques() ||
-			$this->getGrupTeoria() ||
 			$this->getGrupSeminari()) {
 			return true;
 		}
