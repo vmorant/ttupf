@@ -19,7 +19,6 @@ class SessioTable extends Doctrine_Table
 			
 	private $logger;
 	private $courseYear;
-	private $sessions;
 
 	public function actualitza($courseYear, $date = NULL)
 	{	
@@ -30,13 +29,6 @@ class SessioTable extends Doctrine_Table
 
 		$timetableDOM = new simple_html_dom();		
 		$timetableDOM->load_file($courseYear->getUrlHorari());
-				
-
-		foreach($courseYear->getAssignatures() as $assignatura):
-			foreach($assignatura->getSessions() as $sessio):
-				$this->sessions[] = $sessio;
-			endforeach;
-		endforeach;
 
 		// Date of first week is in the second table, second row, second cell.
 		$firstWeek = $timetableDOM->find('table', 1)->find('tr', 1)->find('td', 1)->plaintext;
@@ -107,7 +99,7 @@ class SessioTable extends Doctrine_Table
 						$this->parseSession($period);
 					}
 				}
-				//unset($period);
+				unset($period);
 			}
 		}
 	}
@@ -199,18 +191,25 @@ class SessioTable extends Doctrine_Table
 	/**
 	 * Esborra les sessions d'aquella setmana, i se li passa per entrada el primer dia de la setmana
 	 */
-	private function deleteWeekSessions($firstDayWeek) {
-		$bdSessions = $this->sessions;
+	private function deleteWeekSessions($firstDayWeek) {	
+		$firstDay = new DateTime($firstDayWeek);
+		$lastDay = new DateTime($firstDayWeek);
+		$lastDay->add(new DateInterval('P7D'));
+
+		$weekSessionsCarreraCurs = Doctrine_Query::create()
+			->select('s.id')
+			->from('Sessio s, Assignatura a')
+			->where('s.data_hora_inici < ?', $lastDay->format('Y-m-d H:i:s'))
+			->andWhere('s.data_hora_inici > ?', $firstDay->format('Y-m-d H:i:s'))
+			->andWhere('s.assignatura_id = a.id')
+			->andWhere('a.carrera_curs_id = ?', $this->courseYear->getId())
+			->groupBy('s.id')
+			->execute();
 		
-		$firstDayWeek = new DateTime($firstDayWeek);
-		
-		foreach($bdSessions as $bdSessio):
-			$iterDay = new DateTime($bdSessio->getDataHoraInici());
-			
-			if($iterDay->format('%a') - 7 < $firstDayWeek->format('%a')) {
-				$bdSessio->delete();
-			}
+		foreach($weekSessionsCarreraCurs as $sessio):
+			$sessio->delete();
 		endforeach;
+		
 		return 0;
 	}
 }
@@ -456,6 +455,8 @@ class Period
 				if(($isPractical && strtolower($group[0]) == 'p') || ($isSeminar && strtolower($group[0]) == 's') || ($isTheory && sizeof($group) == 1)) {
 					$this->getCurrentBlock()->newSession();
 					$this->getCurrentBlock()->setSessionGroup($group);
+					$this->getCurrentBlock()->getActualSession()->setDataHoraInici($this->getStart()->format('Y-m-d H:i:s'));
+					$this->getCurrentBlock()->getActualSession()->setDataHoraFi($this->getEnd()->format('Y-m-d H:i:s'));
 					//fes una nova sessio i enxufali els grups
 				}
 			endforeach;
@@ -463,6 +464,8 @@ class Period
 		else {
 			$this->getCurrentBlock()->newSession();
 			$this->getCurrentBlock()->setSessionGroup($this->courseyear->getGrupTeoria());
+			$this->getCurrentBlock()->getActualSession()->setDataHoraInici($this->getStart()->format('Y-m-d H:i:s'));
+			$this->getCurrentBlock()->getActualSession()->setDataHoraFi($this->getEnd()->format('Y-m-d H:i:s'));
 			//fes una nova sessio i enxufali el grup de teo que li pertoca per carreraCurs
 		}
 		$this->getCurrentBlock()->setAulas($line);
@@ -482,16 +485,12 @@ class Period
 		//echo "// Estat 6<br />";
 		//echo utf8_decode($line)."<br />";
 		
-		$course = NULL;
-		
-		$assignatures = Doctrine_Core::getTable('Assignatura')
-			->findByCarreraCursId($this->courseyear->getId());
-		
-		foreach($assignatures as $assignatura) {
-			if($assignatura->getNom() == $line) {
-				$course = $assignatura;
-			}
-		}
+		$course = Doctrine_Query::create()
+			->select('a.id')
+			->from('Assignatura a')
+			->where('a.carrera_curs_id = ?', $this->courseyear->getId())
+			->andWhere('a.nom = ?', $line)
+			->fetchOne();
 
 		if($course){
 			$this->logger->debug("Found course " . $line . " in database, id is " . $course->getId());
@@ -507,7 +506,6 @@ class Period
 		}
 		
 		$this->getCurrentBlock()->setAssignatura($course);
-		$this->getCurrentBlock()->setDefaultHours($this->getStart()->format('Y-m-d H:i:s'), $this->getEnd()->format('Y-m-d H:i:s'));
 		$this->getCurrentBlock()->saveSessions();
 		return;
 	}
@@ -672,16 +670,20 @@ class Period
 class Block
 {
 	private $sessions;
+	private $timed;
 	
 	public function Block() {
 		$this->sessions = array();
+		$this->timed = array(); 
 	}
 	
 	public function newSession() {
 		$this->sessions[] = new Sessio();
+		$this->timed[] = false;
 	}
 	
 	public function deleteSessions() {
+		$this->sessions = array();
 		$this->sessions = array();
 	}
 	
@@ -696,6 +698,14 @@ class Block
 	
 	public function getSessions() {
 		return $this->sessions;
+	}
+	
+	public function getTimed($key) {
+		return $this->timed[$key];
+	}
+	
+	public function setTimed($key) {
+		$this->timed[$key] = true;
 	}
 	
 	public function setSessionAula($aula) {
@@ -766,23 +776,58 @@ class Block
 
 		if(preg_match_all($has_hour, $line, $hours)) {
 			if(sizeof($hours) > 1) {
-				foreach($this->getSessions() as $session):
-					if(!$session->isDateTimeSet()) {
-						//echo $hours[0][0]."<br />";
-						//echo $hours[0][1]."<br />";
-//						$session->setDataHoraInici($hours[0][0]);
-//						$session->setDataHoraFi($hours[0][1]);
-						$session->setDataHoraInici($period->getStart()->format('Y-m-d H:i:s'));
-						$session->setDataHoraFi($period->getEnd()->format('Y-m-d H:i:s'));
+				foreach($this->getSessions() as $key => $session):
+					if(!$this->getTimed($key)) {
+						if(strcmp($hours[0][0], ".")) {
+							$hour = explode(".", $hours[0][0]);
+							$start = $session->getDataHoraInici();
+							$start = new DateTime($start);
+							$start->setTime($hour[0], $hour[1], 00);
+							$session->setDataHoraInici($start->format('Y-m-d H:i:s'));
+						}
+						else if(strcmp($hours[0][0], ":")) {
+							$hour = explode(":", $hours[0][0]);
+							$start = $session->getDataHoraInici();
+							$start = new DateTime($start);
+							$start->setTime($hour[0], $hour[1], 00);	
+							$session->setDataHoraInici($start->format('Y-m-d H:i:s'));						
+						}
+						if(strcmp($hours[0][1], ".")) {
+							$hour = explode(".", $hours[0][1]);
+							$end = $session->getDataHoraInici();
+							$end = new DateTime($end);
+							$end->setTime($hour[0], $hour[1], 00);
+							$session->setDataHoraFi($end->format('Y-m-d H:i:s'));
+						}
+						else if(strcmp($hours[0][1], ":")) {
+							$hour = explode(":", $hours[0][1]);
+							$end = $session->getDataHoraInici();
+							$end = new DateTime($end);
+							$end->setTime($hour[0], $hour[1], 00);							
+							$session->setDataHoraFi($end->format('Y-m-d H:i:s'));						
+						}
+						$this->setTimed($key);
 					}
 				endforeach;
 			}
 			else {
-				foreach($this->getSessions() as $session):
-					if(!$session->isDateTimeSet()) {
-						//echo $hours[0][0]."<br />";
-//						$session->setDataHoraFi($hours[0][0]);
-						$session->setDataHoraFi($period->getEnd()->format('Y-m-d H:i:s'));
+				foreach($this->getSessions() as $key => $session):
+					if(!$this->getTimed($key)) {
+						if(strcmp($hours[0][0], ".")) {
+							$hour = explode(".", $hours[0][0]);
+							$end = $session->getDataHoraInici();
+							$end = new DateTime($end);
+							$end->setTime($hour[0], $hour[1], 00);
+							$session->setDataHoraFi($end->format('Y-m-d H:i:s'));
+						}
+						else if(strcmp($hours[0][0], ":")) {
+							$hour = explode(":", $hours[0][0]);
+							$end = $session->getDataHoraInici();
+							$end = new DateTime($end);
+							$end->setTime($hour[0], $hour[1], 00);
+							$session->setDataHoraFi($end->format('Y-m-d H:i:s'));							
+						}
+						$this->setTimed($key);
 					}
 				endforeach;
 			}
@@ -809,15 +854,6 @@ class Block
 			//echo $session->getDataHoraInici()." - ";
 			//echo $session->getDataHoraFi()."<br />";
 			$session->save();
-		endforeach;
-	}
-	
-	public function setDefaultHours($start, $end) {
-		foreach($this->getSessions() as $session):
-				$session->setDataHoraInici($start);
-				//echo $session->getDataHoraInici()."<br />";
-				$session->setDataHoraFi($end);
-				//echo $session->getDataHoraFi()."<br />";
 		endforeach;
 	}
 }
