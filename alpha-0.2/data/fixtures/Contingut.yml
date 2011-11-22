@@ -1,0 +1,20 @@
+Contingut:
+  contacte:
+    nom:  Contacte
+    action_part: $this->form = new sfForm(); $this->form->setWidgets(array('nom' => new sfWidgetFormInputText(),'email' => new sfWidgetFormInputText(array('default' => 'me@example.com')), 'assumpte' => new sfWidgetFormChoice(array('choices' => array('Subject A', 'Subject B', 'Subject C'))), 'missatge' => new sfWidgetFormTextarea())); $str = "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus molestie nisl ante. Nulla non lectus et nulla consequat faucibus. Proin vulputate orci in lorem egestas a sollicitudin diam lacinia. Integer quis risus a erat</p><p><table>".$this->form."<tr><td colspan='2'><input type='submit' /></td></tr></table></form></p>"; $this->contingut_actual->setViewPart($str); $this->contingut_actual->save();
+    es_contingut: true
+
+  quisom:
+    nom:  Qui Som?
+    view_part: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus molestie nisl ante. Nulla non lectus et nulla consequat faucibus. Proin vulputate orci in lorem egestas a sollicitudin diam lacinia. Integer quis risus a erat scelerisque viverra non eget leo. In convallis metus ac sapien commodo blandit. Maecenas id libero sem, id aliquet dui. Donec ac augue massa. Nunc sagittis nulla in ante sagittis tincidunt. Proin sit amet nisl feugiat magna adipiscing dapibus. Phasellus et lorem elit. Praesent in leo mauris. Suspendisse potenti. Proin at magna ipsum. Donec suscipit libero leo. Maecenas nisl metus, tristique ultricies malesuada in, rhoncus at sapien.</p>
+    es_contingut: true
+    
+  ajuda:
+    nom:  Ajuda
+    view_part: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus molestie nisl ante. Nulla non lectus et nulla consequat faucibus. Proin vulputate orci in lorem egestas a sollicitudin diam lacinia. Integer quis risus a erat scelerisque viverra non eget leo. In convallis metus ac sapien commodo blandit. Maecenas id libero sem, id aliquet dui. Donec ac augue massa. Nunc sagittis nulla in ante sagittis tincidunt. Proin sit amet nisl feugiat magna adipiscing dapibus. Phasellus et lorem elit. Praesent in leo mauris. Suspendisse potenti. Proin at magna ipsum. Donec suscipit libero leo. Maecenas nisl metus, tristique ultricies malesuada in, rhoncus at sapien.</p>
+    es_contingut: true
+    
+  index:
+    nom:  Index
+    view_part: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus molestie nisl ante. Nulla non lectus et nulla consequat faucibus. Proin vulputate orci in lorem egestas a sollicitudin diam lacinia. Integer quis risus a erat scelerisque viverra non eget leo. In convallis metus ac sapien commodo blandit. Maecenas id libero sem, id aliquet dui. Donec ac augue massa. Nunc sagittis nulla in ante sagittis tincidunt. Proin sit amet nisl feugiat magna adipiscing dapibus. Phasellus et lorem elit. Praesent in leo mauris. Suspendisse potenti. Proin at magna ipsum. Donec suscipit libero leo. Maecenas nisl metus, tristique ultricies malesuada in, rhoncus at sapien.</p>
+    es_contingut: false

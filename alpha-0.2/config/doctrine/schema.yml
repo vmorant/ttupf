@@ -1,0 +1,61 @@
+detect_relations: true
+
+CarreraCurs:
+  actAs:              { Timestampable: ~ }
+  columns:
+    nom:              { type: string(255), notnull: true }
+    curs:             { type: integer, notnull: true }
+    grup_teoria:      { type: integer, notnull: true }
+    url_horari:       { type: string(255), notnull: true, unique: true }
+
+Assignatura:
+  columns:
+    nom:              { type: string(255), notnull: true }
+    carrera_curs_id:  { type: integer, notnull: true }
+  relations:
+    CarreraCurs:      { onDelete: CASCADE, local: carrera_curs_id, foreign: id, foreignAlias: Assignatures }
+    
+Sessio:
+  columns:
+    data_hora_inici:  { type: timestamp, notnull: true }
+    data_hora_fi:     { type: timestamp, notnull: true }
+    assignatura_id:   { type: integer, notnull: true }
+    aula:             { type: string(255) }
+    tipus:            { type: string(255), notnull: true }
+    grup_seminari:    { type: string(255) }
+    grup_practiques:  { type: string(255) }
+    grup_teoria:	  { type: string(255) }
+  relations:
+    Assignatura:      { onDelete: CASCADE, local: assignatura_id, foreign: id, foreignAlias: Sessions }
+
+UsuariTeAssignatura:
+  columns:
+    usuari_id:        { type: integer, notnull: true, primary: true }
+    assignatura_id:   { type: integer, notnull: true, primary: true }
+    grup_practiques:  { type: string(255) }
+    grup_seminari:    { type: string(255) }
+    grup_teoria:	  { type: string(255) }
+  relations:
+    sfGuardUser:      { onDelete: CASCADE, local: usuari_id, foreign: id, foreignAlias: UsuariTeAssignatures }
+    Assignatura:      { onDelete: CASCADE, local: assignatura_id, foreign: id, foreignAlias: UsuariTeAssignatures }
+    
+Contingut:
+  columns:
+    nom:              { type: string(255), notnull: true }
+    action_part:      { type: string(700), notnull: true }
+    view_part:        { type: string(700), notnull: true }
+    es_contingut:     { type: boolean, notnull: true }
+
+Opcio:
+  columns:
+    nom:              { type: string(255), notnull: true }
+    module:           { type: string(255), notnull: true }
+    action:           { type: string(255), notnull: true }
+    
+ContingutTeOpcio:
+  columns:
+    contingut_id:     { type: integer, notnull: true, primary: true }
+    opcio_id:         { type: integer, notnull: true, primary: true }
+  relations:
+    Contingut:        { onDelete: CASCADE, local: contingut_id, foreign: id, foreignAlias: ContingutTeOpcions }
+    Opcio:            { onDelete: CASCADE, local: opcio_id, foreign: id, foreignAlias: ContingutTeOpcions }
