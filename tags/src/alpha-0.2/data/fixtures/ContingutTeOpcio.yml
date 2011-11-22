@@ -1,0 +1,45 @@
+ContingutTeOpcio:
+  contacte_tornar:
+    contingut_id: 1
+    opcio_id:    1
+    
+  quisom_tornar:
+    contingut_id: 2
+    opcio_id:    1
+
+  ajuda_tornar:
+    contingut_id: 3
+    opcio_id:    1
+
+  contacte_login:
+    contingut_id: 1
+    opcio_id:    2
+    
+  quisom_login:
+    contingut_id: 2
+    opcio_id:    2
+
+  ajuda_login:
+    contingut_id: 3
+    opcio_id:    2
+
+  index_login:
+    contingut_id: 4
+    opcio_id:    2
+  
+  contacte_registrar:
+    contingut_id: 1
+    opcio_id:    3
+    
+  quisom_registrar:
+    contingut_id: 2
+    opcio_id:    3
+
+  ajuda_registrar:
+    contingut_id: 3
+    opcio_id:    3
+
+  index_registrar:
+    contingut_id: 4
+    opcio_id:    3
+  
