@@ -61,7 +61,9 @@ class horariActions extends sfActions
 		    $dates[$key]  = $sessio->getDataHoraInici(); 
 		}
 
-		array_multisort($dates, SORT_ASC, $this->sessionsArray);
+		if(isset($dates)){
+			array_multisort($dates, SORT_ASC, $this->sessionsArray);
+		}
 	}
 
 	/**
