@@ -325,7 +325,7 @@ class Period
 				else if (($groups = $this->isThereAGroup($line)) && $hasThings[0]) {
 					//echo "__Tipus i Grup --> D<br />";
 					foreach($groups as $group):
-						$this->getCurrentBlock()->setSessionGroup($group);	
+						$this->getCurrentBlock()->setSessionGroup($group, $this->courseyear->getGrupTeoria());	
 					endforeach;
 					$this->doStateD($line);
 					return 3;
@@ -355,6 +355,11 @@ class Period
 					//echo "__Tipus --> D<br />";
 					$this->doStateD($line);
 					return 3;
+				}
+				else if($hasThings[2]) {
+					//echo "__Assignatura --> E<br />";
+					$this->doStateE($line);					
+					return 5;
 				}
 				else {
 					echo "Line:\"".utf8_decode($line)."\"<br />";
@@ -454,7 +459,7 @@ class Period
 			foreach($groups as $group):
 				if(($isPractical && strtolower($group[0]) == 'p') || ($isSeminar && strtolower($group[0]) == 's') || ($isTheory && sizeof($group) == 1)) {
 					$this->getCurrentBlock()->newSession();
-					$this->getCurrentBlock()->setSessionGroup($group);
+					$this->getCurrentBlock()->setSessionGroup($group, $this->courseyear->getGrupTeoria());
 					$this->getCurrentBlock()->getActualSession()->setDataHoraInici($this->getStart()->format('Y-m-d H:i:s'));
 					$this->getCurrentBlock()->getActualSession()->setDataHoraFi($this->getEnd()->format('Y-m-d H:i:s'));
 					//fes una nova sessio i enxufali els grups
@@ -463,7 +468,7 @@ class Period
 		}
 		else {
 			$this->getCurrentBlock()->newSession();
-			$this->getCurrentBlock()->setSessionGroup($this->courseyear->getGrupTeoria());
+			$this->getCurrentBlock()->setSessionGroup($this->courseyear->getGrupTeoria(), $this->courseyear->getGrupTeoria());
 			$this->getCurrentBlock()->getActualSession()->setDataHoraInici($this->getStart()->format('Y-m-d H:i:s'));
 			$this->getCurrentBlock()->getActualSession()->setDataHoraFi($this->getEnd()->format('Y-m-d H:i:s'));
 			//fes una nova sessio i enxufali el grup de teo que li pertoca per carreraCurs
@@ -472,7 +477,6 @@ class Period
 	}
 	
 	public function doStateC($line) {
-		echo "Hora: ".$line."<br />";
 		$this->getCurrentBlock()->setHours($line, $this);
 	}
 	
@@ -506,6 +510,7 @@ class Period
 		}
 		
 		$this->getCurrentBlock()->setAssignatura($course);
+		$this->getCurrentBlock()->setDefaultType();
 		$this->getCurrentBlock()->saveSessions();
 		return;
 	}
@@ -638,7 +643,7 @@ class Period
 		$hasThings[] = false;
 
 		// If line has at least 1 uppercase word is type => 0
-		$has_type = "/[ÀÁÈÉÍÏÒÓÚÜÑA-Z]{3,}/";
+		$has_type = "/[ÀÁÈÉÍÏÒÓÚÜÑA-Z]{4,}/";
 		// If line is like PXXX: XX.XXX or SXXX: XX.XXX or SXXX - XX.XXX is aulagrup => 1
 		$has_aula = "/(?<![0-9])([0-9]{2}.[A-Za-z0-9][0-9]{2})/";
 		// This regex is a miracle understandable. Sorry xD NO FUNCIONA DEL TOT, de moment detecta l'assignatura bé però
@@ -714,7 +719,7 @@ class Block
 	
 	// Set the group like P101 or S101 or A or B or C or 1 or 2.
 	//TODO handle cases when the grip is inherit
-	public function setSessionGroup($group) {
+	public function setSessionGroup($group, $courseyear_group) {
 		if(strtolower($group[0]) == 'p') {
 			//echo "Prac ".strtolower($group[0])."<br />";
 			$this->getActualSession()->setGrupPractiques($group);
@@ -728,7 +733,12 @@ class Block
 		else {			
 			//echo "Teo ".strtolower($group[0])."<br />";
 			if(!$this->getActualSession()->isGroupSet()) {
-				$this->getActualSession()->setGrupTeoria($group);
+				if(!is_numeric($group)) {
+					$this->getActualSession()->setGrupTeoria($courseyear_group.$group);
+				}
+				else {
+					$this->getActualSession()->setGrupTeoria($group);
+				}
 			}
 			return 't';
 		}
@@ -832,6 +842,22 @@ class Block
 				endforeach;
 			}
 		}
+	}
+
+	public function setDefaultType() {
+		foreach($this->getSessions() as $session):
+			if(!$session->isTypeSet()) {
+				if($session->getGrupSeminari()) {
+					$session->setTipus("SEMINARIS");
+				}
+				else if($session->getGrupPractiques()) {
+					$session->setTipus("PRÀCTIQUES");
+				}
+				else if($session->getGrupTeoria("TEORIA")) {
+					$session->setTipus();
+				}
+			}
+		endforeach;
 	}
 	
 	public function setType($line) {
