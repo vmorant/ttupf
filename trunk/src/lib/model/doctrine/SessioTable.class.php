@@ -198,12 +198,11 @@ class SessioTable extends Doctrine_Table
 
 		$weekSessionsCarreraCurs = Doctrine_Query::create()
 			->select('s.id')
-			->from('Sessio s, Assignatura a, CarreraCursTeAssignatura c')
+			->from('Sessio s, Assignatura a')
 			->where('s.data_hora_inici < ?', $lastDay->format('Y-m-d H:i:s'))
 			->andWhere('s.data_hora_inici > ?', $firstDay->format('Y-m-d H:i:s'))
 			->andWhere('s.assignatura_id = a.id')
-			->andWhere('c.assignatura_id = a.id')
-			->andWhere('c.carrera_curs_id = ?', $this->courseYear->getId())
+			->andWhere('a.carrera_curs_id = ?', $this->courseYear->getId())
 			->groupBy('s.id')
 			->execute();
 		
@@ -493,42 +492,23 @@ class Period
 		$course = Doctrine_Query::create()
 			->select('a.id')
 			->from('Assignatura a')
-			->where('a.nom = ?', $line)
-			->fetchOne();
-
-		$courseyear_has_course = Doctrine_Query::create()
-			->select ('*')
-			->from('CarreraCursTeAssignatura c, Assignatura a')
-			->where('a.id = c.assignatura_id')
-			->andWhere('c.carrera_curs_id = ?', $this->courseyear->getId())
+			->where('a.carrera_curs_id = ?', $this->courseyear->getId())
 			->andWhere('a.nom = ?', $line)
 			->fetchOne();
 
-		if($course && $courseyear_has_course){
+		if($course){
 			$this->logger->debug("Found course " . $line . " in database, id is " . $course->getId());
 		}
 		// Course doesn't exist, so create it and set its attributes.
-		else if($course) {
-			//echo utf8_decode($line)."<br />";
-			$this->logger->debug("Course relation ".$line." with CarreraCurs ".$this->courseyear->getId()." doesn't exist, creating.");
-			$courseyear_has_course = new CarreraCursTeAssignatura();
-			$courseyear_has_course->setCarreraCurs($this->courseyear);
-			$courseyear_has_course->setAssignatura($course);
-			$courseyear_has_course->save();
-		}
 		else {
 			$this->logger->debug("Course " . $line . " doesn't exist, creating.");
 			$course = new Assignatura();
 			$course->setNom($line);
-			$course->save();			
-
-			$this->logger->debug("Course relation ".$line." with CarreraCurs ".$this->courseyear->getId()." doesn't exist, creating.");
-			$courseyear_has_course = new CarreraCursTeAssignatura();
-			$courseyear_has_course->setCarreraCurs($this->courseyear);
-			$courseyear_has_course->setAssignatura($course);
-			$courseyear_has_course->save();
+			$course->setCarreraCurs($this->courseyear);
+			$course->save();
+			//echo utf8_decode($line)."<br />";
 		}
-
+		
 		$this->getCurrentBlock()->setAssignatura($course);
 		$this->getCurrentBlock()->setDefaultType();
 		$this->getCurrentBlock()->saveSessions();
@@ -899,42 +879,7 @@ class Block
 			//echo "<br />ES GUARDA LA SESSIO<br /><br />";
 			//echo $session->getDataHoraInici()." - ";
 			//echo $session->getDataHoraFi()."<br />";
-			if($session->getGrupSeminari()) {
-				$llista = Doctrine_Query::create()
-					->from('sessio s')
-					->where('s.data_hora_inici = ?', $session->getDataHoraInici())
-					->andWhere('s.data_hora_fi = ?', $session->getDataHoraFi())
-					->andWhere('s.assignatura_id = ?', $session->getAssignaturaId())
-					->andWhere('s.aula = ?', $session->getAula())
-					->andWhere('s.grup_seminari = ?', $session->getGrupSeminari())
-					->execute();
-			}
-			else if($session->getGrupPractiques()) {
-				$llista = Doctrine_Query::create()
-					->from('sessio s')
-					->where('s.data_hora_inici = ?', $session->getDataHoraInici())
-					->andWhere('s.data_hora_fi = ?', $session->getDataHoraFi())
-					->andWhere('s.assignatura_id = ?', $session->getAssignaturaId())
-					->andWhere('s.aula = ?', $session->getAula())
-					->andWhere('s.grup_practiques = ?', $session->getGrupPractiques())
-					->execute();
-			}
-			else if($session->getGrupTeoria()) {
-				$llista = Doctrine_Query::create()
-					->from('sessio s')
-					->where('s.data_hora_inici = ?', $session->getDataHoraInici())
-					->andWhere('s.data_hora_fi = ?', $session->getDataHoraFi())
-					->andWhere('s.assignatura_id = ?', $session->getAssignaturaId())
-					->andWhere('s.aula = ?', $session->getAula())
-					->andWhere('s.grup_teoria = ?', $session->getGrupTeoria())
-					->execute();
-			}
-			
-			sfContext::getInstance()->getLogger()->info('Result of select: ' . $llista . ', having size. ' . sizeof($llista));
-						
-			if(sizeof($llista) == 0) {
-				$session->save();
-			}
+			$session->save();
 		endforeach;
 	}
 }

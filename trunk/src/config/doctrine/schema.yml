@@ -11,6 +11,9 @@ CarreraCurs:
 Assignatura:
   columns:
     nom:              { type: string(255), notnull: true }
+    carrera_curs_id:  { type: integer, notnull: true }
+  relations:
+    CarreraCurs:      { onDelete: CASCADE, local: carrera_curs_id, foreign: id, foreignAlias: Assignatures }
     
 Sessio:
   columns:
@@ -35,14 +38,6 @@ UsuariTeAssignatura:
   relations:
     sfGuardUser:      { onDelete: CASCADE, local: usuari_id, foreign: id, foreignAlias: UsuariTeAssignatures }
     Assignatura:      { onDelete: CASCADE, local: assignatura_id, foreign: id, foreignAlias: UsuariTeAssignatures }
-
-CarreraCursTeAssignatura:
-  columns:
-    carrera_curs_id:  { type: integer, notnull: true, primary: true }
-    assignatura_id:   { type: integer, notnull: true, primary: true }
-  relations:
-    CarreraCurs:      { onDelete: CASCADE, local: carrera_curs_id, foreign: id, foreignAlias: CarreraCursTeAssignatures }
-    Assignatura:      { onDelete: CASCADE, local: assignatura_id, foreign: id, foreignAlias: CarreraCursTeAssignatures }
     
 Contingut:
   columns:
