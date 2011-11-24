@@ -9,18 +9,18 @@
  * @property integer $curs
  * @property integer $grup_teoria
  * @property string $url_horari
- * @property Doctrine_Collection $CarreraCursTeAssignatures
+ * @property Doctrine_Collection $Assignatures
  * 
- * @method string              getNom()                       Returns the current record's "nom" value
- * @method integer             getCurs()                      Returns the current record's "curs" value
- * @method integer             getGrupTeoria()                Returns the current record's "grup_teoria" value
- * @method string              getUrlHorari()                 Returns the current record's "url_horari" value
- * @method Doctrine_Collection getCarreraCursTeAssignatures() Returns the current record's "CarreraCursTeAssignatures" collection
- * @method CarreraCurs         setNom()                       Sets the current record's "nom" value
- * @method CarreraCurs         setCurs()                      Sets the current record's "curs" value
- * @method CarreraCurs         setGrupTeoria()                Sets the current record's "grup_teoria" value
- * @method CarreraCurs         setUrlHorari()                 Sets the current record's "url_horari" value
- * @method CarreraCurs         setCarreraCursTeAssignatures() Sets the current record's "CarreraCursTeAssignatures" collection
+ * @method string              getNom()          Returns the current record's "nom" value
+ * @method integer             getCurs()         Returns the current record's "curs" value
+ * @method integer             getGrupTeoria()   Returns the current record's "grup_teoria" value
+ * @method string              getUrlHorari()    Returns the current record's "url_horari" value
+ * @method Doctrine_Collection getAssignatures() Returns the current record's "Assignatures" collection
+ * @method CarreraCurs         setNom()          Sets the current record's "nom" value
+ * @method CarreraCurs         setCurs()         Sets the current record's "curs" value
+ * @method CarreraCurs         setGrupTeoria()   Sets the current record's "grup_teoria" value
+ * @method CarreraCurs         setUrlHorari()    Sets the current record's "url_horari" value
+ * @method CarreraCurs         setAssignatures() Sets the current record's "Assignatures" collection
  * 
  * @package    ttupf
  * @subpackage model
@@ -56,7 +56,7 @@ abstract class BaseCarreraCurs extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('CarreraCursTeAssignatura as CarreraCursTeAssignatures', array(
+        $this->hasMany('Assignatura as Assignatures', array(
              'local' => 'id',
              'foreign' => 'carrera_curs_id'));
 
