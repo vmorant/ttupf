@@ -15,15 +15,13 @@ abstract class BaseAssignaturaForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'id'              => new sfWidgetFormInputHidden(),
-      'nom'             => new sfWidgetFormInputText(),
-      'carrera_curs_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('CarreraCurs'), 'add_empty' => false)),
+      'id'  => new sfWidgetFormInputHidden(),
+      'nom' => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
-      'id'              => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'nom'             => new sfValidatorString(array('max_length' => 255)),
-      'carrera_curs_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('CarreraCurs'))),
+      'id'  => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
+      'nom' => new sfValidatorString(array('max_length' => 255)),
     ));
 
     $this->widgetSchema->setNameFormat('assignatura[%s]');

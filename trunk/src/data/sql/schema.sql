@@ -1,5 +1,6 @@
-CREATE TABLE assignatura (id BIGINT AUTO_INCREMENT, nom VARCHAR(255) NOT NULL, carrera_curs_id BIGINT NOT NULL, INDEX carrera_curs_id_idx (carrera_curs_id), PRIMARY KEY(id)) ENGINE = INNODB;
+CREATE TABLE assignatura (id BIGINT AUTO_INCREMENT, nom VARCHAR(255) NOT NULL, PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE carrera_curs (id BIGINT AUTO_INCREMENT, nom VARCHAR(255) NOT NULL, curs BIGINT NOT NULL, grup_teoria BIGINT NOT NULL, url_horari VARCHAR(255) NOT NULL UNIQUE, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(id)) ENGINE = INNODB;
+CREATE TABLE carrera_curs_te_assignatura (carrera_curs_id BIGINT, assignatura_id BIGINT, PRIMARY KEY(carrera_curs_id, assignatura_id)) ENGINE = INNODB;
 CREATE TABLE contingut (id BIGINT AUTO_INCREMENT, nom VARCHAR(255) NOT NULL, action_part TEXT NOT NULL, view_part TEXT NOT NULL, es_contingut TINYINT(1) NOT NULL, PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE contingut_te_opcio (contingut_id BIGINT, opcio_id BIGINT, PRIMARY KEY(contingut_id, opcio_id)) ENGINE = INNODB;
 CREATE TABLE opcio (id BIGINT AUTO_INCREMENT, nom VARCHAR(255) NOT NULL, module VARCHAR(255) NOT NULL, action VARCHAR(255) NOT NULL, PRIMARY KEY(id)) ENGINE = INNODB;
@@ -14,7 +15,8 @@ CREATE TABLE sf_guard_user (id BIGINT AUTO_INCREMENT, first_name VARCHAR(255), l
 CREATE TABLE sf_guard_user_group (user_id BIGINT, group_id BIGINT, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(user_id, group_id)) ENGINE = INNODB;
 CREATE TABLE sf_guard_user_permission (user_id BIGINT, permission_id BIGINT, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(user_id, permission_id)) ENGINE = INNODB;
 CREATE TABLE sf_guard_user_profile (id BIGINT AUTO_INCREMENT, user_id BIGINT NOT NULL, email_new VARCHAR(255) UNIQUE, firstname VARCHAR(255), lastname VARCHAR(255), validate_at DATETIME, validate VARCHAR(33), created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, UNIQUE INDEX user_id_unique_idx (user_id), PRIMARY KEY(id)) ENGINE = INNODB;
-ALTER TABLE assignatura ADD CONSTRAINT assignatura_carrera_curs_id_carrera_curs_id FOREIGN KEY (carrera_curs_id) REFERENCES carrera_curs(id) ON DELETE CASCADE;
+ALTER TABLE carrera_curs_te_assignatura ADD CONSTRAINT carrera_curs_te_assignatura_carrera_curs_id_carrera_curs_id FOREIGN KEY (carrera_curs_id) REFERENCES carrera_curs(id) ON DELETE CASCADE;
+ALTER TABLE carrera_curs_te_assignatura ADD CONSTRAINT carrera_curs_te_assignatura_assignatura_id_assignatura_id FOREIGN KEY (assignatura_id) REFERENCES assignatura(id) ON DELETE CASCADE;
 ALTER TABLE contingut_te_opcio ADD CONSTRAINT contingut_te_opcio_opcio_id_opcio_id FOREIGN KEY (opcio_id) REFERENCES opcio(id) ON DELETE CASCADE;
 ALTER TABLE contingut_te_opcio ADD CONSTRAINT contingut_te_opcio_contingut_id_contingut_id FOREIGN KEY (contingut_id) REFERENCES contingut(id) ON DELETE CASCADE;
 ALTER TABLE sessio ADD CONSTRAINT sessio_assignatura_id_assignatura_id FOREIGN KEY (assignatura_id) REFERENCES assignatura(id) ON DELETE CASCADE;
