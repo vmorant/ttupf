@@ -1,0 +1,34 @@
+CarreraCursTeAssignatura:
+  1_ADX:
+    carrera_curs_id: 13
+    assignatura_id: 1
+  2_DAD:
+    carrera_curs_id: 13
+    assignatura_id: 2
+  3_CAT:
+    carrera_curs_id: 13
+    assignatura_id: 3
+  4_CAT:
+    carrera_curs_id: 14
+    assignatura_id: 3
+  5_SF:
+    carrera_curs_id: 13
+    assignatura_id: 4
+  6_SS:
+    carrera_curs_id: 7
+    assignatura_id: 5
+  7_PIPE:
+    carrera_curs_id: 7
+    assignatura_id: 6
+  8_AIW:
+    carrera_curs_id: 16
+    assignatura_id: 7
+  9_PTM:
+    carrera_curs_id: 14
+    assignatura_id: 8
+  10_SXS:
+    carrera_curs_id: 14
+    assignatura_id: 9
+  11_RC:
+    carrera_curs_id: 17
+    assignatura_id: 10
