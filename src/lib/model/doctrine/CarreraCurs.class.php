@@ -12,4 +12,8 @@
  */
 class CarreraCurs extends BaseCarreraCurs
 {
+	public function __toString()
+	{
+		return $this->getNom();
+	}
 }

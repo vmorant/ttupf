@@ -12,4 +12,8 @@
  */
 class Assignatura extends BaseAssignatura
 {
+	public function __toString()
+	{
+		return $this->getNom();
+	}
 }

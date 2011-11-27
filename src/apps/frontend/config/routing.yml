@@ -17,6 +17,10 @@ horari:
   url:   /:module/:action/
   param: { module: horari }
 
+configura:
+  url:   /:module/:action/
+  param: { module: configura }
+
 horari_data:
   url:   /:module/:action/:dia/:mes/:any
   param: { module: horari }
@@ -44,3 +48,6 @@ default_index:
   
 default:
   url:   /:module/:action/*
+
+default_no_params:
+  url:   /:module/:action
