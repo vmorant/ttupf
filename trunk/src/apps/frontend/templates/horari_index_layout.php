@@ -13,5 +13,6 @@
   <body>
     <?php echo $sf_content ?>
     <?php echo link_to("Sortir", 'sf_guard_signout') ?>
+		<?php echo link_to("Configura l'horari", 'configura') ?>
   </body>
 </html>
