@@ -8,17 +8,20 @@
  * @property string $nom
  * @property integer $carrera_curs_id
  * @property CarreraCurs $CarreraCurs
+ * @property Doctrine_Collection $sfGuardUser
  * @property Doctrine_Collection $Sessions
  * @property Doctrine_Collection $UsuariTeAssignatures
  * 
  * @method string              getNom()                  Returns the current record's "nom" value
  * @method integer             getCarreraCursId()        Returns the current record's "carrera_curs_id" value
  * @method CarreraCurs         getCarreraCurs()          Returns the current record's "CarreraCurs" value
+ * @method Doctrine_Collection getSfGuardUser()          Returns the current record's "sfGuardUser" collection
  * @method Doctrine_Collection getSessions()             Returns the current record's "Sessions" collection
  * @method Doctrine_Collection getUsuariTeAssignatures() Returns the current record's "UsuariTeAssignatures" collection
  * @method Assignatura         setNom()                  Sets the current record's "nom" value
  * @method Assignatura         setCarreraCursId()        Sets the current record's "carrera_curs_id" value
  * @method Assignatura         setCarreraCurs()          Sets the current record's "CarreraCurs" value
+ * @method Assignatura         setSfGuardUser()          Sets the current record's "sfGuardUser" collection
  * @method Assignatura         setSessions()             Sets the current record's "Sessions" collection
  * @method Assignatura         setUsuariTeAssignatures() Sets the current record's "UsuariTeAssignatures" collection
  * 
@@ -50,6 +53,11 @@ abstract class BaseAssignatura extends sfDoctrineRecord
              'local' => 'carrera_curs_id',
              'foreign' => 'id',
              'onDelete' => 'CASCADE'));
+
+        $this->hasMany('sfGuardUser', array(
+             'refClass' => 'UsuariTeAssignatura',
+             'local' => 'assignatura_id',
+             'foreign' => 'usuari_id'));
 
         $this->hasMany('Sessio as Sessions', array(
              'local' => 'id',
