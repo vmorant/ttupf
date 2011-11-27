@@ -1,0 +1,111 @@
+
+
+
+
+/* CAPǇALERA */
+
+#superior {
+	background-color: #000;
+	background-image: url(/esup/_img/cstop_fons.gif);
+	background-repeat : repeat;
+	height: 108px;
+	}
+#superior_izquierda {
+	position: absolute;
+	width:207px;
+	}
+#superior_derecha { 
+	
+	   margin-top: 0px;
+	
+        
+    	   float:right;
+	    
+	}	
+
+
+#menu_navegacion{
+}
+
+.menu_separador{
+	color: #666666;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-style: normal;
+}
+
+#menu_navegacion_opcions {
+	margin-right: 10px;
+        display: inline;	
+	
+           
+  	      margin-top: -21px;
+           
+	  
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 0.7em;
+	font-style: normal;
+	float:right;
+}
+
+#menu_navegacion_opcions_esquerra {
+	
+	    margin-top: -16px; 
+	    margin-left: 210px; 
+	 	    
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 0.7em;
+	font-style: normal;
+	position:absolute;
+}
+
+#menu_navegacion_opcions a:link, 
+#menu_navegacion_opcions a:visited, 
+#menu_navegacion_opcions_esquerra a:link, 
+#menu_navegacion_opcions_esquerra a:visited {	
+	color: white;
+	text-decoration: none
+}
+
+#menu_navegacion_opcions a:hover,#menu_navegacion_opcions_esquerra a:hover {	
+	text-decoration:underline;
+}
+
+/* CONTINGUT */
+#navegacion{  
+	width:150px;
+	Float:left;  
+}
+
+#navegacion a:hover, #navegacion a:focus, #navegacion a.rollover, #navegacion a.rollover:visited {
+	background:#ffefcf;
+	color:#806020;
+}
+
+#navegacion a:link, #navegacion a:visited {	
+	color: black;
+}
+
+#navegacion ul{
+	padding:0;
+	margin:0;
+}
+
+#navegacion li{
+	list-style-type:none;
+}
+#principal{
+	background-color: #F3F3F3;
+	width:100%
+}
+#contenido{  
+	background-color: white;
+	margin-left:180px;
+	margin-right:10px;
+	margin-bottom:10px;
+	border-left:1px solid #DDDDDD;
+	padding-left:12px;
+	text-align:justify
+}
+
+form { margin: 0px 0px 0px 0px }

@@ -1,0 +1,27 @@
+/* --------------------------------------------------------------------------------- PRINT */ 
+
+body {background: #fff; background-image:none; font-family: Verdana, Arial, Helvetica, sans-serif; font-size:  14pt;}
+#Izquierda, #Derecha, #superior_izquierda, #superior_derecha, #menu_navegacion, #peu_plana { display:none; background: #fff;}
+html>body #Central { margin-left:0px;  margin-top: 0px; background: #fff;}
+#Central, #Madre { 
+	margin:0px; 
+	padding:0px; 
+	width: 100%; /* Para todos los Browsers */
+	#width: 100%; /*Para Internet Explorer */
+	_width: 80%; /* Para Internet Explorer 6 */
+	background: #fff; 
+}
+#caixa1004 {
+        background: #fff;
+}
+
+#superior {
+	background-image: url(http://www.upf.edu/cms/opencms_resources/upf/_img/marca_bn.jpg);
+	background-color: #FFF;
+	background-position: top left; 
+	background-repeat: no-repeat; 
+	width:280px;
+	height:85px;
+}
+
+div.breadcrumb			{ visibility:hidden; }

@@ -1,0 +1,32 @@
+/* --------------------------------------------------------------------------------- PRINT 
+
+body {background: #fff; background-image:none; font-family: Verdana, Arial, Helvetica, sans-serif; font-size:  14pt;}
+#Central, #Madre { 
+	margin:0px; 
+	padding:0px; 
+	background: #FFF;	
+}
+
+#Izquierda {
+	display:none;
+	visible:hidden;
+	background: #FFF;
+}
+
+html > body #Central {
+    margin-left: 0px;
+}
+
+#Izquierda, #Derecha, #superior_izquierda, #superior_derecha, #menu_navegacion, #peu_plana { display:none; background: #fff;}
+
+
+#superior {
+	background-image: url(http://www.upf.edu/universitat/_img/marca2005.gif);
+	background-color: #FFF;
+	background-position: top left; 
+	background-repeat: no-repeat; 
+	width:280px;
+	height:85px;
+}
+
+DESHABILITAT */ 
