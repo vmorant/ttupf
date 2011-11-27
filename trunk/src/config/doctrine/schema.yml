@@ -14,6 +14,21 @@ Assignatura:
     carrera_curs_id:  { type: integer, notnull: true }
   relations:
     CarreraCurs:      { onDelete: CASCADE, local: carrera_curs_id, foreign: id, foreignAlias: Assignatures }
+# From http://melikedev.com/2009/12/09/symfony-w-doctrine-saving-many-to-many-mm-relationships/
+    sfGuardUser:
+      class: sfGuardUser
+      refClass: UsuariTeAssignatura # Allows referencing Users from Assignatura object
+      local: assignatura_id # Refers to current object, i.e. Assignatura
+      foreign: usuari_id # Object to link to from Assignatura, i.e. User
+
+sfGuardUser:
+  relations:
+# From http://melikedev.com/2009/12/09/symfony-w-doctrine-saving-many-to-many-mm-relationships/
+   Assignatura: 
+      class: Assignatura
+      refClass: UsuariTeAssignatura # Allows referencing Assignatura from User object
+      local: usuari_id # Refers to current object, i.e. User 
+      foreign: assignatura_id # Object to link to from User, i.e., Assignatura
     
 Sessio:
   columns:

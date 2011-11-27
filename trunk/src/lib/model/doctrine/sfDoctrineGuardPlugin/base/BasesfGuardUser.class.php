@@ -17,6 +17,7 @@
  * @property timestamp $last_login
  * @property Doctrine_Collection $Groups
  * @property Doctrine_Collection $Permissions
+ * @property Doctrine_Collection $Assignatura
  * @property Doctrine_Collection $sfGuardUserPermission
  * @property Doctrine_Collection $sfGuardUserGroup
  * @property sfGuardRememberKey $RememberKeys
@@ -36,6 +37,7 @@
  * @method timestamp             getLastLogin()             Returns the current record's "last_login" value
  * @method Doctrine_Collection   getGroups()                Returns the current record's "Groups" collection
  * @method Doctrine_Collection   getPermissions()           Returns the current record's "Permissions" collection
+ * @method Doctrine_Collection   getAssignatura()           Returns the current record's "Assignatura" collection
  * @method Doctrine_Collection   getSfGuardUserPermission() Returns the current record's "sfGuardUserPermission" collection
  * @method Doctrine_Collection   getSfGuardUserGroup()      Returns the current record's "sfGuardUserGroup" collection
  * @method sfGuardRememberKey    getRememberKeys()          Returns the current record's "RememberKeys" value
@@ -54,6 +56,7 @@
  * @method sfGuardUser           setLastLogin()             Sets the current record's "last_login" value
  * @method sfGuardUser           setGroups()                Sets the current record's "Groups" collection
  * @method sfGuardUser           setPermissions()           Sets the current record's "Permissions" collection
+ * @method sfGuardUser           setAssignatura()           Sets the current record's "Assignatura" collection
  * @method sfGuardUser           setSfGuardUserPermission() Sets the current record's "sfGuardUserPermission" collection
  * @method sfGuardUser           setSfGuardUserGroup()      Sets the current record's "sfGuardUserGroup" collection
  * @method sfGuardUser           setRememberKeys()          Sets the current record's "RememberKeys" value
@@ -138,6 +141,11 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'refClass' => 'sfGuardUserPermission',
              'local' => 'user_id',
              'foreign' => 'permission_id'));
+
+        $this->hasMany('Assignatura', array(
+             'refClass' => 'UsuariTeAssignatura',
+             'local' => 'usuari_id',
+             'foreign' => 'assignatura_id'));
 
         $this->hasMany('sfGuardUserPermission', array(
              'local' => 'id',

@@ -13,13 +13,15 @@ abstract class BaseAssignaturaFormFilter extends BaseFormFilterDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'nom'             => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'carrera_curs_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('CarreraCurs'), 'add_empty' => true)),
+      'nom'                => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'carrera_curs_id'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('CarreraCurs'), 'add_empty' => true)),
+      'sf_guard_user_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser')),
     ));
 
     $this->setValidators(array(
-      'nom'             => new sfValidatorPass(array('required' => false)),
-      'carrera_curs_id' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('CarreraCurs'), 'column' => 'id')),
+      'nom'                => new sfValidatorPass(array('required' => false)),
+      'carrera_curs_id'    => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('CarreraCurs'), 'column' => 'id')),
+      'sf_guard_user_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('assignatura_filters[%s]');
@@ -31,6 +33,24 @@ abstract class BaseAssignaturaFormFilter extends BaseFormFilterDoctrine
     parent::setup();
   }
 
+  public function addSfGuardUserListColumnQuery(Doctrine_Query $query, $field, $values)
+  {
+    if (!is_array($values))
+    {
+      $values = array($values);
+    }
+
+    if (!count($values))
+    {
+      return;
+    }
+
+    $query
+      ->leftJoin($query->getRootAlias().'.UsuariTeAssignatura UsuariTeAssignatura')
+      ->andWhereIn('UsuariTeAssignatura.usuari_id', $values)
+    ;
+  }
+
   public function getModelName()
   {
     return 'Assignatura';
@@ -39,9 +59,10 @@ abstract class BaseAssignaturaFormFilter extends BaseFormFilterDoctrine
   public function getFields()
   {
     return array(
-      'id'              => 'Number',
-      'nom'             => 'Text',
-      'carrera_curs_id' => 'ForeignKey',
+      'id'                 => 'Number',
+      'nom'                => 'Text',
+      'carrera_curs_id'    => 'ForeignKey',
+      'sf_guard_user_list' => 'ManyKey',
     );
   }
 }
