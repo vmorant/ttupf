@@ -1,20 +1,20 @@
 Contingut:
   contacte:
-    nom:  Contacte
+    nom:  Contacta
     action_part: $this->form = new sfForm(); $this->form->setWidgets(array('nom' => new sfWidgetFormInputText(),'email' => new sfWidgetFormInputText(array('default' => 'me@example.com')), 'assumpte' => new sfWidgetFormChoice(array('choices' => array('Subject A', 'Subject B', 'Subject C'))), 'missatge' => new sfWidgetFormTextarea())); $str = "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus molestie nisl ante. Nulla non lectus et nulla consequat faucibus. Proin vulputate orci in lorem egestas a sollicitudin diam lacinia. Integer quis risus a erat</p><p><table>".$this->form."<tr><td colspan='2'><input type='submit' /></td></tr></table></form></p>"; $this->contingut_actual->setViewPart($str); $this->contingut_actual->save();
     es_contingut: true
 
   quisom:
     nom:  Qui Som?
-    view_part: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus molestie nisl ante. Nulla non lectus et nulla consequat faucibus. Proin vulputate orci in lorem egestas a sollicitudin diam lacinia. Integer quis risus a erat scelerisque viverra non eget leo. In convallis metus ac sapien commodo blandit. Maecenas id libero sem, id aliquet dui. Donec ac augue massa. Nunc sagittis nulla in ante sagittis tincidunt. Proin sit amet nisl feugiat magna adipiscing dapibus. Phasellus et lorem elit. Praesent in leo mauris. Suspendisse potenti. Proin at magna ipsum. Donec suscipit libero leo. Maecenas nisl metus, tristique ultricies malesuada in, rhoncus at sapien.</p>
+    view_part: <p>Som dos estudiants d'informàtica de la UPF amb greus problemes de memòria pel que fa a grups de seminari i pràctiques. Farts de perdre el temps comprovant quins eren els nostres grups vam decidir trubar una solució.</p>
     es_contingut: true
     
   ajuda:
     nom:  Ajuda
-    view_part: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus molestie nisl ante. Nulla non lectus et nulla consequat faucibus. Proin vulputate orci in lorem egestas a sollicitudin diam lacinia. Integer quis risus a erat scelerisque viverra non eget leo. In convallis metus ac sapien commodo blandit. Maecenas id libero sem, id aliquet dui. Donec ac augue massa. Nunc sagittis nulla in ante sagittis tincidunt. Proin sit amet nisl feugiat magna adipiscing dapibus. Phasellus et lorem elit. Praesent in leo mauris. Suspendisse potenti. Proin at magna ipsum. Donec suscipit libero leo. Maecenas nisl metus, tristique ultricies malesuada in, rhoncus at sapien.</p>
+    view_part: <p>Estem en fase de proves encara, si trobes algun error diga'ns-ho a través d'<a href="http://code.google.com/p/ttupf/issues/entry">aquest formulari</a></p>
     es_contingut: true
     
   index:
     nom:  Index
-    view_part: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus molestie nisl ante. Nulla non lectus et nulla consequat faucibus. Proin vulputate orci in lorem egestas a sollicitudin diam lacinia. Integer quis risus a erat scelerisque viverra non eget leo. In convallis metus ac sapien commodo blandit. Maecenas id libero sem, id aliquet dui. Donec ac augue massa. Nunc sagittis nulla in ante sagittis tincidunt. Proin sit amet nisl feugiat magna adipiscing dapibus. Phasellus et lorem elit. Praesent in leo mauris. Suspendisse potenti. Proin at magna ipsum. Donec suscipit libero leo. Maecenas nisl metus, tristique ultricies malesuada in, rhoncus at sapien.</p>
+    view_part: <p>ttupf és un servei de personalització d'horaris per als estudiants de l'Escola Superior Politècnica de la Pompeu Fabra.</p><p>Un cop et registris podrás configurar el teu horari amb les assignatures que estàs cursant (de diversos cursos inclús), indicant els grups de teoria, pràctiques i seminaris. Quan estigui tot configurat veuràs només les classes que et toquen a tu, ja siguin de teoria, de pràctiques o de seminaris.</p>
     es_contingut: false
