@@ -1,0 +1,33 @@
+
+
+
+
+div.element {
+	padding-top:0;
+}
+
+.ocms_de_norm p {
+	margin-top:0;
+}
+
+.caixa_noticies p, .TextNoticia, .TextNoticia li, .TextNoticia p {
+	line-height: 1.9em;
+	padding-left: 8px;
+	padding-right: 4px;
+	color: #000000;
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-size: 0.75em;
+	font-weight: normal;
+}
+
+html > body #Madre {
+    min-height: 1124px;
+}
+
+html > body #Central {
+    min-height: 1124px;
+}
+
+html > body #Izquierda, #Derecha {
+    min-height: 1124px;
+}

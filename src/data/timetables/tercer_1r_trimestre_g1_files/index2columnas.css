@@ -1,0 +1,80 @@
+
+
+
+
+
+
+
+#Madre, #Central, #Izquierda, #Derecha { height:100%; }
+
+#Madre {  background:transparent; }
+
+   #Izquierda { position:absolute; top:0; left:0; width:160px; background-color: #F4F4F4; }
+
+#Central { margin-left:164px; }
+#Central_ariadna { margin-left:8px; }
+#Central_titol { margin-left:8px; }
+html>body #Central { margin-left:164px;  }
+#Derecha { position:absolute; top:0; right:0; width:180px; }
+
+#Madre,#Central,#Izquierda, #Derecha { height:100%; }
+html>body #Izquierda, #Derecha { height:100%; }
+html>body #Madre, #Central {  height:inherit; }
+html>body #Central { min-height:368px; }
+#Actualitat { text-align:center; display:block;}
+#Data_modificacio {  text-align:center; display:block; width:100%; float:left; font-size: 0.8em; color: #999 ; text-decoration: none; font-weight: normal; }
+#cajita_01 { float:left; width:160px; }
+#cajita_02 { float:left; width:160px; }
+#peu_plana { text-align:center; display:block; position:relative;}
+#peu_print { text-align:center; display:block; text-align:right; background-color: #F1F1F1; }
+
+
+/* ------------------------------------------------------------- Canvis per pintar a 1004 */
+#caixa1004 {
+position:relative;
+height:100%;
+width:1006px;
+margin:0 auto;
+
+background: #F4F4F4 url(/cms/opencms_resources/upf/_img/fons_menu_blanc.gif) repeat-y 160px 0;
+}
+
+
+   #Izquierda, #Derecha { margin-top:108px; }
+   html>body #Izquierda, #Derecha { margin-top:0px; }
+
+html>body #Madre { position:relative; }
+/* -------------------------------------------------------------- END Canvis per pintar a 1004 */
+
+
+html, body { height: 100%; }                           /* FF 2.0 ok */
+#Central, #Madre, #caixa1004 { height: auto; min-height:100%;}
+#Izquierda,#Derecha {
+       height:1024px;
+       min-height:1024px;
+} 
+
+
+
+.cssbox_body strong {
+	color: #e75f02;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:12px;
+}
+
+.cssbox, .cssbox_body, .cssbox_head, .cssbox_head h2{ background: transparent url(/cms/opencms_resources/upf/_img/contacte_fons.png) no-repeat bottom right} 
+.cssbox{ width:193px !important;width: 193px}
+.cssbox_head{background-position:top right;margin-right:-0px;padding-right:0px;}
+.cssbox_head h2{ background-position:top left; margin:0; font-size:12px;padding:15px 15px 10px 15px;text-align:left;
+ border:0; height:auto !important; height:1%} 
+.cssbox_body{ background-position:bottom left; margin-right:0px; padding:10px 5px 10px 15px;text-align:left;font-size:9px;} 
+
+
+
+.cssboxample, .cssboxample_body, .cssboxample_head, .cssboxample_head h2{ background: transparent url(/cms/opencms_resources/upf/_img/contacte_fonsample.png) no-repeat bottom right} 
+.cssboxample{ width:786px !important; width: 750px; padding-right:15px; margin:0px;}  
+.cssboxample_head{background-position:top right; margin-right:-15px; padding-right:40px} 
+.cssboxample_head h2{ background-position:top left; margin:0; border:0; padding:25px 0 15px 40px; height:auto !important; height:1%}  
+.cssboxample_body{ background-position:bottom left; margin-right:25px; font-size:9px; padding:15px 0 15px 40px} 
+.cssboxample_head h2 {magin-bottom:0px; padding-bottom:0px;}
+

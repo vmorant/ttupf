@@ -1,0 +1,439 @@
+
+
+
+
+
+
+
+
+/* ------------------------------------------------------- Fil Ariadna -- */
+div.breadcrumb			{ margin: 8px 0px; }
+span.breadcrumb			{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 0.7em; color: #000000; text-decoration: none;  }
+a.breadcrumb,a.breadcrumb:visited { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 0.7em; color: #999 ; text-decoration: none; font-weight: normal; }
+a.breadcrumb:hover { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 0.7em; color: #FF0000; text-decoration: underline; font-weight: normal; }
+
+/* ------------------------------------------------------- Contenido editable -- */
+div.element {
+    vertical-align: top;
+    font-size:  0.9em;
+    padding: 10px;
+}
+
+/* ------------------------------------------------------- Estilos añdidos de intiepc.css */
+
+a,a:link	{	color: #990000; font-weight: normal; text-decoration: underline; }
+a:visited	{	color: #990000; text-decoration: underline; }
+a:hover		{	color: #FF0000; text-decoration: underline;; }
+a:active	{	color: #990000; text-decoration: underline; }
+
+img  { border: 0 }
+b    { font-weight: bold}
+dd   { font-family: Verdana, Arial, Helvetica, sans-serif; font-size:  0.9em}
+div  { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 100%}
+body { font-family: Verdana, Arial, Helvetica, sans-serif; font-size:  0.9em; margin-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px }
+form { margin: 0px 0px 0px 0px }
+blockquote {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size:  100%}
+table {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size:  100%}
+td {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 100%}
+tr {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 100%}
+th {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 100%}
+dl {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 100%}
+dt {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 100%}
+ol {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 100%}
+h1 {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 150%;
+    font-style: normal;
+    color: #000000;
+    font-weight: lighter;
+}
+
+h2 {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 130%;
+    font-style: normal;
+    color: #000000;
+    font-weight: lighter;
+}
+h3 {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 120%;
+    font-style: normal;
+    color: #000000;
+    font-weight: lighter;
+}
+h4 {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 110%;
+    font-style: normal;
+    color: #000000;
+    font-weight: lighter;
+}
+h5 {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 105%;
+    font-style: normal;
+    color: #000000;
+    font-weight: lighter;
+}
+.text {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size:  0.9em; text-decoration: none; padding: 10px; }
+
+/* Sumaris */
+
+.sumari {
+    line-height: 2.5em;
+    padding-left: 10px;
+    list-style-type: none;
+    list-style-image: url(/img/fletxa.gif);
+}
+
+.sumari_contenidor {
+    width: 100%;
+}
+
+#sumari_2_columnes {
+    float: left;
+}
+
+#sumari_2_columnes_item {
+    float: left;
+    width: 50%;
+    text-align: left;
+    padding-left:0px!important; /* (solo para firefox) */
+    padding-left:10px;          /* (solo para IE 6 siempre y cuando este el de firefox aplicado arriba de este) */
+}
+
+*:first-child+html #sumari_2_columnes_item { padding-left: 10px; } /* (solo para IE 7) */
+#sumari_2_columnes_item { padding-left /*\**/: 0px\9 } /* (solo para IE 8) */
+#sumari_2_columnes_item { padding-left /*\**/: 10px\9; } /* (solo para IE 7) */
+
+.sumari_fons {
+    background-color:#f6f6f6;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%;
+}
+
+.sumari_resum {
+    margin-bottom: 10px;
+    background: none;
+    text-align: left;
+}
+
+.sumari_llista {
+    width: 100%;
+}
+
+/* Caixes de contingut*/
+.caixa_fons_border {
+    display:block;
+    border-style: ridge;
+    background-color:#F3F3F3;
+    margin-top: 1pt;
+    padding: 10pt;
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;
+}
+.caixa_fons {
+    display:block;
+    background-color:#F3F3F3;
+    margin-top: 1pt;
+    padding: 10pt;
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;
+}
+.caixa_border{
+    display:block;
+    border-style: ridge;
+    margin-top: 1pt;
+    padding: 10pt;
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;
+}
+
+/* Llista notícia */
+.llista_noticia_ul {
+    margin-bottom: 0px;
+    margin-top: 0px;
+
+}
+.llista_noticia {
+    margin-left: 10px;
+    line-height: 1.5em;
+    padding-left: 5px;
+    padding-bottom: 0px;
+    list-style-type: none;
+    list-style-image: url(/img/fletxa.gif);
+    margin-bottom: -15px;
+}
+
+/* Imatges alineació */
+.img_dreta {
+    float:right;
+    margin:10pt;
+    border:0pt
+}
+.img_esquerra {
+    float:left;
+    margin:10pt;
+    border:0pt;
+}
+
+.img_centre {
+    display: block;
+    margin: auto;
+}
+
+/* Taules */
+
+.taucap {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 100%; font-weight: bold; color: #FFFFFF; background-color: #999999}
+.tautit { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 100%; color: #FFFFFF; background-color: #990000; font-weight: bold}
+.taunorm {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 100%; background-color: #DFDFDF}
+.taunorm2 { font-family: Verdana, Arial, Helvetica, sans-serif; background-color: #F3F3F3; font-size: 100%}
+.copyright {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size:  0.9em; font-style: italic}
+.caption {  font-family: Verdana, Arial, Helvetica, sans-serif; font-style: italic; font-size: 100%; font-weight: bold}
+.taunorm-matricula { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 100%; background-color: #EFE3DE}
+.taucap-matricula { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 100%; font-weight: bold; color: #FFFFFF; background-color: #FF7635 }
+
+p {     font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 100%;}
+
+/* Botons */
+
+#campusbutton {
+    font-weight: bold; font-size: 10px; text-transform: uppercase; font-family: Verdana, Arial, Helvetica, sans-serif; text-align: center
+}
+#campusbutton A {
+    border-right: #990033 2px solid; padding-right: 2px; border-top: #CC0000 1px solid; display: inline; padding-left: 2px; padding-bottom: 2px; border-left: #CC0000 1px solid; color: white; padding-top: 2px; border-bottom: #990033 2px solid; background-color: #990000; text-decoration: none
+}
+#campusbutton A:hover {
+    border-right: #990033 2px solid; border-top: #CC0000 1px solid; border-left: #CC0000 1px solid; color: #FFFFFF; border-bottom: #990033 2px solid; background-color: #CC0000}
+
+#menu_navegacion_opcions form img{                            /* Botó cercador */
+                                                              margin-top:3px;
+}
+
+/* Altres */
+
+.linkunderlined:link	{	text-decoration: none;}
+.linkunderlined:visited	{	text-decoration: none;}
+.linkunderlined:hover	{	text-decoration: none;}
+.linkunderlined:active	{	text-decoration: none;}
+
+cite {  font-family: Verdana, Arial, Helvetica, sans-serif; font-style: italic; font-size: 100%; font-weight: bold}
+
+
+/* --------------------------------------------------------------- Peu plana */
+
+.linkpeu {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 0.9em; color:white; }
+.linkpeu a:link,
+.linkpeu a:visited {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 0.9em; color:white; text-decoration:none; }
+.linkpeu a:hover {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 0.9em; color:white; text-decoration:underline; }
+.copyright {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size:  0.9em; font-style: italic }
+.adresapeu {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size:  0.9em; color:white; }
+div.peu_vermell {
+    border:1px solid #990000;
+    border-top-color: #990000;
+    border-right-color: #fff;
+    border-left-color: #fff;
+    border-bottom-color: #fff;
+    background-color: #fff;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size:  0.9em;
+    color:#333;
+    /* height:30px; */
+    padding-top: 10px;
+}
+div.peu_plana { background-color: #fff; }
+div.peu_negre { font-family: Verdana, Arial, Helvetica, sans-serif; color:white; background-color: #000000; }
+div.peu_img { height:30px; float:left; padding: 0 0 0 10px;}
+
+/*--------------------------------------------------------------- Caixes Home */
+
+div.caixa_pestania_enoticies {
+    width: 98%;
+    background-color: #EBF6F6;
+    font-family: Verdana, Arial, Helvetica, sans-serif; color:#336666; text-decoration:none;
+}
+div.caixa_pestania_actualitat {
+    padding: 2px 20px 4px 5px;
+    background-image: url(/cms/opencms_resources/upf/_img/caixa_cantonada_vermell_verd.gif);
+    background-color: #990000;
+    background-position: top right;
+    background-repeat: no-repeat;
+    font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 0.8em; color:white; text-decoration:none;
+    font-weight: bold;
+    display:inline;
+}
+div.caixa_pestania {
+    padding: 2px 20px 0px 5px;
+    background-image: url(/cms/opencms_resources/upf/_img/caixa_cantonada_vermell.gif);
+    background-color: #990000;
+    background-position: top right;
+    background-repeat: no-repeat;
+    font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 0.8em; color:white; text-decoration:none;
+    font-weight: bold;
+    display:inline;
+}
+div.caixa_fondo {
+    width: 98%;
+    background-image: url(/cms/opencms_resources/upf/_img/caixa_fons.gif); /* fondo */
+    background-repeat: repeat;
+}
+div.caixa_blanc_fondo {
+    width: 98%;
+    background-image: url(/cms/opencms_resources/upf/_img/caixa_blanc_fons.gif); /* fondo */
+    background-repeat: repeat;
+}
+
+div.caixa_esquerra {
+    background-image: url(/cms/opencms_resources/upf/_img/caixa_esquerra.gif); /* borde izquierda */
+    background-repeat: repeat-y;
+}
+div.caixa_blanc_esquerra {
+    background-image: url(/cms/opencms_resources/upf/_img/caixa_blanc_esquerra.gif); /* borde izquierda */
+    background-repeat: repeat-y;
+}
+
+div.caixa_top {
+    /* width: 100%; */
+    background-image: url(/cms/opencms_resources/upf/_img/caixa_top_peu.gif); /* top */
+    background-repeat: repeat-x;
+}
+div.caixa_dreta {
+    background-image: url(/cms/opencms_resources/upf/_img/caixa_dreta.gif); /* borde derecha */
+    background-position: top right;
+    background-repeat: repeat-y;
+}
+div.caixa_blanc_dreta {
+    background-image: url(/cms/opencms_resources/upf/_img/caixa_dreta.gif); /* borde derecha */
+    background-position: top right;
+    background-repeat: repeat-y;
+}
+div.caixa_peu {
+    background-image: url(/cms/opencms_resources/upf/_img/caixa_top_peu.gif); /* pie */
+    background-position: bottom left;
+    background-repeat: repeat-x;
+}
+div.caixa_top_derecha {
+    background-image: url(/cms/opencms_resources/upf/_img/caixa_cantonada_gris.gif); /* derecha top */
+    background-position: top right;
+    background-repeat: no-repeat;
+}
+div.caixa_blanc_top_derecha {
+    background-image: url(/cms/opencms_resources/upf/_img/caixa_blanc_cantonada_gris.gif); /* derecha top */
+    background-position: top right;
+    background-repeat: no-repeat;
+}
+div.caixa_top_derecha_cuadrat {
+    background-image: url(/cms/opencms_resources/upf/_img/caixa_top_peu.gif); /* derecha top cantonada cuadrada */
+    background-position: top right;
+    background-repeat: no-repeat;
+}
+
+div.caixa_peu_dreta {
+    background-image: url(/cms/opencms_resources/upf/_img/caixa_top_peu.gif); /* derecha pie */
+    background-position: bottom right;
+    background-repeat: no-repeat;
+    padding: 5px 15px 15px 5px;
+}
+div.caixa_contingut {
+    width: 100%;
+}
+
+/*-------------------------------------------------------------  Caixes Links */
+
+.caixa_link { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 0.85em; color: #336666; text-decoration: none; line-height: 20px;}
+.caixa_link a:link { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 0.85em; color: #336666; text-decoration: underline; }
+.caixa_link a:visited { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 0.85em; color: #336666; text-decoration: underline; }
+.caixa_link a:hover { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 0.85em; color: #CC0000; text-decoration: underline; }
+
+/*-------------------------------------------------------------  Notí­cies Home */
+
+.TitolNoticia, .TitolNoticiaa:link, .TitolNoticia a:visited {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 100%;
+    color: #336666;
+    font-weight: bold;
+}
+
+.TitolNoticia a:hover { color: #CC0000; }
+
+.TextNoticia {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 0.75em;
+    color: #000000;
+    font-weight: normal;}
+
+/*--------------------------------------------------------------- e-noticies & noticies portada home upf */
+
+.foto_esquerra {float:left; padding: 3px 13px 3px 3px;}
+.foto_dreta{float:right; padding: 3px 13px 3px 3px;}
+.noticia_foto{float:left;width:100%;}
+
+
+
+/*-------------------------------------------------------------  Fitxa persona */
+
+.fitxa_caixa {
+    width:80%;
+    min-height:120px;
+    height:120px;
+    background-image: url(/cms/opencms_resources/upf/_img/fons_llista_fitxa_personal.jpg);
+}
+
+#fitxa_persona_2_columnes {
+    float:left;
+    width:50%;
+}
+
+.fitxa_caixa_sensefons {
+    width:80%;
+    min-height:220px;
+    /*height:220px;*/
+}
+.fitxa_foto { float:left; width:100px; z-index:1; padding-left:10px;}
+.fitxa_dades {  }
+.fitxa_contingut { float:left; width:100%; }
+
+/*-------------------------------------------------------------  Titulacions */
+.titulacio_llista {
+    list-style:none;
+    background-color:#DADADA;
+    padding: 4pt;
+    margin-bottom:5pt;
+    margin-left:5pt;
+    margin-top:0pt;
+}
+
+.titulacio_llista_separador {
+    list-style:none;
+    background-color:#990000;
+    color:#FFFFFF;
+    padding: 4pt;
+    margin-bottom:5pt;
+    margin-left:5pt;
+    margin-top:0pt;
+}
+
+div.titulacio_menu {
+    overflow: hidden;
+    float:right;
+    width:250px;
+    margin-right: 20px;
+}
+
+/*-------------------------------------------------------------  Flash*/
+div.imatge_impacte{
+    width:98%;
+    overflow: hidden;
+    clear:both;
+}
+
+body
+{
+    background-image: url(/cms/opencms_resources/upf/_img/body_fons2.gif);
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    background-position: top center;
+}
