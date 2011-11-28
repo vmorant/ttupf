@@ -10,6 +10,6 @@ Opcio:
     action: login
       
   registrar:
-    nom: Registre-se
+    nom: Registra't
     module: user
     action: new
