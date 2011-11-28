@@ -106,3 +106,15 @@ CarreraCurs:
     url_horari: http://www.upf.edu/esup/docencia/horaris/graus11_12/grau-eng_audiovisuals/primer_trimestre/tercer/optatives.html
     grup_teoria: 1
     curs: 3
+
+  19_EI_4C_1T_1G:
+    nom: Enginyeria en Informàtica 4t Curs
+    url_horari: http://www.upf.edu/esup/docencia/horaris/Plans_Antics_11_12/ei/primer_trimestre/quart_curs.html
+    grup_teoria: 1
+    curs: 4
+
+  20_EI_4C_1T_OPT:
+    nom: Enginyeria en Informàtica 4t Curs - Optatives
+    url_horari: http://www.upf.edu/esup/docencia/horaris/Plans_Antics_11_12/ei/primer_trimestre/optatives.html
+    grup_teoria: 1
+    curs: 4
