@@ -112,9 +112,3 @@ CarreraCurs:
     url_horari: http://www.upf.edu/esup/docencia/horaris/Plans_Antics_11_12/ei/primer_trimestre/quart_curs.html
     grup_teoria: 1
     curs: 4
-
-  20_EI_4C_1T_OPT:
-    nom: Enginyeria en Informàtica 4t Curs - Optatives
-    url_horari: http://www.upf.edu/esup/docencia/horaris/Plans_Antics_11_12/ei/primer_trimestre/optatives.html
-    grup_teoria: 1
-    curs: 4
