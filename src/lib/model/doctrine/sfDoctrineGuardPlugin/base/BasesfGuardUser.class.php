@@ -23,46 +23,61 @@
  * @property sfGuardRememberKey $RememberKeys
  * @property sfGuardForgotPassword $ForgotPassword
  * @property sfGuardUserProfile $Profile
+ * @property Doctrine_Collection $Applications
+ * @property Doctrine_Collection $sfOauthServerRequestToken
+ * @property Doctrine_Collection $sfOauthServerAccessToken
+ * @property Doctrine_Collection $sfOauthServerUserScope
+ * @property Doctrine_Collection $sfOauthServerDeveloper
  * @property Doctrine_Collection $UsuariTeAssignatures
  * 
- * @method string                getFirstName()             Returns the current record's "first_name" value
- * @method string                getLastName()              Returns the current record's "last_name" value
- * @method string                getEmailAddress()          Returns the current record's "email_address" value
- * @method string                getUsername()              Returns the current record's "username" value
- * @method string                getAlgorithm()             Returns the current record's "algorithm" value
- * @method string                getSalt()                  Returns the current record's "salt" value
- * @method string                getPassword()              Returns the current record's "password" value
- * @method boolean               getIsActive()              Returns the current record's "is_active" value
- * @method boolean               getIsSuperAdmin()          Returns the current record's "is_super_admin" value
- * @method timestamp             getLastLogin()             Returns the current record's "last_login" value
- * @method Doctrine_Collection   getGroups()                Returns the current record's "Groups" collection
- * @method Doctrine_Collection   getPermissions()           Returns the current record's "Permissions" collection
- * @method Doctrine_Collection   getAssignatura()           Returns the current record's "Assignatura" collection
- * @method Doctrine_Collection   getSfGuardUserPermission() Returns the current record's "sfGuardUserPermission" collection
- * @method Doctrine_Collection   getSfGuardUserGroup()      Returns the current record's "sfGuardUserGroup" collection
- * @method sfGuardRememberKey    getRememberKeys()          Returns the current record's "RememberKeys" value
- * @method sfGuardForgotPassword getForgotPassword()        Returns the current record's "ForgotPassword" value
- * @method sfGuardUserProfile    getProfile()               Returns the current record's "Profile" value
- * @method Doctrine_Collection   getUsuariTeAssignatures()  Returns the current record's "UsuariTeAssignatures" collection
- * @method sfGuardUser           setFirstName()             Sets the current record's "first_name" value
- * @method sfGuardUser           setLastName()              Sets the current record's "last_name" value
- * @method sfGuardUser           setEmailAddress()          Sets the current record's "email_address" value
- * @method sfGuardUser           setUsername()              Sets the current record's "username" value
- * @method sfGuardUser           setAlgorithm()             Sets the current record's "algorithm" value
- * @method sfGuardUser           setSalt()                  Sets the current record's "salt" value
- * @method sfGuardUser           setPassword()              Sets the current record's "password" value
- * @method sfGuardUser           setIsActive()              Sets the current record's "is_active" value
- * @method sfGuardUser           setIsSuperAdmin()          Sets the current record's "is_super_admin" value
- * @method sfGuardUser           setLastLogin()             Sets the current record's "last_login" value
- * @method sfGuardUser           setGroups()                Sets the current record's "Groups" collection
- * @method sfGuardUser           setPermissions()           Sets the current record's "Permissions" collection
- * @method sfGuardUser           setAssignatura()           Sets the current record's "Assignatura" collection
- * @method sfGuardUser           setSfGuardUserPermission() Sets the current record's "sfGuardUserPermission" collection
- * @method sfGuardUser           setSfGuardUserGroup()      Sets the current record's "sfGuardUserGroup" collection
- * @method sfGuardUser           setRememberKeys()          Sets the current record's "RememberKeys" value
- * @method sfGuardUser           setForgotPassword()        Sets the current record's "ForgotPassword" value
- * @method sfGuardUser           setProfile()               Sets the current record's "Profile" value
- * @method sfGuardUser           setUsuariTeAssignatures()  Sets the current record's "UsuariTeAssignatures" collection
+ * @method string                getFirstName()                 Returns the current record's "first_name" value
+ * @method string                getLastName()                  Returns the current record's "last_name" value
+ * @method string                getEmailAddress()              Returns the current record's "email_address" value
+ * @method string                getUsername()                  Returns the current record's "username" value
+ * @method string                getAlgorithm()                 Returns the current record's "algorithm" value
+ * @method string                getSalt()                      Returns the current record's "salt" value
+ * @method string                getPassword()                  Returns the current record's "password" value
+ * @method boolean               getIsActive()                  Returns the current record's "is_active" value
+ * @method boolean               getIsSuperAdmin()              Returns the current record's "is_super_admin" value
+ * @method timestamp             getLastLogin()                 Returns the current record's "last_login" value
+ * @method Doctrine_Collection   getGroups()                    Returns the current record's "Groups" collection
+ * @method Doctrine_Collection   getPermissions()               Returns the current record's "Permissions" collection
+ * @method Doctrine_Collection   getAssignatura()               Returns the current record's "Assignatura" collection
+ * @method Doctrine_Collection   getSfGuardUserPermission()     Returns the current record's "sfGuardUserPermission" collection
+ * @method Doctrine_Collection   getSfGuardUserGroup()          Returns the current record's "sfGuardUserGroup" collection
+ * @method sfGuardRememberKey    getRememberKeys()              Returns the current record's "RememberKeys" value
+ * @method sfGuardForgotPassword getForgotPassword()            Returns the current record's "ForgotPassword" value
+ * @method sfGuardUserProfile    getProfile()                   Returns the current record's "Profile" value
+ * @method Doctrine_Collection   getApplications()              Returns the current record's "Applications" collection
+ * @method Doctrine_Collection   getSfOauthServerRequestToken() Returns the current record's "sfOauthServerRequestToken" collection
+ * @method Doctrine_Collection   getSfOauthServerAccessToken()  Returns the current record's "sfOauthServerAccessToken" collection
+ * @method Doctrine_Collection   getSfOauthServerUserScope()    Returns the current record's "sfOauthServerUserScope" collection
+ * @method Doctrine_Collection   getSfOauthServerDeveloper()    Returns the current record's "sfOauthServerDeveloper" collection
+ * @method Doctrine_Collection   getUsuariTeAssignatures()      Returns the current record's "UsuariTeAssignatures" collection
+ * @method sfGuardUser           setFirstName()                 Sets the current record's "first_name" value
+ * @method sfGuardUser           setLastName()                  Sets the current record's "last_name" value
+ * @method sfGuardUser           setEmailAddress()              Sets the current record's "email_address" value
+ * @method sfGuardUser           setUsername()                  Sets the current record's "username" value
+ * @method sfGuardUser           setAlgorithm()                 Sets the current record's "algorithm" value
+ * @method sfGuardUser           setSalt()                      Sets the current record's "salt" value
+ * @method sfGuardUser           setPassword()                  Sets the current record's "password" value
+ * @method sfGuardUser           setIsActive()                  Sets the current record's "is_active" value
+ * @method sfGuardUser           setIsSuperAdmin()              Sets the current record's "is_super_admin" value
+ * @method sfGuardUser           setLastLogin()                 Sets the current record's "last_login" value
+ * @method sfGuardUser           setGroups()                    Sets the current record's "Groups" collection
+ * @method sfGuardUser           setPermissions()               Sets the current record's "Permissions" collection
+ * @method sfGuardUser           setAssignatura()               Sets the current record's "Assignatura" collection
+ * @method sfGuardUser           setSfGuardUserPermission()     Sets the current record's "sfGuardUserPermission" collection
+ * @method sfGuardUser           setSfGuardUserGroup()          Sets the current record's "sfGuardUserGroup" collection
+ * @method sfGuardUser           setRememberKeys()              Sets the current record's "RememberKeys" value
+ * @method sfGuardUser           setForgotPassword()            Sets the current record's "ForgotPassword" value
+ * @method sfGuardUser           setProfile()                   Sets the current record's "Profile" value
+ * @method sfGuardUser           setApplications()              Sets the current record's "Applications" collection
+ * @method sfGuardUser           setSfOauthServerRequestToken() Sets the current record's "sfOauthServerRequestToken" collection
+ * @method sfGuardUser           setSfOauthServerAccessToken()  Sets the current record's "sfOauthServerAccessToken" collection
+ * @method sfGuardUser           setSfOauthServerUserScope()    Sets the current record's "sfOauthServerUserScope" collection
+ * @method sfGuardUser           setSfOauthServerDeveloper()    Sets the current record's "sfOauthServerDeveloper" collection
+ * @method sfGuardUser           setUsuariTeAssignatures()      Sets the current record's "UsuariTeAssignatures" collection
  * 
  * @package    ttupf
  * @subpackage model
@@ -164,6 +179,27 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'foreign' => 'user_id'));
 
         $this->hasOne('sfGuardUserProfile as Profile', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
+        $this->hasMany('sfOauthServerConsumer as Applications', array(
+             'refClass' => 'sfOauthServerDeveloper',
+             'local' => 'user_id',
+             'foreign' => 'consumer_id'));
+
+        $this->hasMany('sfOauthServerRequestToken', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
+        $this->hasMany('sfOauthServerAccessToken', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
+        $this->hasMany('sfOauthServerUserScope', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
+        $this->hasMany('sfOauthServerDeveloper', array(
              'local' => 'id',
              'foreign' => 'user_id'));
 
