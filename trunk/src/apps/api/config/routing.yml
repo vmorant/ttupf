@@ -1,0 +1,21 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/10-Routing
+
+sessio_test:
+  url:   /sessio/test.:sf_format
+  param: { module: sessio, action: test, sf_format: json }
+
+# default rules
+homepage:
+  url:   /
+  param: { module: index, action: index }
+
+default_index:
+  url:   /:module
+  param: { action: index }
+  
+default:
+  url:   /:module/:action/*
+
+default_no_params:
+  url:   /:module/:action
