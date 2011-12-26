@@ -16,4 +16,8 @@ class sfGuardUserTable extends PluginsfGuardUserTable
     {
         return Doctrine_Core::getTable('sfGuardUser');
     }
+    
+    public static function getAuthenticated($username, $password)
+    {
+    }
 }

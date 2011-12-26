@@ -1,0 +1,5 @@
+all:
+  is_secure: false
+test:
+  is_secure: true
+  scope: [read write]
