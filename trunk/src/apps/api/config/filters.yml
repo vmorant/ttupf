@@ -3,8 +3,10 @@
 
 rendering: ~
 
-oauth_filter:
-  class: sfOauthFilter
+oauth:
+ class: sfOauthFilter 
+ param:
+   type: oauth
 
 security:  ~
 

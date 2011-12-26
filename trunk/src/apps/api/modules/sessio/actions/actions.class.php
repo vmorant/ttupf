@@ -15,6 +15,8 @@ class sessioActions extends sfActions
 		$sfoauth = new sfOauth(sfContext::getInstance(),$this->getModuleName(),$this->getActionName());
 		$sfoauth->connectEvent();
 		sfConfig::set('sf_web_debug',false);
+		
+		//$this->forward404Unless($request->getParameter('username') && $request->getParameter('password'));
 	}
 	
 	/**
