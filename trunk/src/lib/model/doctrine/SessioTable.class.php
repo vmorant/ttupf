@@ -30,10 +30,11 @@ class SessioTable extends Doctrine_Table
 		$timetableDOM = new simple_html_dom();		
 		$timetableDOM->load_file($courseYear->getUrlHorari());
 
-		// Date of first week is in the second table, second row, second cell.
-		$firstWeek = $timetableDOM->find('table', 1)->find('tr', 1)->find('td', 1)->plaintext;
-
+		// Date of first week is in the first table, second row, second cell.
+		$firstWeek = $timetableDOM->find('table', 0)->find('tr', 1)->find('td', 1)->plaintext;
+		
 		$currWeekNum = $this->calculateCurrentWeek($firstWeek, $date);
+		
 		$this->logger->info('Current week number is ' . $currWeekNum);
 
 		$currWeekDOM = $timetableDOM->find('table', $currWeekNum);
@@ -47,19 +48,22 @@ class SessioTable extends Doctrine_Table
 		$this->deleteWeekSessions($currWeekStartDate->format('d.m.Y H:i:s'));
 
 		$this->logger->info("Current week start date is ". $currWeekStartDate->format('d.m.Y H:i:s'));
+		echo "////// /////// /////// Current week start date is ". $currWeekStartDate->format('d.m.Y H:i:s');
 
 		// Create sessions for each period in the timetable and save them to the database.
 		$rows = $currWeekDOM->find('tr');
 		
 		
 		for($row = 0; $row < sizeof($rows); $row++){
-			if($row > 1){
-				$cells = $rows[$row]->find('td');
+			if($row > 1)
+			{
+				$cells = $rows[$row]->find('div');
 				$period = new Period($cells[0]->plaintext);
 				$period->setCourseYear($this->courseYear);
 				$this->logger->info("Start time is " . $period->getStart()->format("H:i:s") . ". End time is " . $period->getEnd()->format("H:i:s"));
 				for($cell = 0; $cell < sizeof($cells); $cell++){				
-					if($cell > 0){
+					if($cell > 0)
+					{
 						// Parse the start/end times for this row's period.
 						if(trim($cells[$cell]->plaintext) === '') {
 							$this->logger->debug("Skipping cell [".$row."][".$cell."], it's empty.");
@@ -81,11 +85,12 @@ class SessioTable extends Doctrine_Table
 						
 						$period->setEnd($sessionEndDateTime);
 						$this->logger->debug('SessionEndDateTime is: ' . $sessionEndDateTime->format('d.m.Y H:i:s'));
-
+						//echo "*******LA PRUEBA DEL DELITO: ".$cells[$cell]->plaintext."**********<br>";
 						// Get the plaintext for the period and insert each line into an array.
-						$this->logger->debug("Periodinfoarray is: " . var_export($cells[$cell]->plaintext, true));
+						$this->logger->debug("Periodinfoarray is: " . var_export($cells[$cell]->plaintext, true), 'err');
 
 						$periodInfo = html_entity_decode($cells[$cell]->plaintext, ENT_QUOTES, 'UTF-8');
+						$periodInfo = Encoding::toUTF8($periodInfo);
 						$periodInfoArray = explode("\n", $periodInfo);
 						foreach($periodInfoArray as $i => $value):
 							unset($periodInfoArray[$i]);
@@ -109,18 +114,45 @@ class SessioTable extends Doctrine_Table
 	 */
 	private function calculateCurrentWeek($dateFirstWeek, $date = NULL)
 	{
-		$dateFirstWeek = new DateTime($dateFirstWeek);
+		$dateFirstWeek = ltrim($dateFirstWeek);
+		$dateFirstWeek = rtrim($dateFirstWeek);
+
+		$dateFirstWeek = explode("/", $dateFirstWeek);
+//		echo $dateFirstWeek;
+		
+		$dateFirstWeek = new DateTime($dateFirstWeek[2]."/".$dateFirstWeek[1]."/".$dateFirstWeek[0]);
 		// Si s'ha especificat una data retornem el número de setmana d'aquella data.
+		
+//		$dateFirstWeek = new Datetime($dateFirstWeek);
+		
 		if($date){
 			$today = new DateTime($date);
 		}
 		else{
 			$today = new DateTime();
 		}
-		$interval = $today->diff($dateFirstWeek);
-		// Add one because week number starts at 1 not zero
-		$currWeek = floor($interval->format('%a') / 7) + 1;
-		return $currWeek;
+		
+		$dateFirstWeek = $dateFirstWeek->format('z');
+		$today = $today->format('z');
+		
+		//echo "Today: ".$today."<br>";
+		//echo "DateFirstWeek: ".$dateFirstWeek."<br>";
+
+		if($today >= $dateFirstWeek) {
+			$interval = $today - $dateFirstWeek;
+	
+			// Add one because week number starts at 1 not zero
+			$currWeek = floor($interval / 7);
+			
+			echo "Numero de semana: ".$currWeek."<br>";
+			return $currWeek;
+		}
+		else {
+			echo "No te sentit mirar l'horari d'abans que comenci el trimestre";
+
+		}
+
+		return -1;		
 	}
 
 	/**
@@ -240,90 +272,89 @@ class Period
 		$timeArray = explode('-', $timeString);
 		$this->logger->debug('after exploding by \'-\' it\'s: ' . var_export($timeArray, true));
 		// start has two elements, [0] is hour [1] is minutes
-		$start = explode('.', $timeArray[0]);
+		$start = explode(':', $timeArray[0]);
 		$start[0] = ltrim($start[0]);
 
 		$this->logger->debug('start array is: ' . var_export($start, true));
 
 		// same with end
-		$end = explode('.', $timeArray[1]);
+		$end = explode(':', $timeArray[1]);
 		// end minutes has a trailing 'h' we need to trim
-		$end[1] = rtrim($end[1], ' h ');
-		$end[1] = ltrim($end[1]);
-
+		$end[1] = rtrim($end[1]);
+		
 		$this->logger->debug('end array is: ' .var_export($end, true));
 		$this->start->setTime(intval($start[0]), intval($start[1]));
 		$this->end->setTime(intval($end[0]), intval($end[1]));
 	}
 	
 	public function stateMachine($current_state, $line) {
-		//$line = iconv("ISO-8859-1//TRANSLIT", "UTF-8", $line);
-		//echo "^".utf8_decode($line)."$<br />";
+//		$line = iconv("ISO-8859-1", "UTF-8", $line);
+		echo "^".$line."$<br />";
 		switch($current_state) {
 			case 0:
-				//echo "// Estat A<br />";
+				echo "// Estat A<br />";
 				////echo $line."<br />";
 
 				$hasThings = $this->lineType($line);
 				
 				// Seguent estat
 				if($hasThings[1] && ($this->isThereAGroup($line)) && $hasThings[0]) {
-					//echo "__Aula i Grup --> B, Tipus --> D<br />";
+					echo "__Aula i Grup --> B, Tipus --> D<br />";
 					$this->doStateA();
 					$this->doStateB($line);
 					$this->doStateD($line);
 					return 3;
 				}
 				else if($hasThings[1] && $this->isThereAGroup($line)) {
-					//echo "__Aula i Grup --> B<br />";
+					echo "__Aula i Grup --> B<br />";
 					$this->doStateA();
 					$this->doStateB($line);
 					return 1;
 				}
 				else if($hasThings[1]) {
-					//echo "__Aula --> B<br />";
+					echo "__Aula --> B<br />";
 					$this->doStateA();
 					$this->doStateB($line);
 					return 1;
 				}
 				else if($hasThings[0]) {
-					//echo "__Tipus --> D<br />";
+					echo "__Tipus --> D<br />";
 					$this->doStateA();
 					$this->doStateD($line);
 					return 3;
 				}
 				else if(!$line || ((preg_match("/^[\s]{1,}/", $line) || preg_match("/^[-]{3,}/", $line)))) {
-					//echo "__Linea Buida<br />";
+					echo "__Linea Buida<br />";
 					return 0;
 				}
 				else {
-					//echo "__Linea Invalida<br />";
+					echo "__Linea Invalida<br />";
 					return 0;
 				}
 				break;
 			case 1:
-				//echo "// Estat B<br />";
+				echo "// Estat B<br />";
 				//echo $line."<br />";
 				$hasThings = $this->lineType($line);
 
 				// Seguent estat
 				if($hasThings[1] && $this->isThereAGroup($line)) {
-					//echo "__Aula i Grup --> B<br />";
+					echo "__Aula i Grup --> B<br />";
 					$this->doStateB($line);
 					return 1;
 				}
 				else if($hasThings[1]) {
-					//echo "__Aula --> B<br />";
+					echo "__Aula --> B<br />";
 					$this->doStateB($line);
 					return 1;
 				}
 				else if($hasThings[3]) {
-					//echo "__Hora --> C<br />";
+					echo "__Hora --> C<br />";
 					$this->doStateC($line);
 					return 2;
 				}
 				else if (($groups = $this->isThereAGroup($line)) && $hasThings[0]) {
-					//echo "__Tipus i Grup --> D<br />";
+					echo "__Tipus i Grup --> D<br />";
 					foreach($groups as $group):
 						$this->getCurrentBlock()->setSessionGroup($group, $this->courseyear->getGrupTeoria());	
 					endforeach;
@@ -331,43 +362,43 @@ class Period
 					return 3;
 				}
 				else if($hasThings[0]) {
-					//echo "__Tipus --> D<br />";
+					echo "__Tipus --> D<br />";
 					$this->doStateD($line);
 					return 3;
 				}
 				else {
-					////echo "Something went wrong in state B<br />";
+					echo "Something went wrong in state B<br />";
 				}
 				break;
 			case 2:
 				//TODO: Maybe can be created some way from c to e
-				//echo "// Estat C<br />";
+				echo "// Estat C<br />";
 				////echo $line."<br />";
 				$hasThings = $this->lineType($line);
 				
 				// Seguent estat
 				if($hasThings[1] && $this->isThereAGroup($line)) {
-					//echo "__Aula i Grup --> B<br />";
+					echo "__Aula i Grup --> B<br />";
 					$this->doStateB($line);
 					return 1;
 				}
 				else if($hasThings[0]) {
-					//echo "__Tipus --> D<br />";
+					echo "__Tipus --> D<br />";
 					$this->doStateD($line);
 					return 3;
 				}
 				else if($hasThings[2]) {
-					//echo "__Assignatura --> E<br />";
+					echo "__Assignatura --> E<br />";
 					$this->doStateE($line);					
 					return 5;
 				}
 				else {
-					echo "Line:\"".utf8_decode($line)."\"<br />";
+					echo "Line:\"".$line."\"<br />";
 					echo "State C: Something is wrong in this line.<br />";
 				}
 				break;
 			case 3:
-				//echo "// Estat D<br />";
+				echo "// Estat D<br />";
 				//echo "-----------------_->".$line."<-------<br />";
 				
 				if($line == NULL) {
@@ -380,37 +411,37 @@ class Period
 				
 				// Seguent estat
 				if($hasThings[2]) {
-					//echo "__Assignatura --> E<br />";
+					echo "__Assignatura --> E<br />";
 					$this->doStateE($line);					
 					return 5;
 				}
 				else if($hasThings[1] && $this->isThereAGroup($line) && $hasThings[0]) {
-					//echo "__Aula i Grup --> B, Tipus --> D<br />";
+					echo "__Aula i Grup --> B, Tipus --> D<br />";
 					$this->doStateB($line);
 					$this->doStateD($line);
 					return 3;
 				}
 				else if($hasThings[1] && $this->isThereAGroup($line)) {
-					//echo "__Aula i Grup --> B<br />";
+					echo "__Aula i Grup --> B<br />";
 					$this->doStateB($line);
 					return 1;
 				}
 				else if($hasThings[3]) {
-					//echo "__Hora --> C<br />";
+					echo "__Hora --> C<br />";
 					$this->doStateC($line);
 					return 2;
 				}
 				else if($hasThings[1]) {
-					//echo "__Aula --> B<br />";
+					echo "__Aula --> B<br />";
 					$this->doStateB($line);
 					return 1;
 				}
 				else {
-					//echo "Dia Festiu o l'assignatura no te nom<br />";
+					echo "Dia Festiu o l'assignatura no te nom<br />";
 				}
 				break;
 			case 4:
-				//echo "// Estat F<br />";
+				echo "// Estat F<br />";
 				//echo $line."<br />";
 				
 				// Seguent estat
@@ -418,7 +449,7 @@ class Period
 				return 5;
 				break;
 			case 5:
-				//echo "// Estat E, Bloc acabat<br />";
+				echo "// Estat E, Bloc acabat<br />";
 				//echo $line."<br />";				
 				if(preg_match("/^[\s]{1,}/", $line) || preg_match("/^[-]{3,}/", $line)) {
 					return 0;
@@ -487,7 +518,7 @@ class Period
 	
 	public function doStateE($line) {
 		//echo "// Estat 6<br />";
-		//echo utf8_decode($line)."<br />";
+		//echo "EL que hi ha a line: ".bin2hex($line)."<br>";
 		
 		$course = Doctrine_Query::create()
 			->select('a.id')
@@ -501,12 +532,13 @@ class Period
 		}
 		// Course doesn't exist, so create it and set its attributes.
 		else {
+			//echo $line."<br />";
 			$this->logger->debug("Course " . $line . " doesn't exist, creating.");
 			$course = new Assignatura();
 			$course->setNom($line);
 			$course->setCarreraCurs($this->courseyear);
 			$course->save();
-			//echo utf8_decode($line)."<br />";
+			
 		}
 		
 		$this->getCurrentBlock()->setAssignatura($course);
@@ -630,6 +662,8 @@ class Period
 	}
 	
 	public function lineType($line) {
+		//echo $line."<br>";
+	
 		$line = $line;
 		$types = Array();
 		$aulas = Array();
@@ -648,24 +682,30 @@ class Period
 		$has_aula = "/(?<![0-9])([0-9]{2}.[A-Za-z0-9][0-9]{2})/";
 		// This regex is a miracle understandable. Sorry xD NO FUNCIONA DEL TOT, de moment detecta l'assignatura bé però
 		// només pot contenir una paraula en majuscula i al final. aula => 2
-		$has_assignatura = "/^((?:(?:[ÀÁÇÈÉÍÏÒÓÚÜÑA-Z]?[àáçèéíïòóúüña-z\'\·[:space:]]+)+)+[ÀÁÈÉÍÏÒÓÚÜÑA-Z]*)$/";
+		$has_assignatura = "/^((?:(?:[ÀÁÇÈÉÍÏÒÓÚÜÑA-Z]?[àáçèéíïòóúüña-z\'\’\·[:space:]]+)+)+[ÀÁÈÉÍÏÒÓÚÜÑA-Z]*)$/";
 		// If line matches at least one hour XX:XX hora =>3
-		$has_hour = "/(?<![0-9])([0-2]?[0-9]\s?[:|.]\s?[0-5][0-9])(?![0-9])/";
+		$has_hour = "/(?<![0-9])([0-2]?[0-9][:|.][0-5][0-9])(?![0-9])/";
+		
+		//echo "Mirant la linia: ".utf8_decode($line)."<br>";
 		
 		if(preg_match_all($has_type, $line, $types)) {
-			////echo "__TYPE<br />";
+			sfContext::getInstance()->getLogger()->debug("__TYPE");
+			//echo "__TYPE<br />";
 			$hasThings[0] = true;
 		}
 		if(preg_match_all($has_aula, $line, $aulas)) {
-			////echo "__AULA<br />";
+			sfContext::getInstance()->getLogger()->debug("__AULA");
+			//echo "__AULA<br />";
 			$hasThings[1] = true;
 		}
 		if(preg_match_all($has_assignatura, $line, $assignaturas)) {
-			////echo "__ASSIGNATURA<br />";
+			sfContext::getInstance()->getLogger()->debug("__ASSIGNATURA");
+			//echo "__ASSIGNATURA<br />";
 			$hasThings[2] = true;
 		}
 		if(preg_match_all($has_hour, $line, $hours)) {
-			////echo "__HORA<br />";
+			sfContext::getInstance()->getLogger()->debug("__HORA");
+			//echo "__HORA<br />";
 			$hasThings[3] = true;
 		}
 		return $hasThings;
@@ -781,41 +821,25 @@ class Block
 	
 	public function setHours($line, $period) {
 		$hours = Array();
-		
-		$has_hour = "/(?<![0-9])([0-2]?[0-9]\s?[:|.]\s?[0-5][0-9])(?![0-9])/";
+				
+		$has_hour = "/(?<![0-9])([0-2]?[0-9][:|.][0-5][0-9])(?![0-9])/";
 
 		if(preg_match_all($has_hour, $line, $hours)) {
 			if(sizeof($hours) > 1) {
 				foreach($this->getSessions() as $key => $session):
 					if(!$this->getTimed($key)) {
-						if(strcmp($hours[0][0], ".")) {
-							$hour = explode(".", $hours[0][0]);
-							$start = $session->getDataHoraInici();
-							$start = new DateTime($start);
-							$start->setTime($hour[0], $hour[1], 00);
-							$session->setDataHoraInici($start->format('Y-m-d H:i:s'));
-						}
-						else if(strcmp($hours[0][0], ":")) {
-							$hour = explode(":", $hours[0][0]);
-							$start = $session->getDataHoraInici();
-							$start = new DateTime($start);
-							$start->setTime($hour[0], $hour[1], 00);	
-							$session->setDataHoraInici($start->format('Y-m-d H:i:s'));						
-						}
-						if(strcmp($hours[0][1], ".")) {
-							$hour = explode(".", $hours[0][1]);
-							$end = $session->getDataHoraInici();
-							$end = new DateTime($end);
-							$end->setTime($hour[0], $hour[1], 00);
-							$session->setDataHoraFi($end->format('Y-m-d H:i:s'));
-						}
-						else if(strcmp($hours[0][1], ":")) {
-							$hour = explode(":", $hours[0][1]);
-							$end = $session->getDataHoraInici();
-							$end = new DateTime($end);
-							$end->setTime($hour[0], $hour[1], 00);							
-							$session->setDataHoraFi($end->format('Y-m-d H:i:s'));						
-						}
+						$hour = explode(":", $hours[0][0]);
+						$start = $session->getDataHoraInici();
+						$start = new DateTime($start);
+						$start->setTime($hour[0], $hour[1], 00);	
+						$session->setDataHoraInici($start->format('Y-m-d H:i:s'));						
+
+						$hour = explode(":", $hours[0][1]);
+						$end = $session->getDataHoraInici();
+						$end = new DateTime($end);
+						$end->setTime($hour[0], $hour[1], 00);							
+						$session->setDataHoraFi($end->format('Y-m-d H:i:s'));						
+					
 						$this->setTimed($key);
 					}
 				endforeach;
@@ -823,20 +847,12 @@ class Block
 			else {
 				foreach($this->getSessions() as $key => $session):
 					if(!$this->getTimed($key)) {
-						if(strcmp($hours[0][0], ".")) {
-							$hour = explode(".", $hours[0][0]);
-							$end = $session->getDataHoraInici();
-							$end = new DateTime($end);
-							$end->setTime($hour[0], $hour[1], 00);
-							$session->setDataHoraFi($end->format('Y-m-d H:i:s'));
-						}
-						else if(strcmp($hours[0][0], ":")) {
-							$hour = explode(":", $hours[0][0]);
-							$end = $session->getDataHoraInici();
-							$end = new DateTime($end);
-							$end->setTime($hour[0], $hour[1], 00);
-							$session->setDataHoraFi($end->format('Y-m-d H:i:s'));							
-						}
+						$hour = explode(":", $hours[0][0]);
+						$end = $session->getDataHoraInici();
+						$end = new DateTime($end);
+						$end->setTime($hour[0], $hour[1], 00);
+						$session->setDataHoraFi($end->format('Y-m-d H:i:s'));							
+	
 						$this->setTimed($key);
 					}
 				endforeach;
