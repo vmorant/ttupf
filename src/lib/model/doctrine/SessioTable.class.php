@@ -48,7 +48,7 @@ class SessioTable extends Doctrine_Table
 		$this->deleteWeekSessions($currWeekStartDate->format('d.m.Y H:i:s'));
 
 		$this->logger->info("Current week start date is ". $currWeekStartDate->format('d.m.Y H:i:s'));
-		echo "////// /////// /////// Current week start date is ". $currWeekStartDate->format('d.m.Y H:i:s');
+		//echo "////// /////// /////// Current week start date is ". $currWeekStartDate->format('d.m.Y H:i:s');
 
 		// Create sessions for each period in the timetable and save them to the database.
 		$rows = $currWeekDOM->find('tr');
@@ -144,11 +144,11 @@ class SessioTable extends Doctrine_Table
 			// Add one because week number starts at 1 not zero
 			$currWeek = floor($interval / 7);
 			
-			echo "Numero de semana: ".$currWeek."<br>";
+			//echo "Numero de semana: ".$currWeek."<br>";
 			return $currWeek;
 		}
 		else {
-			echo "No te sentit mirar l'horari d'abans que comenci el trimestre";
+			//echo "No te sentit mirar l'horari d'abans que comenci el trimestre";
 
 		}
 
