@@ -52,17 +52,17 @@ class Block
 	//TODO handle cases when the grip is inherit
 	public function setSessionGroup($group, $courseyear_group) {
 		if(strtolower($group[0]) == 'p') {
-			//echo "Prac ".strtolower($group[0])."<br />";
+			////echo "Prac ".strtolower($group[0])."<br />";
 			$this->getActualSession()->setGrupPractiques($group);
 			return 'p';
 		}
 		else if(strtolower($group[0]) == 's') {
-			//echo "Sem ".strtolower($group[0])."<br />";
+			////echo "Sem ".strtolower($group[0])."<br />";
 			$this->getActualSession()->setGrupSeminari($group);
 			return 's';
 		}
 		else {			
-			//echo "Teo ".strtolower($group[0])."<br />";
+			////echo "Teo ".strtolower($group[0])."<br />";
 			if(!$this->getActualSession()->isGroupSet()) {
 				if(!is_numeric($group)) {
 					$this->getActualSession()->setGrupTeoria($courseyear_group.$group);
@@ -93,7 +93,7 @@ class Block
 		
 		if(preg_match_all($has_aula, $line, $aulas)) {
 			foreach($aulas[0] as $key => $aula):
-				//echo $aula."<br />";
+				////echo $aula."<br />";
 				if($key == 0) {
 					$ct_aulas = $aula;
 				}
@@ -101,7 +101,7 @@ class Block
 					$ct_aulas = $ct_aulas." ".$aula;
 				}
 			endforeach;
-			//echo "IMPORTANT --> ".$ct_aulas."<br />";
+			////echo "IMPORTANT --> ".$ct_aulas."<br />";
 			foreach($this->getSessions() as $session):
 				if(!$session->isAulaSet()) {
 					$session->setAula($ct_aulas);
@@ -183,9 +183,9 @@ class Block
 	
 	public function saveSessions() {
 		foreach($this->getSessions() as $session):
-			//echo "<br />ES GUARDA LA SESSIO<br /><br />";
-			//echo $session->getDataHoraInici()." - ";
-			//echo $session->getDataHoraFi()."<br />";
+			////echo "<br />ES GUARDA LA SESSIO<br /><br />";
+			////echo $session->getDataHoraInici()." - ";
+			////echo $session->getDataHoraFi()."<br />";
 			$session->save();
 		endforeach;
 	}
