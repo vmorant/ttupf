@@ -22,7 +22,7 @@
 		$url_tail = $url_tail . '?usuari_id='.$form->getObject()->getUsuariId().'&assignatura_id='.$form->getObject()->getAssignaturaId();
 	}
 ?>
-<form action="<?php echo url_for('configura/'.$url_tail) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
+<form action="<?php echo url_for('horari/'.$url_tail) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
 <?php if (!$form->getObject()->isNew()): ?>
 <input type="hidden" name="sf_method" value="put" />
 <?php endif; ?>
