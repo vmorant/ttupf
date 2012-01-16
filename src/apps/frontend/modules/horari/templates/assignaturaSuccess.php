@@ -1,4 +1,4 @@
-<form action="<?php echo url_for('configura/assignatura') ?>" method="POST">
+<form action="<?php echo url_for('horari/grups') ?>" method="POST">
 	<div class="configure-form">
 		<?php echo $form ?>
 	</div>
