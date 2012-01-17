@@ -11,7 +11,7 @@ class ConfigureSelectDegreeForm extends sfForm
 		$this->setWidgets(array(
 					'carreres' => new sfWidgetFormDoctrineChoice(array(
 						'multiple' => false,
-						'expanded' => false,
+						'expanded' => true,
 						'model' => 'CarreraCurs',
 					))));
 	}
