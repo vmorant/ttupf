@@ -34,8 +34,10 @@
         </td>
       </tr>
     </tfoot>
-    <tbody>
-      <?php echo $form ?>
+		<tbody>
+			<?php echo $form['grup_teoria']->renderRow(array(), 'Grup teoria<br /><span style="font-weight: normal; color: gray; size: 90%;">exemple: 1</span>') ?>
+			<?php echo $form['grup_practiques']->renderRow(array(), 'Grup pràctiques<br /><span style="font-weight: normal; color: gray; size: 90%;">exemple: P101</span>') ?>
+			<?php echo $form['grup_seminari']->renderRow(array(), 'Grup seminaris<br /><span style="font-weight: normal; color: gray; size: 90%;">exemple: S101</span>') ?>
     </tbody>
   </table>
 </form>
