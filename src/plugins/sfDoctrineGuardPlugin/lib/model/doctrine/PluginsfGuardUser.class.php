@@ -47,6 +47,11 @@ abstract class PluginsfGuardUser extends BasesfGuardUser
       return;
     }
 
+    $fromdump = false;
+    if($this->isNew() && $this->getSalt()){
+     $fromdump=true;
+    }
+
     if (!$salt = $this->getSalt())
     {
       $salt = md5(rand(100000, 999999).$this->getUsername());
@@ -64,9 +69,15 @@ abstract class PluginsfGuardUser extends BasesfGuardUser
     }
     $this->setAlgorithm($algorithmAsStr);
 
-    $this->_set('password', call_user_func_array($algorithm, array($salt.$password)));
+    if($fromdump){
+     parent::_set('password',$password);
+    }
+    else{
+     parent::_set('password', call_user_func_array($algorithm, array($salt.$password)));
+    }
+    
   }
-
+  
   /**
    * Returns whether or not the given password is valid.
    *
