@@ -26,7 +26,7 @@ class sfOauthAuthActions extends sfActions
 	 /*
 	 *Get AccessToken OAuth 1.0 and OAuth 2.0
 	 */
-		public function executeAccessToken(sfWebRequest $request)
+	public function executeAccessToken(sfWebRequest $request)
 	{
 		$req = OAuthRequest::from_request(NULL,$request->getUri()); // To get variable in header 
 			
@@ -35,7 +35,7 @@ class sfOauthAuthActions extends sfActions
 			$oauthServer = new sfoauthserver(new sfOAuthDataStore());
 			$req = OAuthRequest::from_request(NULL,$request->getUri());
 
-			$q = Doctrine::getTable('sfOauthServerRequestToken')->findOneByToken($request->getParameter('oauth_token'));
+			$q = Doctrine::getTable('sfOauthServerRequestToken')->findOneByToken($req->get_parameter('oauth_token'));
 			$this->token = $oauthServer->fetch_access_token($req);
 		
 			if ($q->getUserId()==NULL&&$q->getScope())

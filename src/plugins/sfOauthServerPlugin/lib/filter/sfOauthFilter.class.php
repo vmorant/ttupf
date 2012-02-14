@@ -25,17 +25,15 @@ class sfOauthFilter extends sfFilter
 	$sfoauth = new sfOauth($this->context,$actionInstance->getModuleName(),$actionInstance->getActionName());
 	
 	$request  =  $this->context->getRequest();
+	$req = OAuthRequest::from_request();
 	
 	SfContext::getInstance()->getLogger()->debug("Abans de comprovar la versió");
 	
-	if($request->getParameter('oauth_version', NULL) == "1.0") // OAuth 1.0
+	if($req->get_parameter('oauth_version', NULL) == "1.0") // OAuth 1.0
 	{
 		SfContext::getInstance()->getLogger()->debug("Versio 1.0");
 	    $oauthServer = new sfoauthserver(new sfOAuthDataStore());
-	    $req = OAuthRequest::from_request();
 	    $oauthServer->verify_request($req);
-
-		
 	}
 	else if($request->getParameter('oauth_version', NULL) != NULL) // OAuth 2.0
 	{
@@ -48,7 +46,8 @@ class sfOauthFilter extends sfFilter
 	}
 
 	SfContext::getInstance()->getLogger()->debug("Configura coses");
-	$token = $request->getParameter('access_token', $request->getParameter('oauth_token'));
+	$token = $req->get_parameter('oauth_token');
+	
 	$sfToken = Doctrine::getTable('sfOauthServerAccessToken')->findOneByToken($token);
 	$user = $sfToken->getUser(); // Select user concerned
 
@@ -59,8 +58,10 @@ class sfOauthFilter extends sfFilter
     $credential = $sfoauth->getOauthCredential();
 
 	SfContext::getInstance()->getLogger()->debug("Acaba de configurar coses");
-    if (null !== $credential && !$sfToken->hasCredential($credential)) // chek if the consumer is allowed to access to this action
-		throw new OAuthException('Unauthorized Access');
+
+    if (null !== $credential && !$sfToken->hasCredential($credential)) {
+    	throw new OAuthException('Unauthorized Access');
+    } // chek if the consumer is allowed to access to this action
 
     // this aplpication has access, continue
     $filterChain->execute();
