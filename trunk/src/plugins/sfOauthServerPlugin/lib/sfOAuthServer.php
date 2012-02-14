@@ -45,9 +45,9 @@ class sfOAuthServer extends OAuthServer {
 	/* Check if all params are corrects
 	 * @return boolean
 	 * */
-	public function checkAuthorizeRequest(sfWebRequest $request)
+	public function checkAuthorizeRequest($sfToken)
 	{
-		$sfToken = Doctrine::getTable('sfOauthServerRequestToken')->findOneByToken($request->getParameter('oauth_token'));
+		$sfToken = Doctrine::getTable('sfOauthServerRequestToken')->findOneByToken($sfToken);
 		if (!$sfToken)
 				return false;	
 		return true;

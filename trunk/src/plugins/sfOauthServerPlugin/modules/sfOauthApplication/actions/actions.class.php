@@ -21,7 +21,7 @@ class sfOauthApplicationActions extends sfActions
       $this->callback = $request->getParameter('oauth_callback', $this->consumer->getCallback());
       $oauthServer = new sfoauthserver(new sfOAuthDataStore());
       $this->token = $request->getParameter('oauth_token');
-      $this->forward404Unless($oauthServer->checkAuthorizeRequest($request));
+      $this->forward404Unless($oauthServer->checkAuthorizeRequest($this->token));
       if (!Doctrine::getTable('SfOauthServerUserScope')->isApplicationAuthorized($this->consumer->getId(), $user_id, $this->consumer->getScope()))
       {
         if ($request->isMethod(sfRequest::POST))
