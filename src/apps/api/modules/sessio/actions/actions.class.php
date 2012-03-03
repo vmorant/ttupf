@@ -28,6 +28,7 @@ class sessioActions extends sfActions
 	{
 		//$user és l'objecte sfGuardUser
 		$user = $request->getParameter('sfGuardUser');
+
 		$utas = $user->getUsuariTeAssignatures()->getData();
 		
 		//TODO maybe some grup_practiques or grip-seminari has many groups. We have to support thet
