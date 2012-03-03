@@ -26,6 +26,18 @@ class sessioActions extends sfActions
 	*/
 	public function executeTest(sfWebRequest $request)
 	{
+		if($request->getParameter('any')){
+			// S'ha de normalitzar el dia i mes per a tenir dos dígits,
+			// DateTime->format() ho fa.
+			$this->data = new DateTime($request->getParameter('any') . "/" . $request->getParameter('mes') . "/" . $request->getParameter('dia'));
+			$this->data = $this->data->format('d/m/Y');
+		}
+		else {
+			$this->data = date('d/m/Y', mktime(0, 0, 0, date('m')  , date('d'), date('Y')));
+			$tz = new DateTimeZone('Europe/Madrid'); /* replace this string with your local timezone */
+			$this->data->setTimeZone($tz);
+		}
+
 		//$user és l'objecte sfGuardUser
 		$user = $request->getParameter('sfGuardUser');
 

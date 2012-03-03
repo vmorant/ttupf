@@ -2,7 +2,7 @@
 # http://www.symfony-project.org/reference/1_4/en/10-Routing
 
 sessio_test:
-  url:   /sessio/test.:sf_format
+  url:   /sessio/test.:sf_format/:dia/:mes/:any
   param: { module: sessio, action: test, sf_format: json }
 
 # default rules
