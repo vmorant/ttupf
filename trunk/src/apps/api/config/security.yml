@@ -3,3 +3,9 @@
 
 sessio:
   is_secure: false
+  
+user:
+  is_secure: true
+  
+about:
+  is_secure: false
