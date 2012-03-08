@@ -8,7 +8,7 @@ sessio_test:
 # default rules
 homepage:
   url:   /
-  param: { module: index, action: index }
+  param: { module: about, action: index }
 
 default_index:
   url:   /:module
@@ -19,3 +19,11 @@ default:
 
 default_no_params:
   url:   /:module/:action
+  
+sf_guard_signin:
+  url:   /user/login
+  param: { module: sfGuardAuth, action: signin }
+
+sf_guard_signout:
+  url:   /sfGuardAuth/signout
+  param: { module: sfGuardAuth, action: signout }

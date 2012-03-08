@@ -65,6 +65,12 @@ class horariActions extends sfActions
 			array_multisort($dates, SORT_ASC, $this->sessionsArray);
 		}
 	}
+	
+	public function executeUserToken(sfWebRequest $request)
+	{
+		$this->forward404Unless($request->getParameter('token'), 'horari', 'index');
+		$this->profile = sfGuardUserProfilePeer::activateProfileByToken($request->getParameter('token'));
+	}
 
 	/**
 	 * Actualitza les sessions d'una setmana. Es pot especificar la data a la URL
