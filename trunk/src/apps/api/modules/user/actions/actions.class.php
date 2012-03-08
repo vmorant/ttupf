@@ -17,11 +17,13 @@ class userActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    $this->forward('default', 'module');
+  	$this->tokens = Doctrine::getTable('sfOauthServerAccessToken')->createQuery('t')->where('t.user_id = ?',$this->getUser()->getGuardUser()->getId())->execute();
   }
+  
   public function executeLogin(sfWebRequest $request) {
     $this->forward('user', 'index');
   }
+  
   public function executeLogout(sfWebRequest $request) {
     $this->forward('sfGuardAuth', 'signout');
   }

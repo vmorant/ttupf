@@ -21,7 +21,7 @@ class sfGuardAuthActions extends sfActions
 
     if ($user->isAuthenticated())
     {
-		return $this->forward('user', 'index');
+		return $this->redirect('user/index.json');
     }
 
     $message = 'Authentification required';
@@ -40,11 +40,10 @@ class sfGuardAuthActions extends sfActions
       {
         $values = $this->form->getValues();
         
-		echo $values['user'];
-        
-        $this->getUser()->signin($values['user'], array_key_exists('remember', $values) ? $values['remember'] : false);
+        $user = $this->getUser()->signin($values['user'], array_key_exists('remember', $values) ? $values['remember'] : false);
 
-		return $this->forward('user', 'index');
+		$request->setParameter('user', $user);
+		return $this->redirect('user/index.json');
       }
       else
       {

@@ -5,6 +5,10 @@ sessio_test:
   url:   /sessio/test.:sf_format/:dia/:mes/:any
   param: { module: sessio, action: test, sf_format: json }
 
+user_index:
+  url:   /user/index.:sf_format
+  param: { module: user, action: index, sf_format: json }
+
 # default rules
 homepage:
   url:   /
