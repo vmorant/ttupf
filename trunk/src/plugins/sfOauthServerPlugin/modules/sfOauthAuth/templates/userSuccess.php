@@ -1,0 +1,1 @@
+oauth_token=<?php echo urlencode($user_data->key); ?>&oauth_token_secret=<?php echo urlencode($user_data->secret); ?>

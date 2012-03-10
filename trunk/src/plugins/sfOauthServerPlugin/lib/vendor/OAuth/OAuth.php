@@ -532,6 +532,21 @@ class OAuthServer {
     return $new_token;
   }
 
+  public function check_integrity(&$request) {
+    $this->get_version($request);
+
+    $consumer = $this->get_consumer($request);
+
+	$token = NULL;
+
+    $this->check_signature($request, $consumer, $token);
+
+    // Rev A change
+    $callback = $request->get_parameter('oauth_callback');
+ 
+    return;
+  }
+
   /**
    * process an access_token request
    * returns the access token on success
