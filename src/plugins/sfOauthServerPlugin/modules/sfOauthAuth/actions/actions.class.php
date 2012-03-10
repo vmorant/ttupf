@@ -22,6 +22,40 @@ class sfOauthAuthActions extends sfActions
 		return $this->setTemplate('token');
 
 	}
+	
+	public function executeUserAccess(sfWebRequest $request)
+	{	
+		$oauthServer = new sfOauthServer(new sfOAuthDataStore());
+		$req = OAuthRequest::from_request(NULL,$request->getUri());
+
+		$oauthServer->check_integrity($req);
+		$this->user_data = array();
+		
+		$decodedString = base64_decode($request->getParameter('token'));
+		
+		$userPass = explode(':', $decodedString);
+		
+		$username = $userPass[0];
+		$password = $userPass[1];
+
+		if(($user = Doctrine::getTable('sfGuardUser')->findOneByUsername($username)) && ($user->checkPassword($password))) {
+			$this->user_data["correct"] = 0;
+			if ($token = Doctrine::getTable('sfOauthServerAccessToken')->findOneByUserId($user->getId())){
+				$this->user_data["key"] = $token->getToken();
+				$this->user_data["secret"] = $token->getSecret();
+				$this->user_data["code"] = 0;
+			}
+			else {
+				$this->user_data["code"] = -1;
+			}
+		}
+		else {
+			$this->user_data["correct"] = -1;
+			$this->user_data["code"] = -1;
+		}
+
+		return $this->setTemplate('user');
+	}
 		
 	 /*
 	 *Get AccessToken OAuth 1.0 and OAuth 2.0

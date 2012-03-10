@@ -1,3 +1,9 @@
+userAccess:
+  url: /oauth/userAccess.:sf_format/:token
+  param: { module: sfOauthAuth, action: userAccess }
+  requirements:
+    sf_format: (?:json|xml)
+
 oauth:
   url: /oauth/:action.:sf_format/*
   param: { module: sfOauthAuth }
