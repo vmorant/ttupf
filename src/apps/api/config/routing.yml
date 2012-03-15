@@ -5,10 +5,6 @@ sessio_test:
   url:   /sessio/test.:sf_format/:dia/:mes/:any
   param: { module: sessio, action: test, sf_format: json }
 
-user_index:
-  url:   /user/index.:sf_format
-  param: { module: user, action: index, sf_format: json }
-
 # default rules
 homepage:
   url:   /
@@ -23,11 +19,3 @@ default:
 
 default_no_params:
   url:   /:module/:action
-  
-sf_guard_signin:
-  url:   /user/login
-  param: { module: sfGuardAuth, action: signin }
-
-sf_guard_signout:
-  url:   /sfGuardAuth/signout
-  param: { module: sfGuardAuth, action: signout }
