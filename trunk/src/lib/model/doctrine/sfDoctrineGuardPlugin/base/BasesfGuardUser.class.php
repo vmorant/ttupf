@@ -18,6 +18,7 @@
  * @property Doctrine_Collection $Groups
  * @property Doctrine_Collection $Permissions
  * @property Doctrine_Collection $Assignatura
+ * @property Doctrine_Collection $sfGuardUser
  * @property Doctrine_Collection $sfGuardUserPermission
  * @property Doctrine_Collection $sfGuardUserGroup
  * @property sfGuardRememberKey $RememberKeys
@@ -28,6 +29,7 @@
  * @property Doctrine_Collection $sfOauthServerAccessToken
  * @property Doctrine_Collection $sfOauthServerUserScope
  * @property Doctrine_Collection $sfOauthServerDeveloper
+ * @property Doctrine_Collection $UsuariObjectiu
  * @property Doctrine_Collection $UsuariTeAssignatures
  * 
  * @method string                getFirstName()                 Returns the current record's "first_name" value
@@ -43,6 +45,7 @@
  * @method Doctrine_Collection   getGroups()                    Returns the current record's "Groups" collection
  * @method Doctrine_Collection   getPermissions()               Returns the current record's "Permissions" collection
  * @method Doctrine_Collection   getAssignatura()               Returns the current record's "Assignatura" collection
+ * @method Doctrine_Collection   getSfGuardUser()               Returns the current record's "sfGuardUser" collection
  * @method Doctrine_Collection   getSfGuardUserPermission()     Returns the current record's "sfGuardUserPermission" collection
  * @method Doctrine_Collection   getSfGuardUserGroup()          Returns the current record's "sfGuardUserGroup" collection
  * @method sfGuardRememberKey    getRememberKeys()              Returns the current record's "RememberKeys" value
@@ -53,6 +56,7 @@
  * @method Doctrine_Collection   getSfOauthServerAccessToken()  Returns the current record's "sfOauthServerAccessToken" collection
  * @method Doctrine_Collection   getSfOauthServerUserScope()    Returns the current record's "sfOauthServerUserScope" collection
  * @method Doctrine_Collection   getSfOauthServerDeveloper()    Returns the current record's "sfOauthServerDeveloper" collection
+ * @method Doctrine_Collection   getUsuariObjectiu()            Returns the current record's "UsuariObjectiu" collection
  * @method Doctrine_Collection   getUsuariTeAssignatures()      Returns the current record's "UsuariTeAssignatures" collection
  * @method sfGuardUser           setFirstName()                 Sets the current record's "first_name" value
  * @method sfGuardUser           setLastName()                  Sets the current record's "last_name" value
@@ -67,6 +71,7 @@
  * @method sfGuardUser           setGroups()                    Sets the current record's "Groups" collection
  * @method sfGuardUser           setPermissions()               Sets the current record's "Permissions" collection
  * @method sfGuardUser           setAssignatura()               Sets the current record's "Assignatura" collection
+ * @method sfGuardUser           setSfGuardUser()               Sets the current record's "sfGuardUser" collection
  * @method sfGuardUser           setSfGuardUserPermission()     Sets the current record's "sfGuardUserPermission" collection
  * @method sfGuardUser           setSfGuardUserGroup()          Sets the current record's "sfGuardUserGroup" collection
  * @method sfGuardUser           setRememberKeys()              Sets the current record's "RememberKeys" value
@@ -77,6 +82,7 @@
  * @method sfGuardUser           setSfOauthServerAccessToken()  Sets the current record's "sfOauthServerAccessToken" collection
  * @method sfGuardUser           setSfOauthServerUserScope()    Sets the current record's "sfOauthServerUserScope" collection
  * @method sfGuardUser           setSfOauthServerDeveloper()    Sets the current record's "sfOauthServerDeveloper" collection
+ * @method sfGuardUser           setUsuariObjectiu()            Sets the current record's "UsuariObjectiu" collection
  * @method sfGuardUser           setUsuariTeAssignatures()      Sets the current record's "UsuariTeAssignatures" collection
  * 
  * @package    ttupf
@@ -162,6 +168,11 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'local' => 'usuari_id',
              'foreign' => 'assignatura_id'));
 
+        $this->hasMany('sfGuardUser', array(
+             'refClass' => 'UsuariEspiaUsuari',
+             'local' => 'usuari_objectiu',
+             'foreign' => 'usuari_base'));
+
         $this->hasMany('sfGuardUserPermission', array(
              'local' => 'id',
              'foreign' => 'user_id'));
@@ -202,6 +213,10 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
         $this->hasMany('sfOauthServerDeveloper', array(
              'local' => 'id',
              'foreign' => 'user_id'));
+
+        $this->hasMany('UsuariEspiaUsuari as UsuariObjectiu', array(
+             'local' => 'id',
+             'foreign' => 'usuari_objectiu'));
 
         $this->hasMany('UsuariTeAssignatura as UsuariTeAssignatures', array(
              'local' => 'id',
