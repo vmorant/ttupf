@@ -7,14 +7,17 @@
  * 
  * @property integer $usuari_base
  * @property integer $usuari_objectiu
- * @property sfGuardUser $sfGuardUser
+ * @property sfGuardUser $Base
+ * @property sfGuardUser $Objectiu
  * 
  * @method integer           getUsuariBase()      Returns the current record's "usuari_base" value
  * @method integer           getUsuariObjectiu()  Returns the current record's "usuari_objectiu" value
- * @method sfGuardUser       getSfGuardUser()     Returns the current record's "sfGuardUser" value
+ * @method sfGuardUser       getBase()            Returns the current record's "Base" value
+ * @method sfGuardUser       getObjectiu()        Returns the current record's "Objectiu" value
  * @method UsuariEspiaUsuari setUsuariBase()      Sets the current record's "usuari_base" value
  * @method UsuariEspiaUsuari setUsuariObjectiu()  Sets the current record's "usuari_objectiu" value
- * @method UsuariEspiaUsuari setSfGuardUser()     Sets the current record's "sfGuardUser" value
+ * @method UsuariEspiaUsuari setBase()            Sets the current record's "Base" value
+ * @method UsuariEspiaUsuari setObjectiu()        Sets the current record's "Objectiu" value
  * 
  * @package    ttupf
  * @subpackage model
@@ -39,7 +42,12 @@ abstract class BaseUsuariEspiaUsuari extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('sfGuardUser', array(
+        $this->hasOne('sfGuardUser as Base', array(
+             'local' => 'usuari_base',
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
+
+        $this->hasOne('sfGuardUser as Objectiu', array(
              'local' => 'usuari_objectiu',
              'foreign' => 'id',
              'onDelete' => 'CASCADE'));

@@ -15,45 +15,47 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'id'                 => new sfWidgetFormInputHidden(),
-      'first_name'         => new sfWidgetFormInputText(),
-      'last_name'          => new sfWidgetFormInputText(),
-      'email_address'      => new sfWidgetFormInputText(),
-      'username'           => new sfWidgetFormInputText(),
-      'algorithm'          => new sfWidgetFormInputText(),
-      'salt'               => new sfWidgetFormInputText(),
-      'password'           => new sfWidgetFormInputText(),
-      'is_active'          => new sfWidgetFormInputCheckbox(),
-      'is_super_admin'     => new sfWidgetFormInputCheckbox(),
-      'last_login'         => new sfWidgetFormDateTime(),
-      'created_at'         => new sfWidgetFormDateTime(),
-      'updated_at'         => new sfWidgetFormDateTime(),
-      'groups_list'        => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardGroup')),
-      'permissions_list'   => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardPermission')),
-      'assignatura_list'   => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Assignatura')),
-      'sf_guard_user_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser')),
-      'applications_list'  => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfOauthServerConsumer')),
+      'id'                   => new sfWidgetFormInputHidden(),
+      'first_name'           => new sfWidgetFormInputText(),
+      'last_name'            => new sfWidgetFormInputText(),
+      'email_address'        => new sfWidgetFormInputText(),
+      'username'             => new sfWidgetFormInputText(),
+      'algorithm'            => new sfWidgetFormInputText(),
+      'salt'                 => new sfWidgetFormInputText(),
+      'password'             => new sfWidgetFormInputText(),
+      'is_active'            => new sfWidgetFormInputCheckbox(),
+      'is_super_admin'       => new sfWidgetFormInputCheckbox(),
+      'last_login'           => new sfWidgetFormDateTime(),
+      'created_at'           => new sfWidgetFormDateTime(),
+      'updated_at'           => new sfWidgetFormDateTime(),
+      'groups_list'          => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardGroup')),
+      'permissions_list'     => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardPermission')),
+      'assignatura_list'     => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Assignatura')),
+      'usuaris_espiats_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser')),
+      'sf_guard_user_list'   => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser')),
+      'applications_list'    => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfOauthServerConsumer')),
     ));
 
     $this->setValidators(array(
-      'id'                 => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'first_name'         => new sfValidatorString(array('max_length' => 255, 'required' => false)),
-      'last_name'          => new sfValidatorString(array('max_length' => 255, 'required' => false)),
-      'email_address'      => new sfValidatorString(array('max_length' => 255)),
-      'username'           => new sfValidatorString(array('max_length' => 128)),
-      'algorithm'          => new sfValidatorString(array('max_length' => 128, 'required' => false)),
-      'salt'               => new sfValidatorString(array('max_length' => 128, 'required' => false)),
-      'password'           => new sfValidatorString(array('max_length' => 128, 'required' => false)),
-      'is_active'          => new sfValidatorBoolean(array('required' => false)),
-      'is_super_admin'     => new sfValidatorBoolean(array('required' => false)),
-      'last_login'         => new sfValidatorDateTime(array('required' => false)),
-      'created_at'         => new sfValidatorDateTime(),
-      'updated_at'         => new sfValidatorDateTime(),
-      'groups_list'        => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardGroup', 'required' => false)),
-      'permissions_list'   => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardPermission', 'required' => false)),
-      'assignatura_list'   => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Assignatura', 'required' => false)),
-      'sf_guard_user_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser', 'required' => false)),
-      'applications_list'  => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfOauthServerConsumer', 'required' => false)),
+      'id'                   => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
+      'first_name'           => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'last_name'            => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'email_address'        => new sfValidatorString(array('max_length' => 255)),
+      'username'             => new sfValidatorString(array('max_length' => 128)),
+      'algorithm'            => new sfValidatorString(array('max_length' => 128, 'required' => false)),
+      'salt'                 => new sfValidatorString(array('max_length' => 128, 'required' => false)),
+      'password'             => new sfValidatorString(array('max_length' => 128, 'required' => false)),
+      'is_active'            => new sfValidatorBoolean(array('required' => false)),
+      'is_super_admin'       => new sfValidatorBoolean(array('required' => false)),
+      'last_login'           => new sfValidatorDateTime(array('required' => false)),
+      'created_at'           => new sfValidatorDateTime(),
+      'updated_at'           => new sfValidatorDateTime(),
+      'groups_list'          => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardGroup', 'required' => false)),
+      'permissions_list'     => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardPermission', 'required' => false)),
+      'assignatura_list'     => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Assignatura', 'required' => false)),
+      'usuaris_espiats_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser', 'required' => false)),
+      'sf_guard_user_list'   => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser', 'required' => false)),
+      'applications_list'    => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfOauthServerConsumer', 'required' => false)),
     ));
 
     $this->validatorSchema->setPostValidator(
@@ -96,6 +98,11 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
       $this->setDefault('assignatura_list', $this->object->Assignatura->getPrimaryKeys());
     }
 
+    if (isset($this->widgetSchema['usuaris_espiats_list']))
+    {
+      $this->setDefault('usuaris_espiats_list', $this->object->UsuarisEspiats->getPrimaryKeys());
+    }
+
     if (isset($this->widgetSchema['sf_guard_user_list']))
     {
       $this->setDefault('sf_guard_user_list', $this->object->sfGuardUser->getPrimaryKeys());
@@ -113,6 +120,7 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
     $this->saveGroupsList($con);
     $this->savePermissionsList($con);
     $this->saveAssignaturaList($con);
+    $this->saveUsuarisEspiatsList($con);
     $this->savesfGuardUserList($con);
     $this->saveApplicationsList($con);
 
@@ -230,6 +238,44 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
     if (count($link))
     {
       $this->object->link('Assignatura', array_values($link));
+    }
+  }
+
+  public function saveUsuarisEspiatsList($con = null)
+  {
+    if (!$this->isValid())
+    {
+      throw $this->getErrorSchema();
+    }
+
+    if (!isset($this->widgetSchema['usuaris_espiats_list']))
+    {
+      // somebody has unset this widget
+      return;
+    }
+
+    if (null === $con)
+    {
+      $con = $this->getConnection();
+    }
+
+    $existing = $this->object->UsuarisEspiats->getPrimaryKeys();
+    $values = $this->getValue('usuaris_espiats_list');
+    if (!is_array($values))
+    {
+      $values = array();
+    }
+
+    $unlink = array_diff($existing, $values);
+    if (count($unlink))
+    {
+      $this->object->unlink('UsuarisEspiats', array_values($unlink));
+    }
+
+    $link = array_diff($values, $existing);
+    if (count($link))
+    {
+      $this->object->link('UsuarisEspiats', array_values($link));
     }
   }
 

@@ -26,6 +26,7 @@ ALTER TABLE contingut_te_opcio ADD CONSTRAINT contingut_te_opcio_opcio_id_opcio_
 ALTER TABLE contingut_te_opcio ADD CONSTRAINT contingut_te_opcio_contingut_id_contingut_id FOREIGN KEY (contingut_id) REFERENCES contingut(id) ON DELETE CASCADE;
 ALTER TABLE sessio ADD CONSTRAINT sessio_assignatura_id_assignatura_id FOREIGN KEY (assignatura_id) REFERENCES assignatura(id) ON DELETE CASCADE;
 ALTER TABLE usuari_espia_usuari ADD CONSTRAINT usuari_espia_usuari_usuari_objectiu_sf_guard_user_id FOREIGN KEY (usuari_objectiu) REFERENCES sf_guard_user(id) ON DELETE CASCADE;
+ALTER TABLE usuari_espia_usuari ADD CONSTRAINT usuari_espia_usuari_usuari_base_sf_guard_user_id FOREIGN KEY (usuari_base) REFERENCES sf_guard_user(id) ON DELETE CASCADE;
 ALTER TABLE usuari_te_assignatura ADD CONSTRAINT usuari_te_assignatura_usuari_id_sf_guard_user_id FOREIGN KEY (usuari_id) REFERENCES sf_guard_user(id) ON DELETE CASCADE;
 ALTER TABLE usuari_te_assignatura ADD CONSTRAINT usuari_te_assignatura_assignatura_id_assignatura_id FOREIGN KEY (assignatura_id) REFERENCES assignatura(id) ON DELETE CASCADE;
 ALTER TABLE sf_guard_forgot_password ADD CONSTRAINT sf_guard_forgot_password_user_id_sf_guard_user_id FOREIGN KEY (user_id) REFERENCES sf_guard_user(id) ON DELETE CASCADE;
