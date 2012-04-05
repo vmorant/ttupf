@@ -439,7 +439,7 @@ class Period
 		$has_aula = "/(?<![0-9])([0-9]{2}.[A-Za-z0-9][0-9]{2})/";
 		// This regex is a miracle understandable. Sorry xD NO FUNCIONA DEL TOT, de moment detecta l'assignatura bé però
 		// només pot contenir una paraula en majuscula i al final. aula => 2
-		$has_assignatura = "/^((?:(?:[ÀÁÇÈÉÍÏÒÓÚÜÑA-Z]?[àáçèéíïòóúüña-z\'\’\·[:space:]]+)+)+[ÀÁÈÉÍÏÒÓÚÜÑA-Z]*)$/";
+		$has_assignatura = "/^((?:(?:[ÀÁÇÈÉÍÏÒÓÚÜÑA-Z]?[àáçèéíïòóúüña-z\'\’\·[:space:]]+)+)+[ÀÁÈÉÍÏÒÓÚÜÑA-Z]*)/";
 		// If line matches at least one hour XX:XX hora =>3
 		$has_hour = "/(?<![0-9])([0-2]?[0-9][:|.][0-5][0-9])(?![0-9])/";
 		
