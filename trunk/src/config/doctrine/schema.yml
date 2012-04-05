@@ -24,29 +24,24 @@ Assignatura:
 sfGuardUser:
   relations:
 # From http://melikedev.com/2009/12/09/symfony-w-doctrine-saving-many-to-many-mm-relationships/
-   Assignatura:
+    Assignatura:
       class: Assignatura
       refClass: UsuariTeAssignatura # Allows referencing Assignatura from User object
       local: usuari_id # Refers to current object, i.e. User 
       foreign: assignatura_id # Object to link to from User, i.e., Assignatura
-   sfGuardUser:
+    UsuarisEspiats:
       class: sfGuardUser
       refClass: UsuariEspiaUsuari
       local: usuari_base
       foreign: usuari_objectiu
-   sfGuardUser:
-      class: sfGuardUser
-      refClass: UsuariEspiaUsuari
-      local: usuari_objectiu
-      foreign: usuari_base
     
 UsuariEspiaUsuari:
   columns:
     usuari_base:     { type: integer, notnull: true, primary: true }
     usuari_objectiu: { type: integer, notnull: true, primary: true }
   relations:
-    sfGuardUser:     { onDelete: CASCADE, local: usuari_base, foreign: id, foreignAlias: UsuariBase }
-    sfGuardUser:     { onDelete: CASCADE, local: usuari_objectiu, foreign: id, foreignAlias: UsuariObjectiu }
+    Base:            { class: sfGuardUser, onDelete: CASCADE, local: usuari_base, foreign: id, foreignAlias: UsuariEspiaUsuari }
+    Objectiu:        { class: sfGuardUser, onDelete: CASCADE, local: usuari_objectiu, foreign: id, foreignAlias: UsuariEspiaUsuari }
     
 Sessio:
   columns:
