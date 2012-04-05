@@ -119,13 +119,19 @@ class Block
 			if(sizeof($hours) > 1) {
 				foreach($this->getSessions() as $key => $session):
 					if(!$this->getTimed($key)) {
-						$hour = explode(":", $hours[0][0]);
+						if(strpos($hours[0][0], ":") !== false)
+							$hour = explode(":", $hours[0][0]);
+						else if(strpos($hours[0][0], ".") !== false)
+							$hour = explode(".", $hours[0][0]);
 						$start = $session->getDataHoraInici();
 						$start = new DateTime($start);
 						$start->setTime($hour[0], $hour[1], 00);	
 						$session->setDataHoraInici($start->format('Y-m-d H:i:s'));						
 
-						$hour = explode(":", $hours[0][1]);
+						if(strpos($hours[0][0], ":") !== false)
+							$hour = explode(":", $hours[0][0]);
+						else if(strpos($hours[0][0], ".") !== false)
+							$hour = explode(".", $hours[0][0]);
 						$end = $session->getDataHoraInici();
 						$end = new DateTime($end);
 						$end->setTime($hour[0], $hour[1], 00);							
@@ -138,7 +144,10 @@ class Block
 			else {
 				foreach($this->getSessions() as $key => $session):
 					if(!$this->getTimed($key)) {
-						$hour = explode(":", $hours[0][0]);
+						if(strpos($hours[0][0], ":") !== false)
+							$hour = explode(":", $hours[0][0]);
+						else if(strpos($hours[0][0], ".") !== false)
+							$hour = explode(".", $hours[0][0]);
 						$end = $session->getDataHoraInici();
 						$end = new DateTime($end);
 						$end->setTime($hour[0], $hour[1], 00);
