@@ -27,8 +27,16 @@ class SessioTable extends Doctrine_Table
 		$this->courseYear = $courseYear;
 		$this->sessions = array();
 
-		$timetableDOM = new simple_html_dom();		
-		$timetableDOM->load_file($courseYear->getUrlHorari());
+		$timetableDOM = new simple_html_dom();
+		//echo $this->courseYear."<br>";
+		//echo $timetableDOM->load_file($courseYear->getUrlHorari())."<br>";
+
+		$timetableDOM = file_get_html($courseYear->getUrlHorari());
+		
+		if(!($timetableDOM && is_object($timetableDOM) && isset($timetableDOM->nodes))) {
+			$this->logger->debug("La pàgina HTML és invàlida: ".$this->courseYear);
+			return -1;
+		}
 
 		// Date of first week is in the first table, second row, second cell.
 		$firstWeek = $timetableDOM->find('table', 0)->find('tr', 1)->find('td', 1)->plaintext;

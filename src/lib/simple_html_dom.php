@@ -854,6 +854,9 @@ class simple_html_dom {
             $this->clear();
             return false;
         }
+        else {
+        	return true;
+        }
     }
 
     // set callback function
