@@ -7,6 +7,7 @@ CarreraCurs:
     curs:             { type: integer, notnull: true }
     grup_teoria:      { type: integer, notnull: true }
     url_horari:       { type: string(255), notnull: true, unique: true }
+    nom_carrera:      { type: string(255) }
 
 Assignatura:
   columns:
