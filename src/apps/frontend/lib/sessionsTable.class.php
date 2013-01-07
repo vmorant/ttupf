@@ -28,7 +28,8 @@ class sessionsTable
 	 * Genera el codi HTML de la taula d'horari
 	 */
 	public function generaHtml(){
-		$this->table = "<table id='sessions'><thead><tr><th>".$this->date."</th></tr></thead>";
+		$diaSetmana = DateTime::createFromFormat('d/m/Y', $this->date)->format('l');
+		$this->table = "<table id='sessions'><thead><tr><th>" . $diaSetmana . " " . $this->date . "</th></tr></thead>";
 		
 		foreach($this->sessionsArray as $session):
 			$dataHoraInici = $session->getDataHoraInici();
@@ -54,7 +55,7 @@ class sessionsTable
 		if($this->haveClassesToday) {
 			return $this->table;
 		} else {
-			return $this->date."<br />Fantàstic! Tens el dia lliure.<br />";
+			return $this->table . "<br />Fantàstic! Tens el dia lliure.<br />";
 		}
 	}
 

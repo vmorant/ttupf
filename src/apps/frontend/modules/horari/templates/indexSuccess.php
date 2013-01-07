@@ -1,4 +1,4 @@
-Horari Index<br />
+<h1>Horari</h1>
 
 <?php
 	use_helper('Debug');
@@ -28,4 +28,4 @@ Horari Index<br />
 	log_message("Dia seguent: " . $diaSeguent->format('d/m/Y'), 'Debug');
 	$parametres_seguent = 'dia=' . $diaSeguent->format('d') . '&mes=' . $diaSeguent->format('m') . '&any=' . $diaSeguent->format('Y');
 
-	echo '<ul><li>'.link_to('Dia anterior', 'horari/index', array('query_string' => $parametres_anterior)).'</li><li>'.link_to('Dia seguent', 'horari/index', array('query_string' => $parametres_seguent)).'</li></ul>';
+	echo '<ul id="canvi_dia"><li>'.link_to('« Dia anterior', 'horari/index', array('query_string' => $parametres_anterior)).'</li><li>'.link_to('Dia seguent »', 'horari/index', array('query_string' => $parametres_seguent)).'</li></ul>';
