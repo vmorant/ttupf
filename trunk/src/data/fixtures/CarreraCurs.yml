@@ -1,114 +1,133 @@
 CarreraCurs:
-  33_GEI_C1_T1_G1:
+  33_GEI_C1_T2_G1:
     nom: Grau en Enginyeria Informàtica Curs 1 Trimestre 1 Grup 1
-    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GEI_C1_T1_G1.html
+    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GEI_C1_T2_G1.html
     grup_teoria: 1
     curs: 1
+    nom_carrera: Grau en Enginyeria Informàtica
 
-  34_GEI_C1_T1_G2:
+  34_GEI_C1_T2_G2:
     nom: Grau en Enginyeria Informàtica Curs 1 Trimestre 1 Grup 2
-    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GEI_C1_T1_G2.html
+    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GEI_C1_T2_G2.html
     grup_teoria: 2
     curs: 1
+    nom_carrera: Grau en Enginyeria Informàtica
 
-  35_GEI_C2_T1_G1:
+  35_GEI_C2_T2_G1:
     nom: Grau en Enginyeria Informàtica Curs 2 Trimestre 1 Grup 1
-    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GEI_C2_T1_G1.html
+    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GEI_C2_T2_G1.html
     grup_teoria: 1
     curs: 2
+    nom_carrera: Grau en Enginyeria Informàtica
 
-  36_GEI_C2_T1_G2:
+  36_GEI_C2_T2_G2:
     nom: Grau en Enginyeria Informàtica Curs 2 Trimestre 1 Grup 2
-    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GEI_C2_T1_G2.html
+    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GEI_C2_T2_G2.html
     grup_teoria: 2
     curs: 2
+    nom_carrera: Grau en Enginyeria Informàtica
 
-  37_GEI_C3_T1_G1:
+  37_GEI_C3_T2_G1:
     nom: Grau en Enginyeria Informàtica Curs 3 Trimestre 1 Grup 1
-    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GEI_C3_T1_G1.html
+    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GEI_C3_T2_G1.html
     grup_teoria: 1
     curs: 3
+    nom_carrera: Grau en Enginyeria Informàtica
 
-  38_GEI_C4_T1_G1:
-    nom: Grau en Enginyeria Informàtica Curs 4 Trimestre 1 Grup 1
-    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GEI_C4_T1_G1.html
+  38_GEI_C4_T2_G1:
+    nom: Grau en Enginyeria Informàtica
+    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GEI_C4_T2_G1.html
     grup_teoria: 1
     curs: 4
-
-  39_OPT_T1_G1:
-    nom: Optatives Trimestre 1 Grup 1
-    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_OPT_C1_T1_G1.html
+    nom_carrera: Grau en Enginyeria Informàtica
+    
+  39_OPT_T2_G1:
+    nom: Optatives
+    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_OPT_C1_T2_G1.html
     grup_teoria: 1
     curs: 0
-
-  40_GET_C1_T1_G1:
+    nom_carrera: Graus en Enginyeria (Optatives)
+    
+  40_GET_C1_T2_G1:
     nom: Grau en Enginyeria Telemàtica Curs 1 Trimestre 1 Grup 1
-    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GET_C1_T1_G1.html
+    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GET_C1_T2_G1.html
     grup_teoria: 1
     curs: 1
-
-  41_GET_C1_T1_G2:
+    nom_carrera: Grau en Enginyeria Telemàtica
+    
+  41_GET_C1_T2_G2:
     nom: Grau en Enginyeria Telemàtica Curs 1 Trimestre 1 Grup 2
-    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GET_C1_T1_G2.html
+    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GET_C1_T2_G2.html
     grup_teoria: 2
     curs: 1
+    nom_carrera: Grau en Enginyeria Telemàtica    
 
-  42_GET_C2_T1_G1:
+  42_GET_C2_T2_G1:
     nom: Grau en Enginyeria Telemàtica Curs 2 Trimestre 1 Grup 1
-    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GET_C2_T1_G1.html
+    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GET_C2_T2_G1.html
     grup_teoria: 1
     curs: 2
-
-  43_GET_C2_T1_G2:
+    nom_carrera: Grau en Enginyeria Telemàtica
+    
+  43_GET_C2_T2_G2:
     nom: Grau en Enginyeria Telemàtica Curs 2 Trimestre 1 Grup 2
-    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GET_C2_T1_G2.html
+    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GET_C2_T2_G2.html
     grup_teoria: 2
     curs: 2
-
-  44_GET_C3_T1_G1:
+    nom_carrera: Grau en Enginyeria Telemàtica
+    
+  44_GET_C3_T2_G1:
     nom: Grau en Enginyeria Telemàtica Curs 3 Trimestre 1 Grup 1
-    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GET_C3_T1_G1.html
+    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GET_C3_T2_G1.html
     grup_teoria: 1
     curs: 3
-
-  45_GET_C4_T1_G1:
+    nom_carrera: Grau en Enginyeria Telemàtica
+    
+  45_GET_C4_T2_G1:
     nom: Grau en Enginyeria Telemàtica Curs 4 Trimestre 1 Grup 1
-    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GET_C4_T1_G1.html
+    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GET_C4_T2_G1.html
     grup_teoria: 1
     curs: 4
-
-  46_GESA_C1_T1_G1:
+    nom_carrera: Grau en Enginyeria Telemàtica
+    
+  46_GESA_C1_T2_G1:
     nom: Grau en Enginyeria de Sistemes Audiovisuals Curs 1 Trimestre 1 Grup 1
-    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GES_C1_T1_G1.html
+    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GES_C1_T2_G1.html
     grup_teoria: 1
     curs: 1
-
-  47_GESA_C1_T1_G2:
+    nom_carrera: Grau en Enginyeria de Sistemes Audiovisuals
+    
+  47_GESA_C1_T2_G2:
     nom: Grau en Enginyeria de Sistemes Audiovisuals Curs 1 Trimestre 1 Grup 2
-    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GES_C1_T1_G2.html
+    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GES_C1_T2_G2.html
     grup_teoria: 2
     curs: 1
-
-  48_GESA_C2_T1_G1:
+    nom_carrera: Grau en Enginyeria de Sistemes Audiovisuals
+    
+  48_GESA_C2_T2_G1:
     nom: Grau en Enginyeria de Sistemes Audiovisuals Curs 2 Trimestre 1 Grup 1
-    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GES_C2_T1_G1.html
+    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GES_C2_T2_G1.html
     grup_teoria: 1
     curs: 2
-
-  49_GESA_C2_T1_G2:
+    nom_carrera: Grau en Enginyeria de Sistemes Audiovisuals
+    
+  49_GESA_C2_T2_G2:
     nom: Grau en Enginyeria de Sistemes Audiovisuals Curs 2 Trimestre 1 Grup 2
-    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GES_C2_T1_G2.html
+    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GES_C2_T2_G2.html
     grup_teoria: 2
     curs: 2
-
-  50_GESA_C3_T1_G1:
+    nom_carrera: Grau en Enginyeria de Sistemes Audiovisuals
+    
+  50_GESA_C3_T2_G1:
     nom: Grau en Enginyeria de Sistemes Audiovisuals Curs 3 Trimestre 1 Grup 1
-    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GES_C3_T1_G1.html
+    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GES_C3_T2_G1.html
     grup_teoria: 1
     curs: 3
-
-  51_GESA_C4_T1_G1:
+    nom_carrera: Grau en Enginyeria de Sistemes Audiovisuals
+    
+  51_GESA_C4_T2_G1:
     nom: Grau en Enginyeria de Sistemes Audiovisuals Curs 4 Trimestre 1 Grup 1
-    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GES_C4_T1_G1.html
+    url_horari: http://www.upf.edu/esup/docencia/horaris1213/graus12_13/horaris_1213_GES_C4_T2_G1.html
     grup_teoria: 1
     curs: 4
+    nom_carrera: Grau en Enginyeria de Sistemes Audiovisuals
